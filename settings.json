@@ -1,0 +1,16 @@
+{
+    "public": {
+        "appColors": [
+            "red",
+            "red lighten-5",
+            "red lighten-4",
+            "red lighten-3",
+            "red lighten-2",
+            "red lighten-1",
+            "red darken-1",
+            "red darken-2",
+            "red darken-3",
+            "red darken-4",
+        ]
+    }
+}

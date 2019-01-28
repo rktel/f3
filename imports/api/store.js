@@ -5,6 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        themeColor: 'blue'
+        appColors: Meteor.settings.public.appColors
     }
 })
