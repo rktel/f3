@@ -3,7 +3,7 @@
         name: 'App',
         computed: {
             color(){
-                return $store.state.themeColor
+                return this.$store.state.themeColor
             }
         }
     }

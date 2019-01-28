@@ -9,6 +9,8 @@ import App from '../imports/ui/App.vue'
 
 import store from '../imports/api/store'
 
+Vue.config.productionTip = false
+
 Meteor.startup(()=>{
     new Vue({
         el:'#app',
