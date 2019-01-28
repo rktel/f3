@@ -1,7 +1,9 @@
 <script>
     export default{
         name: 'App',
-
+        mounted(){
+            console.log('Text')
+        }
     }
 </script>
 <template>
