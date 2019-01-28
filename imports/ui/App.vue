@@ -10,7 +10,7 @@
 </script>
 <template>
     <v-app>
-        <v-content>
+        <v-content color=color>
             <v-btn small>{{color}}</v-btn>
         </v-content>
     </v-app>
