@@ -9,8 +9,8 @@
     }
 </script>
 <template>
-    <v-app>
-        <v-content color='blue'>
+    <v-app dark>
+        <v-content>
             <v-btn small>{{color}}</v-btn>
         </v-content>
     </v-app>
