@@ -4,7 +4,7 @@
     }
 </script>
 <template>
-    <v-app dark>
+    <v-app class="red">
         <v-content>
             <v-btn small>Go</v-btn>
         </v-content>
