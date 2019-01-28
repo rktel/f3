@@ -2,7 +2,7 @@
     export default{
         name: 'App',
         mounted(){
-            console.log('Text')
+            console.log(this.$store.state)
         }
     }
 </script>
