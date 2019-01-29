@@ -6,7 +6,7 @@
         },
         data(){
             return{
-                appColor: 'indigo darken-1',
+                appColor: 'red',
                 appColorSelected:''
             }
         },
