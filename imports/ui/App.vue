@@ -24,7 +24,7 @@
     }
 </script>
 <template>
-    <v-app :class="{'indigo darken-4': true}">
+    <v-app :class="{appColor: true}">
         <v-content>
                 <v-combobox
                 v-model="appColorSelected"
