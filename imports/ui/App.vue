@@ -24,7 +24,7 @@
     }
 </script>
 <template>
-    <v-app :class="appColor">
+    <v-app class="text--grey" :class="appColor">
         <v-content>
                 <v-combobox
                 v-model="appColorSelected"
