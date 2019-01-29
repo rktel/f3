@@ -17,13 +17,14 @@
         },
         methods:{
             changeAppColor(){
+                console.log('On changeAppColor')
                 this.appColor = this.appColorSelected
             }
         }
     }
 </script>
 <template>
-    <v-app class="appColor">
+    <v-app class={appColor}>
         <v-content>
                 <v-combobox
                 v-model="appColorSelected"
