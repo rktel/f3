@@ -12,7 +12,7 @@
         },
         computed:{
             colors(){
-                return this.$store.state.
+                return this.$store.state.appColors
             }
         },
         methods:{
