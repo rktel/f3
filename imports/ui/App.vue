@@ -6,6 +6,7 @@
 </script>
 <template>
     <v-app>
+    <v-navigation-drawer></v-navigation-drawer>
     <v-toolbar dense></v-toolbar>
         <v-content>
             <router-view></router-view>
