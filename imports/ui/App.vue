@@ -4,19 +4,33 @@
         mounted(){
             console.log(this.$store.state)
         },
+        data(){
+            return{
+                appColor: 'indigo darken-4',
+                appColorSelected:''
+            }
+        },
         computed:{
             colors(){
-                return this.$store.state
+                return this.$store.state.
+            }
+        },
+        methods:{
+            changeAppColor(){
+                this.appColor = this.appColorSelected
             }
         }
     }
 </script>
 <template>
-    <v-app class="indigo darken-4">
+    <v-app class="appColor">
         <v-content>
-            <ul>
-                <li v-for="(color, index) in colors" :key="index">{{color}}</li>
-            </ul>
+                <v-combobox
+                v-model="appColorSelected"
+                :items="colors"
+                label="App colors"
+                ></v-combobox>
+                <v-btn @click="changeAppColor">Change Color</v-btn>
         </v-content>
     </v-app>
 </template>
