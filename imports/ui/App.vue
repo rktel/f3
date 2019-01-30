@@ -14,7 +14,7 @@
             right
             app
             >
-            <v-toolbar flat class="transparent">
+            <v-toolbar flat class="transparent" dense>
                 <v-list class="pa-0">
                 <v-list-tile avatar>
                     <v-list-tile-avatar>
