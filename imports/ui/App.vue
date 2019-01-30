@@ -22,16 +22,16 @@
         height: 100%;
     }
     .itemOne{
-        background-color: teal;
         flex: 3 1 auto;
         order: 0;
         align-self: stretch;
+        border: 1px dotted gray;
     }
     .itemTwo{
-        background-color: indigo;
         flex: 7 1 auto;
         order: 0;
         align-self: stretch;
+        border: 1px dotted gray;
     }
     @media only screen and (max-width: 900px){
         .contenedor{
@@ -41,16 +41,16 @@
             height: 100%;
         }
         .itemOne{
-            background-color: teal;
             flex: 1 1 auto;
             order: 2;
             align-self: stretch;
+            border: 1px dotted gray;
         }
         .itemTwo{
-            background-color: indigo;
             flex: 1 1 auto;
             order: 0;
             align-self: stretch;
+            border: 1px dotted gray;
         }
     }
 </style>
