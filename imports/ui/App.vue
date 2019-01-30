@@ -16,12 +16,12 @@
         <v-content>
 
                 <v-layout v-bind="binding">
-                    <v-flex>
+                    <v-flex flex-grow>
                         <v-card dark tile flat color="error">
                         <v-card-text>#1</v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex>
+                    <v-flex flex-grow>
                         <v-card dark tile flat color="red darken-4">
                         <v-card-text>#2</v-card-text>
                         </v-card>
