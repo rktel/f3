@@ -8,7 +8,7 @@
     <v-app>
         <v-toolbar dense color="amber" absolute clipped-left app></v-toolbar>
         <v-content>
-            <v-container fluid>
+            <v-container>
                 <v-layout row>
                     <v-flex xs6 order-lg2>
                         <v-card dark tile flat color="error">
