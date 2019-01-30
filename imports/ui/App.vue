@@ -24,11 +24,33 @@
     .itemOne{
         background-color: teal;
         flex: 3 1 auto;
+        order: 0;
         align-self: stretch;
     }
     .itemTwo{
         background-color: indigo;
         flex: 7 1 auto;
+        order: 0;
         align-self: stretch;
+    }
+    @media only screen and (max-width: 600px){
+        .contenedor{
+            display: flex;
+            flex-direction: column;
+            align-content: stretch;
+            height: 100%;
+        }
+        .itemOne{
+            background-color: teal;
+            flex: 1 1 auto;
+            order: 2;
+            align-self: stretch;
+        }
+        .itemTwo{
+            background-color: indigo;
+            flex: 1 1 auto;
+            order: 0;
+            align-self: stretch;
+        }
     }
 </style>
