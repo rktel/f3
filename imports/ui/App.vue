@@ -4,7 +4,7 @@
         computed:{
             binding(){
                 const binding = {}
-                if(this.$vuetify.breakpoint.mdAndUp) binding.column = true
+                if(this.$vuetify.breakpoint.xsOnly) binding.column = true
                 return binding
             }
         }
