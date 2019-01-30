@@ -10,7 +10,7 @@
         <v-toolbar dense color="amber" absolute clipped-left app></v-toolbar>
 
         <v-content>
-            <v-navigation-drawer v-model="drawer" fixed clipped class="grey lighten-4 elevation-4" width="480" app>
+            <v-navigation-drawer fixed clipped class="grey lighten-4" width="480" app>
                 <h1>Navbar</h1>
             </v-navigation-drawer>
             <router-view></router-view>
