@@ -33,7 +33,7 @@
         order: 0;
         align-self: stretch;
     }
-    @media only screen and (max-width: 600px){
+    @media only screen and (max-width: 800px){
         .contenedor{
             display: flex;
             flex-direction: column;
