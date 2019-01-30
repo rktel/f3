@@ -16,7 +16,7 @@
         <v-content>
 
                 <v-layout v-bind="binding">
-                    <v-flex order-sm2>
+                    <v-flex>
                         <v-card dark tile flat color="error">
                         <v-card-text>#1</v-card-text>
                         </v-card>
