@@ -1,7 +1,13 @@
 <script>
     export default{
         name: 'App',
-
+        computed:{
+            binding(){
+                const binding = {}
+                if(this.$vuetify.breakpoint.mdAndUp) binding.column = true
+                return binding
+            }
+        }
     }
 </script>
 <template>
@@ -9,7 +15,7 @@
         <v-toolbar dense color="amber" absolute clipped-left app></v-toolbar>
         <v-content>
 
-                <v-layout row>
+                <v-layout v-bind="binding">
                     <v-flex xs6 order-lg2>
                         <v-card dark tile flat color="error">
                         <v-card-text>#1</v-card-text>
