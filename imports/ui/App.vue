@@ -6,10 +6,12 @@
 <template>
     <v-app>
         <v-toolbar dense color="amber" absolute clipped-left app></v-toolbar>
-        <section class="contenedor">
-            <div class="item">1</div>
-            <div class="item">2</div>
-        </section>
+        <v-content>
+            <section class="contenedor">
+                <div class="item">1</div>
+                <div class="item">2</div>
+            </section>
+        </v-content>
     </v-app>
 </template>
 <style scoped>
