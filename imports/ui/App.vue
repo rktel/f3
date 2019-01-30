@@ -18,6 +18,7 @@
     .contenedor{
         display: flex;
         flex-direction: row;
+        align-content: stretch;
     }
     .itemOne{
         background-color: teal;
