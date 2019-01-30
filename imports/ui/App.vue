@@ -19,6 +19,7 @@
         display: flex;
         flex-direction: row;
         align-content: stretch;
+        height: 100%;
     }
     .itemOne{
         background-color: teal;
