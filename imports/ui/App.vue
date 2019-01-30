@@ -16,12 +16,12 @@
         <v-content>
 
                 <v-layout v-bind="binding">
-                    <v-flex xs6 order-lg2>
+                    <v-flex>
                         <v-card dark tile flat color="error">
                         <v-card-text>#1</v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex>
                         <v-card dark tile flat color="red darken-4">
                         <v-card-text>#2</v-card-text>
                         </v-card>
