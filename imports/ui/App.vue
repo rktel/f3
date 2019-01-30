@@ -4,7 +4,7 @@
         computed:{
             binding(){
                 const binding = {}
-                if(this.$vuetify.breakpoint.xsOnly) binding.column = true
+                if(this.$vuetify.breakpoint.mdAndDown) binding.column = true
                 return binding
             }
         }
@@ -16,7 +16,7 @@
         <v-content>
 
                 <v-layout v-bind="binding">
-                    <v-flex>
+                    <v-flex order-md2>
                         <v-card dark tile flat color="error">
                         <v-card-text>#1</v-card-text>
                         </v-card>
