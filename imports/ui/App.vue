@@ -29,7 +29,7 @@ export default {
       </v-toolbar>
       <v-list dense>
         <v-divider></v-divider>
-        <v-list-tile to="'/login'">
+        <v-list-tile to="/login">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -37,7 +37,7 @@ export default {
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="'/f3'">
+        <v-list-tile to="/f3">
           <v-list-tile-action>
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
