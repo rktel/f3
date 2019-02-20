@@ -1,10 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-content class="svgBackground">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <v-card hover light class="pa-4" >
+            <v-card hover light class="pa-4" dark>
               <v-card-text>
                 <section>
                   <img src="/img/seclog.png" height="45px">
