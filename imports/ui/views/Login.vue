@@ -9,7 +9,7 @@
                 <section>
                   <img src="/img/seclog.png" height="45px">
                 </section>
-                <h1 class="font-weight-bold text-xs-center mb-4">Login</h1>
+                <h1 class="font-weight-bold text-xs-center mb-4">Figo3</h1>
                 <v-text-field
                   append-icon="person"
                   name="login"
