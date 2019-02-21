@@ -1,28 +1,22 @@
 {
+    "private": {
+        "HYPER_USER": "nkto",
+        "HYPER_USER_PASSWORD": "Alteraz84",
+        "HYPER_PERSONAL_FIRSTNAME": "Ricardo J.",
+        "HYPER_PERSONAL_LASTNAME": "Hernández Oré",
+        "HYPER_PERSONAL_ROLE": "Hyperadmin",
+        "USER_SMTP":"trackandtrace.securitasperu@gmail.com",
+        "PASS_SMTP":"TrackandtraceGmail.com",
+        "SERVER_SMTP":"smtp.gmail.com",
+        "PORT_SMTP":587
+    },
     "public": {
-        "appColors": [
-            "red",
-            "pink",
-            "purple",
-            "deep-purple",
-            "indigo",
-            "blue",
-            "light-blue",
-            "cyan",
-            "teal",
-            "green",
-            "light-green",
-            "lime",
-            "yellow",
-            "amber",
-            "orange",
-            "deep-orange",
-            "brown",
-            "blue-grey",
-            "grey",
-            "black",
-            "white"
+        "roles": [
+            "Superadmin",
+            "Tecnico"
+        ],
+        "api": [
+
         ]
     }
 }
-
