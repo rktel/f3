@@ -3,6 +3,7 @@ export default {
   name: "F3",
   mounted(){
     console.log("Hello from mounted on F3")
+    console.log(this)
   },
   data: () => ({
     drawer: false
