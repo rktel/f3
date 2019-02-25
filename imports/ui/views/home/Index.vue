@@ -6,7 +6,6 @@ export default {
     this.links = links;
     Meteor.call("getPersona", (error, persona) => {
       if (!error) {
-        console.log(persona);
         this.$store.commit("setPersonaProfile", persona);
       }
     });

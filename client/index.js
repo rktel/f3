@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import Vuebar from 'vuebar';
 
 Vue.use(Vuetify)
+Vue.use(Vuebar);
 
 import 'vuetify/dist/vuetify.min.css'
 
