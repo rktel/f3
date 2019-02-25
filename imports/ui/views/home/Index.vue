@@ -10,6 +10,9 @@ export default {
       }
     });
   },
+  mounted() {
+    this.onResize();
+  },
   data: () => ({
     drawer: true,
     links: []
@@ -20,6 +23,13 @@ export default {
     }
   },
   methods: {
+    onResize() {
+      this.$store.commit("setAppSize", {
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      // console.log(window.innerWidth, window.innerHeight );
+    },
     logout: function() {
       Meteor.logout(error => {
         if (!error) {
@@ -31,7 +41,7 @@ export default {
 };
 </script>
 <template>
-  <v-app>
+  <v-app v-resize="onResize">
     <v-navigation-drawer fixed v-model="drawer" right app dark width="260">
       <v-toolbar flat class="transparent" dense>
         <v-list class="pa-0">

@@ -5,7 +5,7 @@
         <v-text-field label="Buscar usuario" prepend-icon="search" single-line></v-text-field>
       </v-toolbar>
 
-      <div v-bar class="vuebar-element">
+      <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
           <v-divider></v-divider>
 
@@ -21,15 +21,30 @@
         </v-list>
       </div>
     </div>
-    <div class="itemTwo"></div>
+    <div class="itemTwo">
+        <h1>USER PROFILE</h1>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
   name: "Users",
+  computed: {
+    heightList() {
+      const { width, height } = this.$store.getters.appSize;
+      if (width < 900) {
+        //console.log(parseInt(height / 2));
+        return parseInt(height / 2)-100;
+      } else {
+        //console.log(height);
+        return height-100;
+      }
+    }
+  },
   data: () => ({
     items: [
+      { title: "Start", icon: "person" },
       { title: "Kim", icon: "person" },
       { title: "Kim", icon: "person" },
       { title: "Kim", icon: "person" },
@@ -59,28 +74,8 @@ export default {
       { title: "Kim", icon: "person" },
       { title: "Kim", icon: "person" },
       { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" }
+      { title: "End", icon: "person" },
+      
     ]
   })
 };
@@ -88,9 +83,7 @@ export default {
 
 <style scoped>
 .vuebar-element {
-  height: 100%;
   width: 100%;
-   
 }
 .contenedor {
   background-color: #ff7700;
@@ -123,13 +116,13 @@ export default {
     height: 100%;
   }
   .itemOne {
-    flex: 1 1 auto;
-    order: 0;
+    flex: 1 1;
+    order: 0s;
     align-self: stretch;
     border: 1px dotted gray;
   }
   .itemTwo {
-    flex: 1 1 auto;
+    flex: 1 1;
     order: 0;
     align-self: stretch;
     border: 1px dotted gray;
