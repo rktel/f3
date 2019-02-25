@@ -9,7 +9,7 @@
                 <section>
                   <img src="/img/seclog.png" height="45px">
                 </section>
-                <h1 class="font-weight-bold text-xs-center mb-4">Figo3</h1>
+                <h1 class="font-weight-bold text-xs-center mb-4 font-italic">Figo</h1>
                 <v-text-field
                   append-icon="person"
                   name="login"
@@ -54,7 +54,7 @@ export default {
       if (username.length > 0 && password.length > 0) {
         Meteor.loginWithPassword(username, password, error => {
           if (!error) {
-            this.$router.push({ name: "F3" });
+            this.$router.push({ name: "Track" });
           }
         });
       }

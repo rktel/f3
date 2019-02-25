@@ -1,15 +1,15 @@
 <template>
-    <router-view></router-view>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
-  mounted() {
+  created() {
     Meteor.userId()
-      ? this.$router.push({ name: "F3" })
+      ? this.$router.push({ name: "Home" })
       : this.$router.push({ name: "Login" });
   }
-}
+};
 </script>
 
 <style>

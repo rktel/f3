@@ -4,12 +4,36 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Login from '../ui/views/Login.vue'
-import F3 from '../ui/views/F3.vue'
+import Index from '../ui/views/home/Index.vue'
+import Track from '../ui/views/home/Track.vue'
+import Script from '../ui/views/home/Script.vue'
+import Users from '../ui/views/home/Users.vue'
 
 const routes = [
-    { path: '/', redirect: '/f3' },
     { path: '/login', component: Login, name: 'Login' },
-    { path: '/f3', component: F3, name: 'F3' },
+    {
+        path: '/', component: Index, name: 'Home', redirect: '/track',
+        children: [
+            {
+                path: 'track',
+                name: 'Track',
+                component: Track,
+                icon:'devices'
+            },
+            {
+                path: 'script',
+                name: 'Script',
+                component: Script,
+                icon:'insert_drive_file'
+            },
+            {
+                path: 'users',
+                name: 'Users',
+                component: Users,
+                icon:'person'
+            }
+        ]
+    },
 ]
 
 export default new VueRouter({

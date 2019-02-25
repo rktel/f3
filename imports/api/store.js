@@ -5,6 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        appColors: Meteor.settings.public.appColors
-    }
+        personaProfile: {}
+    },
+    getters: {
+        persona: state => state.personaProfile
+    },
+    mutations: {
+        setPersonaProfile: (state, personaProfile) => {
+            state.personaProfile = personaProfile
+        }
+    },
+    actions: {}
 })
