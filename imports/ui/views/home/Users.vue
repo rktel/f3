@@ -20,8 +20,7 @@ export default {
   data: () => ({
     items: [
       { title: "Start", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "End", icon: "person" }
+
     ]
   })
 };
