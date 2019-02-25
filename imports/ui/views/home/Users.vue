@@ -1,14 +1,40 @@
+<script>
+import UserSimpleTable from "../components/UserSimpleTable";
+export default {
+  name: "Users",
+  components: {
+    UserSimpleTable
+  },
+  computed: {
+    heightList() {
+      const { width, height } = this.$store.getters.appSize;
+      if (width < 900) {
+        //console.log(parseInt(height / 2));
+        return parseInt(height / 2) - 100;
+      } else {
+        //console.log(height);
+        return height - 100;
+      }
+    }
+  },
+  data: () => ({
+    items: [
+      { title: "Start", icon: "person" },
+      { title: "Kim", icon: "person" },
+      { title: "End", icon: "person" }
+    ]
+  })
+};
+</script>
 <template>
   <section class="contenedor">
     <div class="itemOne">
-      <v-toolbar flat class="pt-0 transparent" dense dark>
+      <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field label="Buscar usuario" prepend-icon="search" single-line></v-text-field>
       </v-toolbar>
-
+      <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-divider></v-divider>
-
           <v-list-tile v-for="item in items" :key="item.index" @click>
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -22,64 +48,32 @@
       </div>
     </div>
     <div class="itemTwo">
-        <h1>USER PROFILE</h1>
+      <v-toolbar flat class="pt-0 transparent" dark>
+        <v-spacer></v-spacer>
+        <v-btn color="pink" class="white--text">Agregar
+          <v-icon right dark>person</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-divider></v-divider>
+      <v-card class="ma-2 transparent white--text">
+        <v-card-title primary-title>
+          <div>
+            <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+            <user-simple-table :items=items></user-simple-table>
+          </div>
+        </v-card-title>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat color="indigo">Editar</v-btn>
+          <v-btn flat color="pink">Eliminar</v-btn>
+        </v-card-actions>
+      </v-card>
     </div>
   </section>
 </template>
 
-<script>
-export default {
-  name: "Users",
-  computed: {
-    heightList() {
-      const { width, height } = this.$store.getters.appSize;
-      if (width < 900) {
-        //console.log(parseInt(height / 2));
-        return parseInt(height / 2)-100;
-      } else {
-        //console.log(height);
-        return height-100;
-      }
-    }
-  },
-  data: () => ({
-    items: [
-      { title: "Start", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "Kim", icon: "person" },
-      { title: "End", icon: "person" },
-      
-    ]
-  })
-};
-</script>
+
 
 <style scoped>
 .vuebar-element {
@@ -117,7 +111,7 @@ export default {
   }
   .itemOne {
     flex: 1 1;
-    order: 0s;
+    order: 2;
     align-self: stretch;
     border: 1px dotted gray;
   }
