@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuebar from 'vuebar';
+import VueMeteorTracker from 'vue-meteor-tracker'
 
 Vue.use(Vuetify)
 Vue.use(Vuebar);
+Vue.use(VueMeteorTracker)
 
 import 'vuetify/dist/vuetify.min.css'
 

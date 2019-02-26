@@ -9,6 +9,7 @@
     "bcrypt": "^2.0.1",
     "meteor-node-stubs": "^0.4.1",
     "vue": "^2.6.6",
+    "vue-meteor-tracker": "git+https://github.com/moslemir/vue-meteor-tracker.git",
     "vue-router": "^3.0.2",
     "vuebar": "0.0.20",
     "vuetify": "^1.5.2",

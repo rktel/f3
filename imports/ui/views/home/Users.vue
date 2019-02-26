@@ -1,15 +1,29 @@
 <script>
 import UserSimpleTable from "../components/UserSimpleTable";
 import UserFormDialog from "../components/UserFormDialog";
+import { Personal } from "../../../api/collections.js";
+
 export default {
   name: "Users",
   components: {
     UserSimpleTable,
     UserFormDialog
   },
+  meteor: {
+    $subscribe: {
+      personal: []
+    },
+    personal() {
+      return Personal.find({});
+    }
+  },
   methods: {
     toggleFlagUFD() {
       this.$store.commit("toggleFlagUFD");
+    },
+    setUserCard(user) {
+      this.displayUserCard = true;
+      this.userCard = user;
     }
   },
   computed: {
@@ -25,29 +39,26 @@ export default {
     }
   },
   data: () => ({
-    items: [
-      {
-        firstname: "Kelly",
-        lastname: "Smith",
-        email: "kelly.smith@demo.com",
-        rol: "Supervisor",
-        creado: "2019-02-25 19:25:00"
-      }
-    ]
+    displayUserCard: false,
+    userCard: {}
   })
 };
 </script>
 <template>
   <section class="contenedor">
-    <div class="itemOne">
+    <section class="itemOne">
       <user-form-dialog></user-form-dialog>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field label="Buscar usuario" prepend-icon="search" single-line></v-text-field>
       </v-toolbar>
       <v-divider></v-divider>
+      <v-toolbar flat class="pt-0 transparent" dark dense>
+        <h4 class="my-0">Usuarios registrados {{ personal.length }}</h4>
+      </v-toolbar>
+      <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile v-for="item in items" :key="item.index" @click>
+          <v-list-tile v-for="item in personal" :key="item.index" @click="setUserCard(item)">
             <v-list-tile-action>
               <v-icon>person</v-icon>
             </v-list-tile-action>
@@ -57,8 +68,9 @@ export default {
           </v-list-tile>
         </v-list>
       </div>
-    </div>
-    <div class="itemTwo">
+    </section>
+
+    <section class="itemTwo">
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
         <v-btn color="pink" class="white--text" @click="toggleFlagUFD">Agregar
@@ -66,11 +78,10 @@ export default {
         </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
-      <v-card class="ma-2 transparent white--text">
+      <v-card class="ma-2 transparent white--text" v-if="displayUserCard">
         <v-card-title class="py-2">
           <div>
-            <h3 class="my-0">Kangaroo Valley Safari</h3>
-            <user-simple-table :items="items"></user-simple-table>
+            <user-simple-table :item="userCard"></user-simple-table>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -79,7 +90,7 @@ export default {
           <v-btn flat color="pink">Eliminar</v-btn>
         </v-card-actions>
       </v-card>
-    </div>
+    </section>
   </section>
 </template>
 
@@ -101,13 +112,13 @@ export default {
   height: 100%;
 }
 .itemOne {
-  flex: 3 1 auto;
+  flex: 3 1;
   order: 0;
   align-self: stretch;
   border: 1px solid white;
 }
 .itemTwo {
-  flex: 7 1 auto;
+  flex: 7 1;
   order: 0;
   align-self: stretch;
   border: 1px solid white;

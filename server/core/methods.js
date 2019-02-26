@@ -29,6 +29,7 @@ Meteor.methods({
         return Personal.findOne({ userId: this.userId })
     },
     saveUserPersona: function (persona) {
+        const created = (new Date()).toISOString()
         const urlFigo = Meteor.settings.private.URL_FIGO
         const fromEmail = Meteor.settings.private.USER_SMTP
         const subjectEmail = "FIGO [T&T-Securitas]"
@@ -38,9 +39,8 @@ Meteor.methods({
         }
         const userId = Accounts.createUser({ username, password })
         const { firstname, lastname, email, role } = persona
-        return Personal.insert({ firstname, lastname, email, role, userId, username, password }, (error, id) => {
-            if (!error)
-                Meteor.call("sendEmail", email, fromEmail, subjectEmail, bodyEmail())
+        return Personal.insert({ firstname, lastname, email, role, userId, username, password, created }, (error, id) => {
+            // if (!error) Meteor.call("sendEmail", email, fromEmail, subjectEmail, bodyEmail())
         })
 
     },
