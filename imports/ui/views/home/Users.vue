@@ -1,9 +1,16 @@
 <script>
 import UserSimpleTable from "../components/UserSimpleTable";
+import UserFormDialog from "../components/UserFormDialog";
 export default {
   name: "Users",
   components: {
-    UserSimpleTable
+    UserSimpleTable,
+    UserFormDialog
+  },
+  methods: {
+    toggleFlagUFD() {
+      this.$store.commit("toggleFlagUFD");
+    }
   },
   computed: {
     heightList() {
@@ -33,6 +40,7 @@ export default {
 <template>
   <section class="contenedor">
     <div class="itemOne">
+      <user-form-dialog></user-form-dialog>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field label="Buscar usuario" prepend-icon="search" single-line></v-text-field>
       </v-toolbar>
@@ -43,7 +51,6 @@ export default {
             <v-list-tile-action>
               <v-icon>person</v-icon>
             </v-list-tile-action>
-
             <v-list-tile-content>
               <v-list-tile-title>{{ item.firstname }}&nbsp;{{item.lastname}}</v-list-tile-title>
             </v-list-tile-content>
@@ -54,7 +61,7 @@ export default {
     <div class="itemTwo">
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
-        <v-btn color="pink" class="white--text">Agregar
+        <v-btn color="pink" class="white--text" @click="toggleFlagUFD">Agregar
           <v-icon right dark>person</v-icon>
         </v-btn>
       </v-toolbar>
@@ -66,7 +73,6 @@ export default {
             <user-simple-table :items="items"></user-simple-table>
           </div>
         </v-card-title>
-
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo">Editar</v-btn>

@@ -10,11 +10,13 @@
         "USER_SMTP": "trackandtrace.securitasperu@gmail.com",
         "PASS_SMTP": "TrackandtraceGmail.com",
         "SERVER_SMTP": "smtp.gmail.com",
-        "PORT_SMTP": 587
+        "PORT_SMTP": 587,
+        "URL_FIGO": "http://190.223.32.141:3000"
     },
     "public": {
         "roles": [
             "Superadmin",
+            "Supervisor",
             "Tecnico"
         ],
         "api": []

@@ -42,27 +42,26 @@ export default {
 </script>
 <template>
   <v-app v-resize="onResize">
-    <v-navigation-drawer fixed v-model="drawer" right app dark width="260">
-      <v-toolbar flat class="transparent" dense>
+    <v-navigation-drawer fixed v-model="drawer" right app class="red accent-4" width="260" dark>
+      <v-toolbar flat class="transparent" dense >
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
               <img src="https://randomuser.me/api/portraits/lego/5.jpg">
             </v-list-tile-avatar>
-
             <v-list-tile-content>
-              <v-list-tile-title class="body-1 font-weight-light font-italic">{{persona.firstname}}</v-list-tile-title>
+              <v-list-tile-title class="body-1 font-weight-light font-italic white--text">{{persona.firstname}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn icon ripple @click="logout" title="Cerrar sesion">
-                <v-icon color="gray lighten-1">power_settings_new</v-icon>
+                <v-icon color="white">power_settings_new</v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </v-toolbar>
+      <v-divider></v-divider>
       <v-list dense>
-        <v-divider></v-divider>
         <v-list-tile v-for="link in links" :key="link.name" :to="link.path">
           <v-list-tile-action>
             <v-icon>{{link.icon}}</v-icon>
@@ -85,3 +84,9 @@ export default {
     </v-content>
   </v-app>
 </template>
+<style>
+a.primary--text {
+    color: #ff7700  !important;
+    caret-color: #ff7700 !important;
+}
+</style>

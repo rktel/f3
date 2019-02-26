@@ -9,11 +9,13 @@ export default new Vuex.Store({
         appSize: {
             width: 0,
             height: 0
-        }
+        },
+        flagUFD: false
     },
     getters: {
         persona: state => state.personaProfile,
         appSize: state => state.appSize,
+        flagUFD: state => state.flagUFD
     },
     mutations: {
         setPersonaProfile: (state, personaProfile) => {
@@ -22,6 +24,9 @@ export default new Vuex.Store({
         setAppSize: (state, size) => {
             state.appSize = size
         },
+        toggleFlagUFD: (state) => {
+            state.flagUFD = !state.flagUFD
+        }
     },
     actions: {}
 })

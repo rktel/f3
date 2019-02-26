@@ -21,13 +21,64 @@ Meteor.methods({
             })
         }
     },
+
+});
+/*********PERSONAL************/
+Meteor.methods({
+    getPersona: function () {
+        return Personal.findOne({ userId: this.userId })
+    },
+    saveUserPersona: function (persona) {
+        const urlFigo = Meteor.settings.private.URL_FIGO
+        const fromEmail = Meteor.settings.private.USER_SMTP
+        const subjectEmail = "FIGO [T&T-Securitas]"
+        const { username, password } = createCredentials(persona)
+        const bodyEmail = () => {
+            return `Estimado ${firstname} ${lastname} \nLos datos de acceso a FIGO son los siguientes: \nURL: ${urlFigo}  \nUsuario: ${username} \nPassword: ${password} `
+        }
+        const userId = Accounts.createUser({ username, password })
+        const { firstname, lastname, email, role } = persona
+        return Personal.insert({ firstname, lastname, email, role, userId, username, password }, (error, id) => {
+            if (!error)
+                Meteor.call("sendEmail", email, fromEmail, subjectEmail, bodyEmail())
+        })
+
+    },
+    removePersona: function (persona) {
+        const { _id, userId } = persona
+        if (userId) {
+            Meteor.users.remove({ _id: userId })
+        }
+        return Personal.remove({ _id })
+    },
+    updatePersona: function (persona) {
+        const { firstname, lastname, role, _id } = persona
+        return Personal.update({ _id }, { $set: { firstname, lastname, role } })
+    }
+})
+/********EMAIL****************/
+Meteor.methods({
     setEmailOptions: function () {
         process.env.MAIL_URL = 'smtp://' + encodeURIComponent(Meteor.settings.private.USER_SMTP) +
             ':' + encodeURIComponent(Meteor.settings.private.PASS_SMTP) +
             '@' + encodeURIComponent(Meteor.settings.private.SERVER_SMTP) + ':' + Meteor.settings.private.PORT_SMTP;
     },
-    /*********PERSONAL************/
-    getPersona: function () {
-        return Personal.findOne({ userId: this.userId })
-    },
-});
+    sendEmail(to, from, subject, text) {
+        this.unblock();
+        Email.send({ to, from, subject, text })
+    }
+})
+
+/**HELPERS FUNCTIONS*/
+
+function createCredentials(persona) {
+    const { firstname, lastname } = persona
+    const firstLetterUsername = firstname.substr(0, 1).toLowerCase()
+    const moreLetterUsername = lastname.split(' ') ? lastname.split(' ')[0].toLowerCase().replace(/[aeiouáéíóú]/ig, '') : lastname.toLowerCase().replace(/[aeiouáéíóú]/ig, '')
+    const username = firstLetterUsername + moreLetterUsername
+    const password = firstname.split(' ') ? firstname.split(' ')[0].toLowerCase().replace(/[aeiouáéíóú]/ig, '') + Date.now().toString().substr(11) : firstname.toLowerCase().replace(/[aeiouáéíóú]/ig, '') + Date.now().toString().substr(11)
+    return {
+        username,
+        password
+    }
+}
