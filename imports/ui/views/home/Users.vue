@@ -19,8 +19,13 @@ export default {
   },
   data: () => ({
     items: [
-      { title: "Start", icon: "person" },
-
+      {
+        firstname: "Kelly",
+        lastname: "Smith",
+        email: "kelly.smith@demo.com",
+        rol: "Supervisor",
+        creado: "2019-02-25 19:25:00"
+      }
     ]
   })
 };
@@ -36,11 +41,11 @@ export default {
         <v-list class="pt-0 transparent" dense dark>
           <v-list-tile v-for="item in items" :key="item.index" @click>
             <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>person</v-icon>
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile-title>{{ item.firstname }}&nbsp;{{item.lastname}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -55,10 +60,10 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <v-card class="ma-2 transparent white--text">
-        <v-card-title primary-title>
+        <v-card-title class="py-2">
           <div>
-            <h3 class="headline ma-0">Kangaroo Valley Safari</h3>
-            <user-simple-table :items=items></user-simple-table>
+            <h3 class="my-0">Kangaroo Valley Safari</h3>
+            <user-simple-table :items="items"></user-simple-table>
           </div>
         </v-card-title>
 
