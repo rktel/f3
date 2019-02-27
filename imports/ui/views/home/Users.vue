@@ -26,11 +26,32 @@ export default {
       this.userCard = user;
     },
     removeUP() {
-      this.userCard = {};
+      this.displayUserCard = false;
       Meteor.call("removePersona", this.userCard);
+      this.userCard = {};
+    },
+    hideUP() {
+      this.displayUserCard = false;
+      this.userCard = {};
     }
   },
+  data: () => ({
+    displayUserCard: false,
+    userCard: {},
+    userFilter: null
+  }),
   computed: {
+    filteredUser() {
+      if (!this.userFilter) return this.personal;
+      let searchText = this.userFilter.toLowerCase();
+      return this.personal.filter(p => {
+        return (
+          p.firstname.toLowerCase().includes(searchText) ||
+          p.lastname.toLowerCase().includes(searchText) ||
+          p.email.toLowerCase().includes(searchText)
+        );
+      });
+    },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
       if (width < 900) {
@@ -41,11 +62,7 @@ export default {
         return height - 100;
       }
     }
-  },
-  data: () => ({
-    displayUserCard: false,
-    userCard: {}
-  })
+  }
 };
 </script>
 <template>
@@ -53,7 +70,7 @@ export default {
     <section class="itemOne">
       <user-form-dialog></user-form-dialog>
       <v-toolbar flat class="pt-0 transparent" dark>
-        <v-text-field label="Buscar usuario" prepend-icon="search" single-line></v-text-field>
+        <v-text-field label="Buscar usuario" prepend-icon="search" single-line v-model="userFilter" clearable></v-text-field>
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>
@@ -62,7 +79,7 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile v-for="item in personal" :key="item.index" @click="setUserCard(item)">
+          <v-list-tile v-for="item in filteredUser" :key="item.index" @click="setUserCard(item)">
             <v-list-tile-action>
               <v-icon>person</v-icon>
             </v-list-tile-action>
@@ -77,7 +94,7 @@ export default {
     <section class="itemTwo">
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
-        <v-btn color="pink" flat class="white--text" @click="toggleFlagUFD">Agregar
+        <v-btn color="green" flat class="white--text" @click="toggleFlagUFD">Agregar
           <v-icon right dark>person</v-icon>
         </v-btn>
       </v-toolbar>
@@ -90,8 +107,10 @@ export default {
         </v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="indigo">Editar</v-btn>
-          <v-btn flat color="pink" @click="removeUP">Eliminar</v-btn>
+          <v-btn flat color="indigo" @click="hideUP">Ocultar</v-btn>
+          <v-btn flat color="pink" @click="removeUP">Eliminar
+            <v-icon right dark>person</v-icon>
+          </v-btn>
         </v-card-actions>
       </v-card>
     </section>
