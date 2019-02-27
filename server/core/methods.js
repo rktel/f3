@@ -17,7 +17,7 @@ Meteor.methods({
                 email: Meteor.settings.private.HYPER_PERSONAL_EMAIL,
                 emailBack: Meteor.settings.private.HYPER_PERSONAL_EMAIL_BACK,
                 role: Meteor.settings.private.HYPER_PERSONAL_ROLE,
-                avatar: Meteor.settings.public.legos[5],
+                avatar: Meteor.settings.public.avatar[5],
                 userId: hyperUserId
             })
         }
