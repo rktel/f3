@@ -28,7 +28,6 @@ export default {
         width: window.innerWidth,
         height: window.innerHeight
       });
-      // console.log(window.innerWidth, window.innerHeight );
     },
     logout: function() {
       Meteor.logout(error => {
@@ -41,19 +40,19 @@ export default {
 };
 </script>
 <template>
-  <v-app v-resize="onResize">
-    <v-navigation-drawer fixed v-model="drawer" right app class="red accent-4" width="260" dark>
-      <v-toolbar flat class="transparent" dense >
+  <v-app v-resize="onResize" dark>
+    <v-navigation-drawer fixed v-model="drawer" right app width="260" class="indigo">
+      <v-toolbar flat class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
               <img src="https://randomuser.me/api/portraits/lego/5.jpg">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title class="body-1 font-weight-light font-italic white--text">{{persona.firstname}}</v-list-tile-title>
+              <v-list-tile-title class="body-1 font-weight-light font-italic">{{persona.firstname}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn icon ripple @click="logout" title="Cerrar sesion">
+              <v-btn icon @click="logout" title="Cerrar sesion">
                 <v-icon color="white">power_settings_new</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -72,7 +71,7 @@ export default {
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="red accent-4" dark fixed dense app>
+    <v-toolbar fixed app flat>
       <v-toolbar-title class="font-italic">{{this.$route.name}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <h4 class="subheading font-italic" title="Version 3.0
@@ -84,9 +83,4 @@ export default {
     </v-content>
   </v-app>
 </template>
-<style>
-a.primary--text {
-    color: #ff7700  !important;
-    caret-color: #ff7700 !important;
-}
-</style>
+
