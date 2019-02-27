@@ -24,6 +24,10 @@ export default {
     setUserCard(user) {
       this.displayUserCard = true;
       this.userCard = user;
+    },
+    removeUP() {
+      this.userCard = {};
+      Meteor.call("removePersona", this.userCard);
     }
   },
   computed: {
@@ -87,7 +91,7 @@ export default {
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo">Editar</v-btn>
-          <v-btn flat color="pink">Eliminar</v-btn>
+          <v-btn flat color="pink" @click="removeUP">Eliminar</v-btn>
         </v-card-actions>
       </v-card>
     </section>
