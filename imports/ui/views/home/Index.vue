@@ -1,6 +1,8 @@
 <script>
+import UserAvatarDialog from "../components/UserAvatarDialog";
 export default {
   name: "Index",
+  components: { UserAvatarDialog },
   created() {
     const links = this.$router.options.routes[1].children;
     this.links = links;
@@ -20,16 +22,25 @@ export default {
   computed: {
     persona() {
       return this.$store.getters.persona;
+    },
+    userMenu() {
+      return [
+        { title: "Cerrar sesion", option: this.logout },
+        { title: "Avatar", option: this.toggleFlagUAD }
+      ];
     }
   },
   methods: {
+    toggleFlagUAD() {
+      this.$store.commit("toggleFlagUAD");
+    },
     onResize() {
       this.$store.commit("setAppSize", {
         width: window.innerWidth,
         height: window.innerHeight
       });
     },
-    logout: function() {
+    logout() {
       Meteor.logout(error => {
         if (!error) {
           this.$router.push({ name: "Login" });
@@ -42,19 +53,27 @@ export default {
 <template>
   <v-app v-resize="onResize" dark>
     <v-navigation-drawer fixed v-model="drawer" right app width="260" class="indigo darken-4">
+      <user-avatar-dialog></user-avatar-dialog>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="https://randomuser.me/api/portraits/lego/5.jpg">
+              <img :src="persona.avatar">
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title class="body-1 font-weight-light font-italic">{{persona.firstname}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn icon @click="logout" title="Cerrar sesion">
-                <v-icon color="white">power_settings_new</v-icon>
-              </v-btn>
+              <v-menu bottom left>
+                <v-btn slot="activator" dark icon>
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+                <v-list>
+                  <v-list-tile v-for="(item, i) in userMenu" :key="i" @click="item.option">
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>

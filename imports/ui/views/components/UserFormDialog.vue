@@ -66,5 +66,3 @@ export default {
   </v-dialog>
 </template>
 
-<style>
-</style>

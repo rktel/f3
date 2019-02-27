@@ -17,6 +17,7 @@ Meteor.methods({
                 email: Meteor.settings.private.HYPER_PERSONAL_EMAIL,
                 emailBack: Meteor.settings.private.HYPER_PERSONAL_EMAIL_BACK,
                 role: Meteor.settings.private.HYPER_PERSONAL_ROLE,
+                avatar: Meteor.settings.public.legos[5],
                 userId: hyperUserId
             })
         }
@@ -24,11 +25,13 @@ Meteor.methods({
 
 });
 /*********PERSONAL************/
+const DEFAULT_AVATAR = Meteor.settings.public.avatar[5]
 Meteor.methods({
     getPersona: function () {
         return Personal.findOne({ userId: this.userId })
     },
     saveUserPersona: function (persona) {
+        const avatar = DEFAULT_AVATAR
         const created = (new Date()).toISOString()
         const urlFigo = Meteor.settings.private.URL_FIGO
         const fromEmail = Meteor.settings.private.USER_SMTP
@@ -39,7 +42,7 @@ Meteor.methods({
         }
         const userId = Accounts.createUser({ username, password })
         const { firstname, lastname, email, role } = persona
-        return Personal.insert({ firstname, lastname, email, role, userId, username, password, created }, (error, id) => {
+        return Personal.insert({ firstname, lastname, email, role, userId, username, password, created, avatar }, (error, id) => {
             // if (!error) Meteor.call("sendEmail", email, fromEmail, subjectEmail, bodyEmail())
         })
 
@@ -52,8 +55,9 @@ Meteor.methods({
         return Personal.remove({ _id })
     },
     updatePersona: function (persona) {
-        const { firstname, lastname, role, _id } = persona
-        return Personal.update({ _id }, { $set: { firstname, lastname, role } })
+        const modified = (new Date).toISOString()
+        const { firstname, lastname, role, _id, avatar, email } = persona
+        return Personal.update({ _id }, { $set: { firstname, lastname, role, modified, avatar, email } })
     }
 })
 /********EMAIL****************/
