@@ -9,7 +9,7 @@ let adapter = function (device) {
     this.device = device;
 
 	/*******************************************
-	PARSE THE INCOMING STRING FROM THE DECIVE 
+	PARSE THE INCOMING STRING FROM THE DEVICE
 	You must return an object with a least: device_id, cmd and type.
 	return device_id: The device_id
 	return cmd: command from the device.
