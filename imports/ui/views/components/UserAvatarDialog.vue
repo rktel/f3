@@ -17,9 +17,11 @@ export default {
       this.$store.commit("toggleFlagUAD");
     },
     updateUP() {
-      this.persona.avatar = this.avatar;
-      Meteor.call("updatePersona", this.persona);
-      this.avatar = null;
+      if (this.avatar) {
+        this.persona.avatar = this.avatar;
+        Meteor.call("updatePersona", this.persona);
+        this.avatar = null;
+      }
     }
   },
   data: () => ({

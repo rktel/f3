@@ -4,8 +4,7 @@ export default {
   name: "Index",
   components: { UserAvatarDialog },
   created() {
-    const links = this.$router.options.routes[1].children;
-    this.links = links;
+    this.links = this.$router.options.routes[1].children;
     Meteor.call("getPersona", (error, persona) => {
       if (!error) {
         this.$store.commit("setPersonaProfile", persona);

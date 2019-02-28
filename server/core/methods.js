@@ -1,7 +1,7 @@
 import { Personal } from '../../imports/api/collections'
 
+/********* INITIAL METHODS ********/
 Meteor.methods({
-    /********* INITIAL METHODS ********/
     createHyperPersonal: function () {
         let hyperUserId
         if (Meteor.users.find().count() == 0) {
@@ -57,7 +57,7 @@ Meteor.methods({
     updatePersona: function (persona) {
         const modified = (new Date).toISOString()
         const { firstname, lastname, role, _id, avatar, email } = persona
-        return Personal.update({ _id }, { $set: { firstname, lastname, role, modified, avatar, email } })
+        return Personal.update({ _id }, { $set: { firstname, lastname, email, role, userId, username, password, created, avatar } })
     }
 })
 /********EMAIL****************/

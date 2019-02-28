@@ -66,7 +66,7 @@ export default {
 };
 </script>
 <template>
-  <section class="contenedor">
+  <section class="contenedor bg-color">
     <section class="itemOne">
       <user-form-dialog></user-form-dialog>
       <v-toolbar flat class="pt-0 transparent" dark>
