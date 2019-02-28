@@ -8,7 +8,7 @@ var PORT = 7100;
 // Create Server instance 
 var server = net.createServer(onClientConnected);  
  
-server.listen(PORT, HOST, function() {  
+server.listen(PORT, function() {  
   console.log('server listening on %j', server.address());
 });
  
