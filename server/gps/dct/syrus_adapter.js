@@ -6,13 +6,11 @@ const DEFAULT_PORT = 7100
 
 export default class Syrus {
   constructor(PORT) {
-    this.serverOptions = {
-      port: PORT||DEFAULT_PORT, family: "IPv4", address: "0.0.0.0"  
-    }
+    this.port = PORT
     this.sockets = {}
     this.server = net.createServer(this.onClientConnected)
     this.server.on('error', this.onServerError)
-    this.serverListen()
+    serverListen()
   }
 
   onClientConnected(sock) {
@@ -36,7 +34,7 @@ export default class Syrus {
       console.log('Address in use, retrying...');
       setTimeout(() => {
         this.server.close();
-        this.server.listen(this.serverOptions, () => {
+        this.server.listen(DEFAULT_PORT || this.port, () => {
           console.log('Server listening on %j', this.server.address());
         });
       }, 5000);
@@ -45,7 +43,7 @@ export default class Syrus {
   serverListen() {
     setTimeout(() => {
       this.server.close();
-      this.server.listen(this.serverOptions, () => {
+      this.server.listen(DEFAULT_PORT || this.port, () => {
         console.log('Server listening on %j', this.server.address());
       });
     }, 1000);
