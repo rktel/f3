@@ -1,5 +1,7 @@
+import Syrus from './gps/dct/syrus_adapter'
+
 Meteor.startup(() => {
-    console.log("Hello  2!!")
+    new Syrus(7100)
     Meteor.call('createHyperPersonal')
     Meteor.call('setEmailOptions')
 })
