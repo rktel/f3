@@ -14,18 +14,12 @@ export default class Syrus {
   }
 
   onClientConnected(sock) {
-    const remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
-    console.log('new client connected: %s', remoteAddress);
-
-    sock.on('data', function (data) {
-      console.log('Device address %s : %s', remoteAddress, data);
-      // sock.write(data);
+    sock.on('data', (data) => {
+      console.log(data);
     });
-    sock.on('close', function () {
-      console.log('connection from %s closed', remoteAddress);
+    sock.on('close', () => {
     });
-    sock.on('error', function (err) {
-      console.log('Connection %s error: %s', remoteAddress, err.message);
+    sock.on('error', (err) => {
     });
   };
 
