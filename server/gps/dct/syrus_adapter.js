@@ -12,7 +12,32 @@ const Sockets = {}
 export default class Syrus {
   constructor(PORT) {
     this.port = PORT
-    this.server = net.createServer(this.onClientConnected)
+    this.server = net.createServer(sock => {
+      sock.on('data', (data) => {
+        this.message = data.toString().trim()
+        console.log(this.message);
+        if (!Sockets[sock.deviceID]) {
+          sock.deviceID = this.deviceID
+          Sockets[sock.deviceID] = sock
+        }
+        this.messageRouter()
+      });
+      sock.on('end', () => {
+        console.log('End on Sock Device %s:', sock);
+        if (sock.deviceID)
+          delete Sockets[sock.deviceID]
+      })
+      sock.on('close', () => {
+        console.log('Close on Sock Device %s:', sock);
+        if (sock.deviceID)
+          delete Sockets[sock.deviceID]
+      });
+      sock.on('error', (err) => {
+        console.log('Error on Sock Device %s:', sock);
+        if (sock.deviceID)
+          delete Sockets[sock.deviceID]
+      });
+    })
     this.server.on('error', this.onServerError)
     this.serverListen()
   }
@@ -53,32 +78,7 @@ export default class Syrus {
     }
   }
   onClientConnected(sock) {
-    sock.on('data', (data) => {
-      this.message = data.toString().trim()
-      console.log(this.message);
 
-
-      if (!Sockets[sock.deviceID]) {
-        sock.deviceID = this.deviceID
-        Sockets[sock.deviceID] = sock
-      }
-      this.messageRouter()
-    });
-    sock.on('end', () => {
-      console.log('End on Sock Device %s:', sock);
-      if (sock.deviceID)
-        delete Sockets[sock.deviceID]
-    })
-    sock.on('close', () => {
-      console.log('Close on Sock Device %s:', sock);
-      if (sock.deviceID)
-        delete Sockets[sock.deviceID]
-    });
-    sock.on('error', (err) => {
-      console.log('Error on Sock Device %s:', sock);
-      if (sock.deviceID)
-        delete Sockets[sock.deviceID]
-    });
   };
 
   onServerError(error) {
