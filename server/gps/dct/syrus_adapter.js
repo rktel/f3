@@ -53,10 +53,11 @@ export default class Syrus {
     }
   }
   onClientConnected(sock) {
+    console.log(this.sockets);
     sock.on('data', (data) => {
       this.message = data.toString().trim()
       console.log(this.message);
-      console.log(this.sockets);
+  //    console.log(this.sockets);
       /*
       if (!this.sockets[sock.deviceID]) {
         sock.deviceID = this.deviceID
