@@ -86,7 +86,7 @@ const TIME_DISCONNECT_DEVICE = 500
 
 let sockets = {}
 
-export default class SyrusT {
+ class SyrusT {
 
   constructor(port) {
 
