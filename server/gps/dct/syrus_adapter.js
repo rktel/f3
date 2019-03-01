@@ -7,7 +7,7 @@ const DEFAULT_PORT = 7100
 export default class Syrus {
   constructor(PORT) {
     this.serverOptions = {
-      port: PORT||DEFAULT_PORT, family: 'IPv4', address: '0.0.0.0'
+      port: PORT||DEFAULT_PORT, family: "IPv4", address: "0.0.0.0"  
     }
     this.sockets = {}
     this.server = net.createServer(this.onClientConnected)
