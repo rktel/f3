@@ -1,7 +1,11 @@
 
 var net = require('net');
+import Convert from './syrus_convert'
+const convert = new Convert
+// FIRMWARE [1]
 
-// Configuration parameters
+//Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
+
 const DEFAULT_PORT = 7100
 
 export default class Syrus {
@@ -12,15 +16,67 @@ export default class Syrus {
     this.server.on('error', this.onServerError)
     this.serverListen()
   }
-
+  messageRouter() {
+    this.parserMessage()
+    if(this.deviceID){
+      this.sockets[this.deviceID].write(this.deviceID)
+    }
+  }
+  parserMessage() {
+    const { message } = this.message
+    if (message.includes('>') && message.includes('<')) {
+      this.deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
+      if (message.includes('RXART')) {
+        const messageSplit = message.split(";")
+        this.deviceInfo = {
+          firmware: messageSplit[1],
+          hardware: messageSplit[2],
+          operator: messageSplit[5].substr(messageSplit[5].indexOf('=') + 1),
+          sim: messageSplit[6].substr(messageSplit[6].indexOf('=') + 1)
+        }
+      }
+      if (message.includes('REV')) {
+        this.gpsData = {
+          eventCode: parseInt(message.substr(4, 2)),
+          updateTime: convert.time(message.substr(6, 10)),
+          latitude: convert.latitude(message.substr(16, 8)),
+          longitude: convert.longitude(message.substr(24, 9)),
+          speed: convert.speed(message.substr(33, 3)),
+          heading: parseInt(message.substr(36, 3)),
+          fixMode: parseInt(message.substr(39, 1)),
+          ageData: parseInt(message.substr(40, 1)),
+          direction: convert.getCardinal(message.substr(36, 3))
+        }
+      }
+    } else {
+      this.deviceID = message
+    }
+  }
   onClientConnected(sock) {
     sock.on('data', (data) => {
-      data = data.toString()
-      console.log(data);
+      this.message = data.toString().trim()
+      console.log(this.message);
+      this.messageRouter()
+
+      if (!this.sockets[sock.deviceID]) {
+        sock.deviceID = this.deviceID
+        this.sockets[sock.deviceID] = sock
+      }
     });
+    sock.on('end', () => {
+      console.log('End on Sock Device %s:', sock);
+      if (sock.deviceID)
+        delete this.sockets[sock.deviceID]
+    })
     sock.on('close', () => {
+      console.log('Close on Sock Device %s:', sock);
+      if (sock.deviceID)
+        delete this.sockets[sock.deviceID]
     });
     sock.on('error', (err) => {
+      console.log('Error on Sock Device %s:', sock);
+      if (sock.deviceID)
+        delete this.sockets[sock.deviceID]
     });
   };
 
@@ -30,7 +86,7 @@ export default class Syrus {
       setTimeout(() => {
         this.server.close();
         this.server.listen(DEFAULT_PORT || this.port, () => {
-          console.log('Server listening on port %s', this.port);
+          console.log('***************Server listening on port %s****************', this.port);
         });
       }, 5000);
     }
@@ -39,7 +95,7 @@ export default class Syrus {
     setTimeout(() => {
       this.server.close();
       this.server.listen(DEFAULT_PORT || this.port, () => {
-        console.log('Server listening on port %s', this.port);
+        console.log('***************Server listening on port %s****************', this.port);
       });
     }, 1000);
   }
@@ -77,7 +133,7 @@ let sockets = {}
       socket.on('end', Meteor.bindEnvironment(() => {
         delete sockets[socket.mobileID]
         Meteor.call('removeTrail', socket.mobileID)
-        
+
       }))
 
       socket.on('data', Meteor.bindEnvironment(data => {
@@ -126,7 +182,7 @@ let sockets = {}
 
   }
   response() {
- 
+
     const mm = this.mobileMessage
     const mobileID = mm.slice(mm.indexOf('ID=') + 3, mm.indexOf('<'))
     Meteor.call('upsertResponse', mobileID, mm)
@@ -136,7 +192,7 @@ let sockets = {}
     this.taskWorker(mobileID, mm)
   }
   trail() {
-  
+
     const mm = this.mobileMessage
     const mobileID = mm.slice(mm.indexOf('ID=') + 3, mm.indexOf('<'))
     Meteor.call('socketSend', mobileID, mobileID)
@@ -190,9 +246,9 @@ let sockets = {}
   syncWorker(mobileID) {
     const task = Meteor.call('getTask', mobileID)
     if (task) {
-    
+
       const cmd1 = task.commands.filter(el => el.status == 1)[0]
-    
+
       cmd1 ? Meteor.call('socketSend', mobileID, cmd1.command) : false
     }
   }
@@ -210,7 +266,7 @@ Meteor.methods({
   getConnections: () => {
     return Object.keys(sockets).length
   },
- 
+
   upsertTrail: (mobileID) => {
     Trails.upsert({ mobileID }, { $set: { now: now() } })
   },
@@ -234,9 +290,9 @@ Meteor.methods({
           line.indexOf('SXADP00') < 0 && // DANTE UECHI 20/06/2018 AUTORIZA
           line.indexOf('SXADP01') < 0 && // DANTE UECHI 20/06/2018 AUTORIZA
           line.indexOf('SRFA') < 0 &&
-       
+
           line.indexOf('SXAFU0C') < 0 &&
-     
+
           line.indexOf('SID') < 0
       })
       if (lines.length > 0) {
@@ -244,7 +300,7 @@ Meteor.methods({
           return {
             index: (index + 1),
             command: line.trim(),
-          
+
           }
         })
       }
