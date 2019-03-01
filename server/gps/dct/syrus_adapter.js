@@ -52,29 +52,13 @@ export default class Syrus {
 
 
 
-function onClientConnected(sock) {
-  var remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
-  console.log('new client connected: %s', remoteAddress);
-
-  sock.on('data', function (data) {
-    console.log('%s Says: %s', remoteAddress, data);
-    sock.write(data);
-  });
-  sock.on('close', function () {
-    console.log('connection from %s closed', remoteAddress);
-  });
-  sock.on('error', function (err) {
-    console.log('Connection %s error: %s', remoteAddress, err.message);
-  });
-};
-
-// const net = require('net')
+/*
 
 import { p, now, formatTime } from '../imports/tools'
 import { streamer } from '../imports/streamers'
 import { Tasks, Trails, Scripts, Responses } from '../imports/collections'
 
-// PUBLISH
+
 Meteor.publish('scripts', ns => Scripts.find({}))
 Meteor.publish('trails', ns => Trails.find({}))
 Meteor.publish('responses', ns => Responses.find({}))
@@ -92,13 +76,12 @@ let sockets = {}
 
 
     this.server = net.createServer(Meteor.bindEnvironment(socket => {
-      // 'connection' listener
-      // console.log('client connected')
+
 
       socket.on('end', Meteor.bindEnvironment(() => {
         delete sockets[socket.mobileID]
         Meteor.call('removeTrail', socket.mobileID)
-        // console.log(`${socket.mobileID} has disconnected`)
+        
       }))
 
       socket.on('data', Meteor.bindEnvironment(data => {
@@ -147,7 +130,7 @@ let sockets = {}
 
   }
   response() {
-    //p('response')
+ 
     const mm = this.mobileMessage
     const mobileID = mm.slice(mm.indexOf('ID=') + 3, mm.indexOf('<'))
     Meteor.call('upsertResponse', mobileID, mm)
@@ -157,7 +140,7 @@ let sockets = {}
     this.taskWorker(mobileID, mm)
   }
   trail() {
-    //p('trail')
+  
     const mm = this.mobileMessage
     const mobileID = mm.slice(mm.indexOf('ID=') + 3, mm.indexOf('<'))
     Meteor.call('socketSend', mobileID, mobileID)
@@ -165,7 +148,7 @@ let sockets = {}
     this.syncWorker(mobileID)
   }
   heartbeat() {
-    //p('heartbeat')
+
     const mobileID = this.mobileMessage
     Meteor.call('socketSend', mobileID, mobileID)
     Meteor.call('upsertTrail', mobileID)
@@ -211,41 +194,38 @@ let sockets = {}
   syncWorker(mobileID) {
     const task = Meteor.call('getTask', mobileID)
     if (task) {
-      //const cmd0 = task.commands.filter(el=> el.status == 0)[0]
+    
       const cmd1 = task.commands.filter(el => el.status == 1)[0]
-      //const cmd2 = task.commands.filter(el=> el.status == 2)[0]
+    
       cmd1 ? Meteor.call('socketSend', mobileID, cmd1.command) : false
     }
   }
 }
 
-// new SyrusT()
 
 
-/* METEOR METHODS */
+
+
 Meteor.methods({
-  // SERVER TCP
+
   socketSend: (mobileID, message) => {
     sockets[mobileID].write(message)
   },
   getConnections: () => {
     return Object.keys(sockets).length
   },
-  // TRAILS
+ 
   upsertTrail: (mobileID) => {
     Trails.upsert({ mobileID }, { $set: { now: now() } })
   },
-	/*
-	getTrail: (mobileID) => {
-		return Trails.findOne({ mobileID })
-	},*/
+
   removeTrail: (mobileID) => {
     Trails.remove({ mobileID })
   },
   removeAllTrails: () => {
     Trails.remove({})
   },
-  // SCRIPTS
+
   saveScript: (scriptFile) => {
     const { name, file } = scriptFile
     let commands = []
@@ -258,9 +238,9 @@ Meteor.methods({
           line.indexOf('SXADP00') < 0 && // DANTE UECHI 20/06/2018 AUTORIZA
           line.indexOf('SXADP01') < 0 && // DANTE UECHI 20/06/2018 AUTORIZA
           line.indexOf('SRFA') < 0 &&
-          // line.indexOf('SDA0') < 0 &&   DANTE UECHI 18/06/2018 AUTORIZA
+       
           line.indexOf('SXAFU0C') < 0 &&
-          // line.indexOf('SRT;CONFIG') < 0 &&   ERICK ENCISO 06/07/2018 AUTORIZA
+     
           line.indexOf('SID') < 0
       })
       if (lines.length > 0) {
@@ -268,7 +248,7 @@ Meteor.methods({
           return {
             index: (index + 1),
             command: line.trim(),
-            // hopeResponse: line.replace('>S', '>R').substr(0, line.length - 1).trim()
+          
           }
         })
       }
@@ -279,7 +259,7 @@ Meteor.methods({
   removeScript: (name) => {
     Scripts.remove({ name })
   },
-  // TASKS
+
   saveTask: (mobileID, scriptID) => {
     const scriptToTask = Scripts.findOne({ _id: scriptID }, { fields: { _id: 0, createdAt: 0 } })
     scriptToTask.commands.map(el => el.status = 0)
@@ -313,6 +293,6 @@ Meteor.methods({
   },
 
 })
-
+*/
 
 
