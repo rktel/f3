@@ -15,6 +15,7 @@ export default class Syrus {
 
   onClientConnected(sock) {
     sock.on('data', (data) => {
+      data = data.toString()
       console.log(data);
     });
     sock.on('close', () => {
@@ -29,7 +30,7 @@ export default class Syrus {
       setTimeout(() => {
         this.server.close();
         this.server.listen(DEFAULT_PORT || this.port, () => {
-          console.log('Server listening on %j', this.server.address());
+          console.log('Server listening on port %s', this.port);
         });
       }, 5000);
     }
@@ -38,7 +39,7 @@ export default class Syrus {
     setTimeout(() => {
       this.server.close();
       this.server.listen(DEFAULT_PORT || this.port, () => {
-        console.log('Server listening on %j', this.server.address());
+        console.log('Server listening on port %s', this.port);
       });
     }, 1000);
   }
