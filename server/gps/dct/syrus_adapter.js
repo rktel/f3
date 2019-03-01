@@ -18,7 +18,7 @@ export default class Syrus {
   }
   messageRouter() {
     this.parserMessage()
-    if(this.deviceID){
+    if (this.deviceID) {
       this.sockets[this.deviceID].write(this.deviceID)
     }
   }
@@ -56,12 +56,12 @@ export default class Syrus {
     sock.on('data', (data) => {
       this.message = data.toString().trim()
       console.log(this.message);
-      this.messageRouter()
 
       if (!this.sockets[sock.deviceID]) {
         sock.deviceID = this.deviceID
         this.sockets[sock.deviceID] = sock
       }
+      this.messageRouter()
     });
     sock.on('end', () => {
       console.log('End on Sock Device %s:', sock);
