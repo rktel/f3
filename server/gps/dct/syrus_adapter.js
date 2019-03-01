@@ -7,11 +7,11 @@ const convert = new Convert
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
 
 const DEFAULT_PORT = 7100
+const Sockets = {}
 
 export default class Syrus {
   constructor(PORT) {
     this.port = PORT
-    this.sockets = {}
     this.server = net.createServer(this.onClientConnected)
     this.server.on('error', this.onServerError)
     this.serverListen()
@@ -19,7 +19,7 @@ export default class Syrus {
   messageRouter() {
     this.parserMessage()
     if (this.deviceID) {
-      this.sockets[this.deviceID].write(this.deviceID)
+      Sockets[this.deviceID].write(this.deviceID)
     }
   }
   parserMessage() {
@@ -53,32 +53,31 @@ export default class Syrus {
     }
   }
   onClientConnected(sock) {
-    console.log(this.sockets);
     sock.on('data', (data) => {
       this.message = data.toString().trim()
       console.log(this.message);
-  //    console.log(this.sockets);
-      /*
-      if (!this.sockets[sock.deviceID]) {
+
+
+      if (!Sockets[sock.deviceID]) {
         sock.deviceID = this.deviceID
-        this.sockets[sock.deviceID] = sock
+        Sockets[sock.deviceID] = sock
       }
-      this.messageRouter()*/
+      this.messageRouter()
     });
     sock.on('end', () => {
       console.log('End on Sock Device %s:', sock);
       if (sock.deviceID)
-        delete this.sockets[sock.deviceID]
+        delete Sockets[sock.deviceID]
     })
     sock.on('close', () => {
       console.log('Close on Sock Device %s:', sock);
       if (sock.deviceID)
-        delete this.sockets[sock.deviceID]
+        delete Sockets[sock.deviceID]
     });
     sock.on('error', (err) => {
       console.log('Error on Sock Device %s:', sock);
       if (sock.deviceID)
-        delete this.sockets[sock.deviceID]
+        delete Sockets[sock.deviceID]
     });
   };
 
