@@ -10,7 +10,7 @@ export default class Syrus {
     this.sockets = {}
     this.server = net.createServer(this.onClientConnected)
     this.server.on('error', this.onServerError)
-    serverListen()
+    this.serverListen()
   }
 
   onClientConnected(sock) {
