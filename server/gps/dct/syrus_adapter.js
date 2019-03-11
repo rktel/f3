@@ -15,12 +15,14 @@ export default class Syrus {
     this.server = net.createServer(sock => {
       sock.on('data', (data) => {
         this.message = data.toString().trim()
+/*
         console.log(this.message);
         if (!Sockets[sock.deviceID]) {
           sock.deviceID = this.deviceID
           Sockets[sock.deviceID] = sock
         }
         this.messageRouter()
+*/
       });
       sock.on('end', () => {
         console.log('End on Sock Device %s:', sock);
@@ -48,7 +50,7 @@ export default class Syrus {
     }
   }
   parserMessage() {
-    const { message } = this.message
+    const { message } = this
     if (message.includes('>') && message.includes('<')) {
       this.deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
       if (message.includes('RXART')) {
