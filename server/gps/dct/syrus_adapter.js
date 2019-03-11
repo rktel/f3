@@ -15,6 +15,8 @@ export default class Syrus {
     this.server = net.createServer(sock => {
       sock.on('data', (data) => {
         this.message = data.toString().trim()
+        console.log(this.message);
+        
 /*
         console.log(this.message);
         if (!Sockets[sock.deviceID]) {
