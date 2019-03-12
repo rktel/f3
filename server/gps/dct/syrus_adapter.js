@@ -13,7 +13,7 @@ const Syrus = (port = DEFAULT_PORT) => {
   console.log(port);
 }
 
-const srs = new Syrus()
+const srs = Syrus()
 
 /*
 
