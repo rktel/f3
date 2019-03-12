@@ -9,11 +9,11 @@ const convert = new Convert
 const DEFAULT_PORT = 7100
 const Sockets = {}
 
-const Syrus = (port = DEFAULT_PORT) => {
+function Syrus(port = DEFAULT_PORT) {
   console.log(port);
 }
 
-const srs = Syrus()
+const srs = new Syrus()
 
 /*
 
