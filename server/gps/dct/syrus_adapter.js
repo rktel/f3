@@ -9,105 +9,11 @@ const convert = new Convert
 const DEFAULT_PORT = 7100
 const Sockets = {}
 
-export default class Syrus {
-  constructor(PORT) {
-    this.port = PORT
-    this.server = net.createServer(sock => {
-      sock.on('data', (data) => {
-        this.message = data.toString().trim()
-        console.log(this.message);
-        
-/*
-        console.log(this.message);
-        if (!Sockets[sock.deviceID]) {
-          sock.deviceID = this.deviceID
-          Sockets[sock.deviceID] = sock
-        }
-        this.messageRouter()
-*/
-      });
-      sock.on('end', () => {
-        console.log('End on Sock Device %s:', sock);
-        if (sock.deviceID)
-          delete Sockets[sock.deviceID]
-      })
-      sock.on('close', () => {
-        console.log('Close on Sock Device %s:', sock);
-        if (sock.deviceID)
-          delete Sockets[sock.deviceID]
-      });
-      sock.on('error', (err) => {
-        console.log('Error on Sock Device %s:', sock);
-        if (sock.deviceID)
-          delete Sockets[sock.deviceID]
-      });
-    })
-    this.server.on('error', this.onServerError)
-    this.serverListen()
-  }
-  messageRouter() {
-    this.parserMessage()
-    if (this.deviceID) {
-      Sockets[this.deviceID].write(this.deviceID)
-    }
-  }
-  parserMessage() {
-    const { message } = this
-    if (message.includes('>') && message.includes('<')) {
-      this.deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
-      if (message.includes('RXART')) {
-        const messageSplit = message.split(";")
-        this.deviceInfo = {
-          firmware: messageSplit[1],
-          hardware: messageSplit[2],
-          operator: messageSplit[5].substr(messageSplit[5].indexOf('=') + 1),
-          sim: messageSplit[6].substr(messageSplit[6].indexOf('=') + 1)
-        }
-      }
-      if (message.includes('REV')) {
-        this.gpsData = {
-          eventCode: parseInt(message.substr(4, 2)),
-          updateTime: convert.time(message.substr(6, 10)),
-          latitude: convert.latitude(message.substr(16, 8)),
-          longitude: convert.longitude(message.substr(24, 9)),
-          speed: convert.speed(message.substr(33, 3)),
-          heading: parseInt(message.substr(36, 3)),
-          fixMode: parseInt(message.substr(39, 1)),
-          ageData: parseInt(message.substr(40, 1)),
-          direction: convert.getCardinal(message.substr(36, 3))
-        }
-      }
-    } else {
-      this.deviceID = message
-    }
-  }
-  onClientConnected(sock) {
-
-  };
-
-  onServerError(error) {
-    if (error.code === 'EADDRINUSE') {
-      console.log('Address in use, retrying...');
-      setTimeout(() => {
-        this.server.close();
-        this.server.listen(DEFAULT_PORT || this.port, () => {
-          console.log('***************Server listening on port %s****************', this.port);
-        });
-      }, 5000);
-    }
-  }
-  serverListen() {
-    setTimeout(() => {
-      this.server.close();
-      this.server.listen(DEFAULT_PORT || this.port, () => {
-        console.log('***************Server listening on port %s****************', this.port);
-      });
-    }, 1000);
-  }
+const Syrus = (port = DEFAULT_PORT) => {
+  console.log(port);
 }
 
-
-
+const srs = new Syrus()
 
 /*
 
