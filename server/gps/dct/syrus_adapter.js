@@ -16,7 +16,7 @@ function Syrus(port = DEFAULT_PORT) {
     if (data.length == 15) {
       return  data 
     }
-    if (data.includes('>R')) {
+    if (data.includes('>REV')) {
       const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
       return deviceID 
     }
