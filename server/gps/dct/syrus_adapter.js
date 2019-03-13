@@ -30,6 +30,7 @@ function Syrus(port = DEFAULT_PORT) {
 
       if (data && data.length > 0) {
         const proData = routeData(data.toString().trim())
+
         if (!socket.deviceID && proData.deviceID) {
           socket.deviceID = proData.deviceID
           if (!SOCKETS.find(el => el.deviceID = socket.deviceID)) {
@@ -41,11 +42,9 @@ function Syrus(port = DEFAULT_PORT) {
 
     })
 
-
-
   })
 
-  server.listen(7100, () => {
+  server.listen(port, () => {
     console.log("Server TCP Ready");
 
   });
