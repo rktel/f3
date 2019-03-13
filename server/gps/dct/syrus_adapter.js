@@ -35,6 +35,8 @@ function Syrus(port = DEFAULT_PORT) {
 
 
   })
+
+  server.listen(7100);
 }
 
 const srs = new Syrus()
