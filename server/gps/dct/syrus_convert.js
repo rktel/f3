@@ -3,7 +3,7 @@ export function Time(data) {
     const week = parseInt(data.substr(0, 4))
     const day = parseInt(data.substr(4, 1))
     const seconds = parseInt(data.substr(5, 5))
-    return (new Date((new Date(1980, 0, 6)).getTime() + ((week * 7 + day) * 24 * 60 * 60 + seconds) * 1000)).toISOString()
+    return (new Date((new Date(1980, 0, 6)).getTime() + ((week * 7 + day) * 24 * 60 * 60 + seconds) * 1000)).getTime()
 }
 export function Latitude(data) {
     const sign = data.substr(0, 1)
