@@ -36,7 +36,10 @@ function Syrus(port = DEFAULT_PORT) {
 
   })
 
-  server.listen(7100);
+  server.listen(7100, ()=>{
+    console.log("Server TCP Ready");
+    
+  });
 }
 
 const srs = new Syrus()
