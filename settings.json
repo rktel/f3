@@ -31,6 +31,6 @@
             "https://randomuser.me/api/portraits/lego/8.jpg",
             "https://randomuser.me/api/portraits/lego/9.jpg"
         ],
-        "api": []
+        "version": "3.0"
     }
 }

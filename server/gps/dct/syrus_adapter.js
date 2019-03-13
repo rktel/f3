@@ -1,7 +1,8 @@
 
 var net = require('net');
-import Convert from './syrus_convert'
-const convert = new Convert
+import SyrusParser from './syrus_parser'
+
+
 // FIRMWARE [1]
 
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
@@ -11,13 +12,13 @@ let SOCKETS = []
 
 
 function Syrus(port = DEFAULT_PORT) {
-  function routeData(data) {
+  function getDeviceID(data) {
     if (data.length == 15) {
-      return { deviceID: data }
+      return  data 
     }
     if (data.includes('>R')) {
       const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
-      return { deviceID }
+      return deviceID 
     }
     return {
       deviceID: null
@@ -33,12 +34,18 @@ function Syrus(port = DEFAULT_PORT) {
       console.log(data.toString());
 
       if (data && data.length > 0) {
-        const proData = routeData(data.toString().trim())
-        if (proData.deviceID && !SOCKETS.find(el => el.deviceID = proData.deviceID)) {
-          socket.deviceID = proData.deviceID
-          SOCKETS.push(socket)
-          console.log("Here");
+        const deviceID = getDeviceID(data.toString().trim())
+        if (deviceID) {
+          // Si el socket no ha sido guardado en SOCKETS, lo guardamos
+          if (!SOCKETS.find(el => el.deviceID = deviceID)) {
+            socket.deviceID = deviceID
+            SOCKETS.push(socket)
+            console.log("Here");
+          }
+
+          console.log(new SyrusParser(data.toString().trim()));
           
+
         }
       }
 
