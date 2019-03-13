@@ -23,7 +23,8 @@ function Syrus(port = DEFAULT_PORT) {
   const server = net.createServer(function (socket) {
 
     socket.on('data', function (data) {
-
+      console.log(data);
+      
       if (data && data.length > 0) {
        const proData = routeData(data.toString().trim())
        console.log(proData.deviceID)
