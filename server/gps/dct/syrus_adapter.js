@@ -37,6 +37,8 @@ function Syrus(port = DEFAULT_PORT) {
         if (proData.deviceID && !SOCKETS.find(el => el.deviceID = proData.deviceID)) {
           socket.deviceID = proData.deviceID
           SOCKETS.push(socket)
+          console.log("Here");
+          
         }
       }
 
