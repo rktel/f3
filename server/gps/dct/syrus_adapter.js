@@ -25,19 +25,19 @@ function Syrus(port = DEFAULT_PORT) {
   }
   const server = net.createServer(function (socket) {
 
+    socket.on('end', function () {
+      SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+    });
+
     socket.on('data', function (data) {
       console.log(data.toString());
 
       if (data && data.length > 0) {
         const proData = routeData(data.toString().trim())
-
-        if (!socket.deviceID && proData.deviceID) {
+        if (proData.deviceID && !SOCKETS.find(el => el.deviceID = proData.deviceID)) {
           socket.deviceID = proData.deviceID
-          if (!SOCKETS.find(el => el.deviceID = socket.deviceID)) {
-            SOCKETS.push(socket)
-          }
+          SOCKETS.push(socket)
         }
-
       }
 
     })
@@ -51,7 +51,7 @@ function Syrus(port = DEFAULT_PORT) {
         console.log('Address in use, retrying...');
         setTimeout(() => {
           server.close();
-          server.listen(port, () =>{
+          server.listen(port, () => {
             console.log("Restart Server TCP Ready on port", port);
           });
         }, 1500);
