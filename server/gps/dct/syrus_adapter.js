@@ -11,7 +11,7 @@ const Sockets = {}
 
 
 function Syrus(port = DEFAULT_PORT) {
-  function route(data) {
+  function routeData(data) {
     if (data.length == 15) {
       return { deviceID: data }
     }
