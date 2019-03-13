@@ -9,11 +9,34 @@ const convert = new Convert
 const DEFAULT_PORT = 7100
 const Sockets = {}
 
+
 function Syrus(port = DEFAULT_PORT) {
-  console.log(port);
+  function route(data) {
+    if (data.length == 15) {
+      return { deviceID: data }
+    }
+    if (data.includes('>R')) {
+      const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
+      return { deviceID }
+    }
+  }
+  const server = net.createServer(function (socket) {
+
+    socket.on('data', function (data) {
+
+      if (data && data.length > 0) {
+       const proData = routeData(data.toString().trim())
+       console.log(proData.deviceID)
+      }
+
+    })
+
+
+
+  })
 }
 
-const srs = new Syrus(4100)
+const srs = new Syrus()
 
 /*
 
