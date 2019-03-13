@@ -46,7 +46,7 @@ function Syrus(port = DEFAULT_PORT) {
           //console.log(new SyrusParser(data.toString().trim()));
           //Enviamos ACK al Equipos
           socket.write(deviceID)
-          socket.write('>SXADP0201190.223.32.141;7100<')
+          //socket.write('>SXADP0201190.223.32.141;7100<')
         }
       }
 
