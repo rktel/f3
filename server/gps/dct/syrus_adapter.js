@@ -19,15 +19,18 @@ function Syrus(port = DEFAULT_PORT) {
       const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
       return { deviceID }
     }
+    return {
+      deviceID: null
+    }
   }
   const server = net.createServer(function (socket) {
 
     socket.on('data', function (data) {
       console.log(data);
-      
+
       if (data && data.length > 0) {
-       const proData = routeData(data.toString().trim())
-       console.log(proData.deviceID)
+        const proData = routeData(data.toString().trim())
+        console.log(proData.deviceID)
       }
 
     })
@@ -36,9 +39,9 @@ function Syrus(port = DEFAULT_PORT) {
 
   })
 
-  server.listen(7100, ()=>{
+  server.listen(7100, () => {
     console.log("Server TCP Ready");
-    
+
   });
 }
 
