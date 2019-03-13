@@ -7,7 +7,7 @@ const convert = new Convert
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
 
 const DEFAULT_PORT = 7100
-const Sockets = {}
+const SOCKETS = {}
 
 
 function Syrus(port = DEFAULT_PORT) {
@@ -30,7 +30,11 @@ function Syrus(port = DEFAULT_PORT) {
 
       if (data && data.length > 0) {
         const proData = routeData(data.toString().trim())
-        console.log(proData.deviceID)
+        if(proData.deviceID){
+           console.log(socket);
+           
+        }
+        
       }
 
     })
