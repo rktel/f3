@@ -45,7 +45,18 @@ function Syrus(port = DEFAULT_PORT) {
   })
 
   server.listen(port, () => {
-    console.log("Server TCP Ready");
+    console.log("Server TCP Ready on port", port);
+    server.on('error', (e) => {
+      if (e.code === 'EADDRINUSE') {
+        console.log('Address in use, retrying...');
+        setTimeout(() => {
+          server.close();
+          server.listen(port, () =>{
+            console.log("Restart Server TCP Ready on port", port);
+          });
+        }, 1500);
+      }
+    });
 
   });
 }
