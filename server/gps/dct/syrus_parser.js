@@ -12,6 +12,7 @@ export default class SyrusParser {
             this._longitude = Longitude(message.substr(24, 9))
             this._speed = Speed(message.substr(33, 3))
             this._course = parseInt(message.substr(36, 3))
+            this._rawData = message
             Meteor.call('insertEvent', this.event())
         }
         if (message.includes('RXART')) {
@@ -20,6 +21,7 @@ export default class SyrusParser {
             this._firmware = splitMessage[1]
             this._hardware = splitMessage[2]
             this._cell = splitMessage[4]
+            this._rawData = message
             Meteor.call('insertInfo', this.info())
         }
 
@@ -27,6 +29,7 @@ export default class SyrusParser {
     event() {
         return {
             version: VERSION_FG,
+            rawData: this._rawData,
             event:
             {
                 device: this._deviceID,
@@ -45,6 +48,7 @@ export default class SyrusParser {
     info() {
         return {
             version: VERSION_FG,
+            rawData: this._rawData,
             info:
             {
                 device: this._deviceID,

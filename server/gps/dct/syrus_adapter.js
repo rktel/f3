@@ -13,9 +13,9 @@ function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
-    socket.on('end', function () {
+    socket.on('end', Meteor.bindEnvironment(function () {
       SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-    });
+    }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
       console.log(data.toString());
