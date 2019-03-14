@@ -55,9 +55,9 @@ Meteor.methods({
         return Personal.remove({ _id })
     },
     updatePersona: function (persona) {
+        const { firstname, lastname, role, _id, email, userId, username,password, created, avatar} = persona
         const modified = (new Date).toISOString()
-        const { firstname, lastname, role, _id, avatar, email, userId, username,password, created, avatar} = persona
-        return Personal.update({ _id }, { $set: { firstname, lastname, email, role, userId, username, password, created, avatar } })
+        return Personal.update({ _id }, { $set: { firstname, lastname, email, role, userId, username, password, created, avatar, modified: modified  } })
     }
 })
 /********EMAIL****************/
