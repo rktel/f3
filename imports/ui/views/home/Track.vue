@@ -1,5 +1,5 @@
 <script>
-import { stSyrus } from "../../api/streamers";
+import { stSyrus } from "../../../api/streamers";
 
 export default {
   name: "Track",
