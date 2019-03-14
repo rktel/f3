@@ -6,7 +6,7 @@ Meteor.methods({
         Last.upsert({ 'event.device': data.event.deviceID }, { $set: data })
     },
     insertInfo: function (data) {
-        Infos.insert(data)
+        Infos.upsert({ 'info.device': data.info.deviceID }, { $set: data })
     }
 });
 
