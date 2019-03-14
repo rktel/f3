@@ -1,3 +1,16 @@
+<script>
+import { stSyrus } from "../../api/streamers";
+
+export default {
+  name: "Track",
+  mounted() {
+    stSyrus.on("DEVICES_ON",(devicesOn)=>{
+      console.log(devicesOn);
+    })
+  }
+};
+</script>
+
 <template>
   <section class="contenedor bg-color">
     <div class="itemOne">Track</div>
@@ -5,12 +18,4 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: "Track",
-  mounted(){
-    console.log("Hello from Track");
-  }
-};
-</script>
 
