@@ -8,6 +8,7 @@ export default class SyrusParser {
             this._deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
             this._eventCode = parseInt(message.substr(4, 2))
             this._created = Time(message.substr(6, 10))
+            this._received = (new Date()).toISOString()
             this._latitude = Latitude(message.substr(16, 8))
             this._longitude = Longitude(message.substr(24, 9))
             this._speed = Speed(message.substr(33, 3))
@@ -16,6 +17,7 @@ export default class SyrusParser {
             Meteor.call('insertEvent', this.event())
         }
         if (message.includes('RXART')) {
+            this._received = (new Date()).toISOString()
             this._deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
             const splitMessage = message.split(';')
             this._firmware = splitMessage[1]
@@ -30,6 +32,7 @@ export default class SyrusParser {
         return {
             version: VERSION_FG,
             rawData: this._rawData,
+            received:this._received,
             event:
             {
                 device: this._deviceID,
@@ -49,6 +52,7 @@ export default class SyrusParser {
         return {
             version: VERSION_FG,
             rawData: this._rawData,
+            received:this._received,
             info:
             {
                 device: this._deviceID,
