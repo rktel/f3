@@ -12,46 +12,46 @@ let SOCKETS = []
 let DEVICES_ON = []
 
 function Syrus(port = DEFAULT_PORT) {
-
-  const server = net.createServer(Meteor.bindEnvironment(function (socket) {
-
-    socket.on('end', Meteor.bindEnvironment(function () {
-      console.log("Socket End", socket.deviceID);
-      
-      if (socket.deviceID) {
-        SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-        DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-        stSyrus.emit('DEVICES_ON', DEVICES_ON)
-      }
-    }));
-
-    socket.on('data', Meteor.bindEnvironment(function (data) {
-      console.log(data.toString());
-
-      if (data && data.length > 0) {
-        const deviceID = getDeviceID(data.toString().trim())
-        if (deviceID) {
-          // Si el socket no ha sido guardado en SOCKETS, lo guardamos
-          if (!SOCKETS.find(el => el.deviceID = deviceID)) {
-            socket.deviceID = deviceID
-            SOCKETS.push(socket)
-            DEVICES_ON.push(deviceID)
-            stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          }
-
-          saveData(data.toString().trim())
-          //Enviamos ACK al Equipos
-          socket.write(deviceID)
-          //socket.write('>SXADP0201190.223.32.141;7100<')
-        }
-      }
-
-    }))
-
-  }))
+  const server = net.createServer()
 
   server.listen(port, () => {
     console.log("Server TCP Ready on port", port);
+    server.on('connection', Meteor.bindEnvironment(function (socket) {
+
+      socket.on('end', Meteor.bindEnvironment(function () {
+        console.log("Socket End", socket.deviceID);
+
+        if (socket.deviceID) {
+          SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+          DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+          stSyrus.emit('DEVICES_ON', DEVICES_ON)
+        }
+      }));
+
+      socket.on('data', Meteor.bindEnvironment(function (data) {
+        console.log(data.toString());
+
+        if (data && data.length > 0) {
+          const deviceID = getDeviceID(data.toString().trim())
+          if (deviceID) {
+            // Si el socket no ha sido guardado en SOCKETS, lo guardamos
+            if (!SOCKETS.find(el => el.deviceID = deviceID)) {
+              socket.deviceID = deviceID
+              SOCKETS.push(socket)
+              DEVICES_ON.push(deviceID)
+              stSyrus.emit('DEVICES_ON', DEVICES_ON)
+            }
+
+            saveData(data.toString().trim())
+            //Enviamos ACK al Equipos
+            socket.write(deviceID)
+            //socket.write('>SXADP0201190.223.32.141;7100<')
+          }
+        }
+
+      }))
+
+    }))
     server.on('error', (e) => {
       if (e.code === 'EADDRINUSE') {
         console.log('Address in use, retrying...');
