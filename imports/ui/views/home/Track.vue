@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  name: "Track"
+  name: "Track",
+  mounted(){
+    console.log("Hello from Track");
+  }
 };
 </script>
 

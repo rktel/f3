@@ -1,20 +1,26 @@
 
 var net = require('net');
 import SyrusParser from './syrus_parser'
+import { stSyrus } from '../../../imports/api/streamers'
+
 // FIRMWARE [1]
 // device TEst: 357042063175104
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
 
 const DEFAULT_PORT = 7100
 let SOCKETS = []
-
+let DEVICES_ON = []
 
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
     socket.on('end', Meteor.bindEnvironment(function () {
-      SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+      if (socket.deviceID) {
+        SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+        DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+        stSyrus.emit('DEVICES_ON', DEVICES_ON)
+      }
     }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
@@ -27,6 +33,8 @@ function Syrus(port = DEFAULT_PORT) {
           if (!SOCKETS.find(el => el.deviceID = deviceID)) {
             socket.deviceID = deviceID
             SOCKETS.push(socket)
+            DEVICES_ON.push(deviceID)
+            stSyrus.emit('DEVICES_ON', DEVICES_ON)
           }
 
           saveData(data.toString().trim())

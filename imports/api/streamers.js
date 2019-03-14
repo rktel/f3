@@ -1,0 +1,1 @@
+export const stSyrus = new Meteor.Streamer('syrus')
