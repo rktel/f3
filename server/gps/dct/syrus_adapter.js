@@ -11,13 +11,13 @@ let SOCKETS = []
 
 function Syrus(port = DEFAULT_PORT) {
 
-  const server = net.createServer(function (socket) {
+  const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
     socket.on('end', function () {
       SOCKETS.splice(SOCKETS.indexOf(socket), 1);
     });
 
-    socket.on('data', function (data) {
+    socket.on('data', Meteor.bindEnvironment(function (data) {
       console.log(data.toString());
 
       if (data && data.length > 0) {
@@ -36,9 +36,9 @@ function Syrus(port = DEFAULT_PORT) {
         }
       }
 
-    })
+    }))
 
-  })
+  }))
 
   server.listen(port, () => {
     console.log("Server TCP Ready on port", port);
