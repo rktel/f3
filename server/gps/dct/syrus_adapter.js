@@ -1,6 +1,6 @@
 
 var net = require('net');
-
+import SyrusParser from './syrus_parser'
 // FIRMWARE [1]
 // device TEst: 357042063175104
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
@@ -29,7 +29,7 @@ function Syrus(port = DEFAULT_PORT) {
             SOCKETS.push(socket)
           }
 
-          //console.log(new SyrusParser(data.toString().trim()));
+          saveData(data.toString().trim())
           //Enviamos ACK al Equipos
           socket.write(deviceID)
           //socket.write('>SXADP0201190.223.32.141;7100<')
@@ -61,6 +61,9 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
+function saveData(data) {
+  new SyrusParser(data)
+}
 
 function getDeviceID(data) {
   if (data.length == 15) {
