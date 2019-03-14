@@ -16,6 +16,8 @@ function Syrus(port = DEFAULT_PORT) {
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
     socket.on('end', Meteor.bindEnvironment(function () {
+      console.log("Socket End", socket.deviceID);
+      
       if (socket.deviceID) {
         SOCKETS.splice(SOCKETS.indexOf(socket), 1);
         DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
