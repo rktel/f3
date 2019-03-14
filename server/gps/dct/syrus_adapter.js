@@ -10,18 +10,7 @@ let SOCKETS = []
 
 
 function Syrus(port = DEFAULT_PORT) {
-  function getDeviceID(data) {
-    if (data.length == 15) {
-      return  data 
-    }
-    if (data.includes('>R')) {
-      const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
-      return deviceID 
-    }
-    return {
-      deviceID: null
-    }
-  }
+
   const server = net.createServer(function (socket) {
 
     socket.on('end', function () {
@@ -38,7 +27,6 @@ function Syrus(port = DEFAULT_PORT) {
           if (!SOCKETS.find(el => el.deviceID = deviceID)) {
             socket.deviceID = deviceID
             SOCKETS.push(socket)
-            console.log("Here");
           }
 
           //console.log(new SyrusParser(data.toString().trim()));
@@ -70,6 +58,19 @@ function Syrus(port = DEFAULT_PORT) {
 }
 
 const srs = new Syrus()
+
+
+/**FUNCIONES DE APOYO */
+
+function getDeviceID(data) {
+  if (data.length == 15) {
+    return data
+  }
+  if (data.includes('>R')) {
+    return data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
+  }
+  return null
+}
 
 /*
 
