@@ -1,7 +1,5 @@
 
 var net = require('net');
-import SyrusParser from './syrus_parser'
-
 
 // FIRMWARE [1]
 // device TEst: 357042063175104
