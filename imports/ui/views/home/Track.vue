@@ -70,7 +70,12 @@ export default {
     </section>
     <section class="itemTwo">
       <v-divider></v-divider>
-
+      <v-toolbar flat class="pt-0 transparent" dark>
+        <v-spacer></v-spacer>
+        <v-btn color="green" flat class="white--text" >Unknow
+          <v-icon right dark>waves</v-icon>
+        </v-btn>
+      </v-toolbar>
     </section>
   </section>
 </template>
