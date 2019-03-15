@@ -10,8 +10,10 @@ export default {
     setDeviceCard(device) {
       Meteor.call("findInfo", device, (error, deviceInfo) => {
         if (!error) {
-          this.deviceCard = deviceInfo;
-          this.displayDeviceCard = true;
+          if (deviceInfo) {
+            this.deviceCard = deviceInfo;
+            this.displayDeviceCard = true;
+          }
         }
       });
     },
@@ -74,15 +76,8 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
-
         <v-list class="pt-0 transparent" dense dark>
-
-          <v-list-tile
-            v-for="device in filteredDevice"
-            :key="device"
-            avatar
-            @click=""
-          >
+          <v-list-tile v-for="device in filteredDevice" :key="device" avatar @click>
             <v-list-tile-avatar>
               <v-icon :class="['blue white--text']">rss_feed</v-icon>
             </v-list-tile-avatar>
@@ -101,15 +96,8 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
-
           </v-list-tile>
         </v-list>
-
-
-
-
-
-
       </div>
     </section>
     <section class="itemTwo">
