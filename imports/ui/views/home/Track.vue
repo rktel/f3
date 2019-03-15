@@ -116,6 +116,15 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
+      <v-card class="ma-2" flat v-if="deviceInfoCardFlag && deviceInfo.info.device == device ">
+        <v-card-title class="py-2">
+          <div>
+            <device-simple-table :device="deviceInfo"></device-simple-table>
+          </div>
+        </v-card-title>
+      </v-card>
+
+
           </v-list-tile>
         </v-list>
       </div>
@@ -128,13 +137,7 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
 
-      <v-card class="ma-2" flat v-if="deviceInfoCardFlag">
-        <v-card-title class="py-2">
-          <div>
-            <device-simple-table :device="deviceInfo"></device-simple-table>
-          </div>
-        </v-card-title>
-      </v-card>
+
 
       <v-card class="ma-2" flat v-if="deviceMessagesCardFlag">
         <v-card-title class="py-2">
