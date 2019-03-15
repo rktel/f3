@@ -107,15 +107,15 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <v-card class="ma-2" flat v-if="displayDeviceCard">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
+        </v-card-actions>
         <v-card-title class="py-2">
           <div>
             <device-simple-table :device="deviceCard"></device-simple-table>
           </div>
         </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
-        </v-card-actions>
       </v-card>
     </section>
   </section>
