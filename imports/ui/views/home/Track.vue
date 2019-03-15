@@ -92,7 +92,7 @@ export default {
     </section>
     <section class="itemTwo">
       <v-divider></v-divider>
-      <v-toolbar flat class="pt-0 transparent">
+      <v-toolbar flat>
         <v-tabs right>
           <v-tab>
             <v-icon>info</v-icon>INFO
