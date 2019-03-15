@@ -8,23 +8,23 @@ export default {
   },
   methods: {
     toggleInfo(device) {
-      if (!this.displayDeviceCard) {
+      if (!this.deviceInfoCardFlag) {
         Meteor.call("findInfo", device, (error, deviceInfo) => {
           if (!error) {
             if (deviceInfo) {
-              this.deviceCard = deviceInfo;
-              this.displayDeviceCard = true;
+              this.deviceInfo = deviceInfo;
+              this.deviceInfoCardFlag = true;
             }
           }
         });
       } else {
-        this.deviceCard = {};
-        this.displayDeviceCard = false;
+        this.deviceInfo = {};
+        this.deviceInfoCardFlag = false;
       }
     },
     hideDC() {
-      this.deviceCard = {};
-      this.displayDeviceCard = false;
+      this.deviceInfo = {};
+      this.deviceInfoCardFlag = false;
     }
   },
   mounted() {
@@ -37,8 +37,8 @@ export default {
   data: () => ({
     DEVICES_ON: [],
     deviceFilter: null,
-    displayDeviceCard: false,
-    deviceCard: {}
+    deviceInfoCardFlag: false,
+    deviceInfo: {}
   }),
   computed: {
     filteredDevice() {
@@ -111,10 +111,10 @@ export default {
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-divider></v-divider>
-      <v-card class="ma-2" flat v-if="displayDeviceCard">
+      <v-card class="ma-2" flat v-if="deviceInfoCardFlag">
         <v-card-title class="py-2">
           <div>
-            <device-simple-table :device="deviceCard"></device-simple-table>
+            <device-simple-table :device="deviceInfo"></device-simple-table>
           </div>
         </v-card-title>
       </v-card>
