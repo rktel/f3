@@ -44,7 +44,7 @@ function Syrus(port = DEFAULT_PORT) {
     }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
-      console.log(data.toString());
+      console.log(data.toString().trim());
 
       if (data && data.length > 0) {
         const deviceID = getDeviceID(data.toString().trim())
