@@ -11,6 +11,8 @@ const DEFAULT_PORT = 7100
 let SOCKETS = []
 let DEVICES_ON = []
 
+stSyrus.on("GET_DEVICES_ON", DEVICES_ON)
+
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
@@ -50,7 +52,7 @@ function Syrus(port = DEFAULT_PORT) {
         const deviceID = getDeviceID(data.toString().trim())
 
         if (deviceID) {
-         // console.log('deviceID:', deviceID);
+          // console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
           if (!DEVICES_ON.includes(deviceID)) {
             socket.deviceID = deviceID

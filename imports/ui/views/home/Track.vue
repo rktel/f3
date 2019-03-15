@@ -8,6 +8,7 @@ export default {
       this.DEVICES_ON = devicesOn
       console.log(devicesOn);
     });
+    stSyrus.emit("GET_DEVICES_ON")
   },
   data: () => ({
     DEVICES_ON: []
