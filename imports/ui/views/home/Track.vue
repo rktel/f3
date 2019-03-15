@@ -74,6 +74,36 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
+
+        <v-list two-line subheader>
+
+          <v-list-tile
+            v-for="device in filteredDevice"
+            :key="device"
+            avatar
+            @click=""
+          >
+            <v-list-tile-avatar>
+              <v-icon :class="['blue white--text']">rss_feed</v-icon>
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>{{ device }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ device }}</v-list-tile-sub-title>
+            </v-list-tile-content>
+
+            <v-list-tile-action>
+              <v-btn icon ripple>
+                <v-icon color="grey lighten-1">info</v-icon>
+              </v-btn>
+              <v-btn icon ripple>
+                <v-icon color="grey lighten-1">message</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
+
+
         <v-list class="pt-0 transparent" dense dark>
           <v-list-tile
             v-for="device in filteredDevice"
@@ -88,6 +118,9 @@ export default {
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
+
+
+
       </div>
     </section>
     <section class="itemTwo">
