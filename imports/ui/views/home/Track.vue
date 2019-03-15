@@ -7,19 +7,24 @@ export default {
     DeviceSimpleTable
   },
   methods: {
-    setDeviceCard(device) {
-      Meteor.call("findInfo", device, (error, deviceInfo) => {
-        if (!error) {
-          if (deviceInfo) {
-            this.deviceCard = deviceInfo;
-            this.displayDeviceCard = true;
+    toggleInfo(device) {
+      if (!this.displayDeviceCard) {
+        Meteor.call("findInfo", device, (error, deviceInfo) => {
+          if (!error) {
+            if (deviceInfo) {
+              this.deviceCard = deviceInfo;
+              this.displayDeviceCard = true;
+            }
           }
-        }
-      });
+        });
+      } else {
+        this.deviceCard = {};
+        this.displayDeviceCard = false;
+      }
     },
     hideDC() {
-      this.displayDeviceCard = false;
       this.deviceCard = {};
+      this.displayDeviceCard = false;
     }
   },
   mounted() {
@@ -87,7 +92,7 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple @click="setDeviceCard(device)">
+              <v-btn icon ripple @click="toggleInfo(device)">
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -107,10 +112,6 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <v-card class="ma-2" flat v-if="displayDeviceCard">
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
-        </v-card-actions>
         <v-card-title class="py-2">
           <div>
             <device-simple-table :device="deviceCard"></device-simple-table>
