@@ -3,7 +3,19 @@ import { stSyrus } from "../../../api/streamers";
 
 export default {
   name: "Track",
-  methods:{},
+  methods: {
+    setDeviceCard(device) {
+      this.displayDeviceCard = true;
+      Meteor.call("findInfo", device, function(error, success) {
+        if (error) {
+          console.log("error", error);
+        }
+        if (success) {
+          console.log(success);
+        }
+      });
+    }
+  },
   mounted() {
     stSyrus.on("DEVICES_ON", devicesOn => {
       this.DEVICES_ON = devicesOn;
@@ -13,7 +25,8 @@ export default {
   },
   data: () => ({
     DEVICES_ON: [],
-    deviceFilter: null
+    deviceFilter: null,
+    displayDeviceCard: false
   }),
   computed: {
     filteredDevice() {
@@ -57,7 +70,11 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile v-for="device in filteredDevice" :key="device" @click="setUserCard(item)">
+          <v-list-tile
+            v-for="device in filteredDevice"
+            :key="device"
+            @click="setDeviceCard(device)"
+          >
             <v-list-tile-action>
               <v-icon>rss_feed</v-icon>
             </v-list-tile-action>
@@ -72,10 +89,25 @@ export default {
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
-        <v-btn color="green" flat class="white--text" >Unknow
+        <v-btn color="green" flat class="white--text">Unknow
           <v-icon right dark>waves</v-icon>
         </v-btn>
       </v-toolbar>
+      <v-divider></v-divider>
+      <v-card class="ma-2" flat v-if="displayDeviceCard">
+        <v-card-title class="py-2">
+          <div>
+            <h1>Device Card</h1>
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat color="indigo">Ocultar</v-btn>
+          <v-btn flat color="pink">Eliminar
+            <v-icon right dark>person</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </section>
   </section>
 </template>

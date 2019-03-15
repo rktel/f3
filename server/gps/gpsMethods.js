@@ -7,6 +7,9 @@ Meteor.methods({
     },
     insertInfo: function (data) {
         Infos.upsert({ 'info.device': data.info.deviceID }, { $set: data })
-    }
+    },
+    findInfo: function (deviceID) {
+        return Infos.findOne({ 'info.device': deviceID })
+    },
 });
 
