@@ -1,17 +1,17 @@
 <script>
 import { stSyrus } from "../../../api/streamers";
-
+import DeviceSimpleTable from "../components/DeviceSimpleTable";
 export default {
   name: "Track",
+  components: {
+    DeviceSimpleTable
+  },
   methods: {
     setDeviceCard(device) {
       this.displayDeviceCard = true;
-      Meteor.call("findInfo", device, function(error, success) {
-        if (error) {
-          console.log("error", error);
-        }
-        if (success) {
-          console.log(success);
+      Meteor.call("findInfo", device, function(error, deviceInfo) {
+        if (!error) {
+          this.deviceCard = deviceInfo;
         }
       });
     }
@@ -26,7 +26,8 @@ export default {
   data: () => ({
     DEVICES_ON: [],
     deviceFilter: null,
-    displayDeviceCard: false
+    displayDeviceCard: false,
+    deviceCard: {}
   }),
   computed: {
     filteredDevice() {
@@ -97,7 +98,7 @@ export default {
       <v-card class="ma-2" flat v-if="displayDeviceCard">
         <v-card-title class="py-2">
           <div>
-            <h1>Device Card</h1>
+            <device-simple-table :device="deviceCard"></device-simple-table>
           </div>
         </v-card-title>
         <v-card-actions>
