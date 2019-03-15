@@ -119,7 +119,7 @@ export default {
             </v-card-actions>
           </v-card>
         </v-tab-item>
-        <v-tab-item :value="messenger">
+        <v-tab-item :value="'messenger'">
           <v-card >
             <h1>Messenger</h1>
           </v-card>
