@@ -69,6 +69,7 @@ export default {
   <section class="contenedor bg-color">
     <section class="itemOne">
       <user-form-dialog></user-form-dialog>
+      <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field label="Buscar usuario" prepend-icon="search" single-line v-model="userFilter" clearable></v-text-field>
       </v-toolbar>

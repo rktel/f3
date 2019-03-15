@@ -39,6 +39,7 @@ export default {
 <template>
   <section class="contenedor bg-color">
     <section class="itemOne">
+      <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field
           label="Buscar dispositivo"
