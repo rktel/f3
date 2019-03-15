@@ -146,7 +146,7 @@ export default {
         <v-card-actions>
           <v-text-field
             v-model="deviceMsg"
-            :append-outer-icon="message"
+            :append-outer-icon="'message'"
             box
             clear-icon="mdi-close-circle"
             clearable
