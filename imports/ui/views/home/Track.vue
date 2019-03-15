@@ -7,7 +7,7 @@ export default {
     DeviceSimpleTable
   },
   methods: {
-    toggleInfo(device) {
+    deviceToggleInfo(device) {
       if (!this.deviceInfoCardFlag) {
         Meteor.call("findInfo", device, (error, deviceInfo) => {
           if (!error) {
@@ -22,9 +22,20 @@ export default {
         this.deviceInfoCardFlag = false;
       }
     },
-    hideDC() {
-      this.deviceInfo = {};
-      this.deviceInfoCardFlag = false;
+    deviceToggleMessages(device) {
+      if (!this.deviceMessagesCardFlag) {
+        this.deviceMessagesCardFlag = true;
+        /*
+        Meteor.call("findMessages", device, (error, deviceMessages) => {
+          if (!error) {
+            console.log("deviceMessages:", deviceMessages);
+          }
+        });
+*/
+      }
+    },
+    deviceSendMsg(){
+      alert(this.deviceMsg)
     }
   },
   mounted() {
@@ -38,7 +49,10 @@ export default {
     DEVICES_ON: [],
     deviceFilter: null,
     deviceInfoCardFlag: false,
-    deviceInfo: {}
+    deviceInfo: {},
+    deviceMessagesCardFlag: false,
+    deviceMessages: [],
+    deviceMsg: null,
   }),
   computed: {
     filteredDevice() {
@@ -80,6 +94,7 @@ export default {
         <h4 class="my-0">Dispositivos online {{ DEVICES_ON.length }}</h4>
       </v-toolbar>
       <v-divider></v-divider>
+
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
           <v-list-tile v-for="device in filteredDevice" :key="device" avatar @click>
@@ -92,7 +107,7 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple @click="toggleInfo(device)">
+              <v-btn icon ripple @click="deviceToggleInfo(device)">
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -105,18 +120,40 @@ export default {
         </v-list>
       </div>
     </section>
+
     <section class="itemTwo">
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-divider></v-divider>
+
       <v-card class="ma-2" flat v-if="deviceInfoCardFlag">
         <v-card-title class="py-2">
           <div>
             <device-simple-table :device="deviceInfo"></device-simple-table>
           </div>
         </v-card-title>
+      </v-card>
+
+      <v-card class="ma-2" flat v-if="deviceMessagesCardFlag">
+        <v-card-title class="py-2">
+          <div>
+            <h2>Messages</h2>
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-text-field
+            v-model="deviceMsg"
+            :append-outer-icon="message "
+            box
+            clear-icon="mdi-close-circle"
+            clearable
+            label="Message"
+            type="text"
+            @click:append-outer="deviceSendMsg"
+          ></v-text-field>
+        </v-card-actions>
       </v-card>
     </section>
   </section>
