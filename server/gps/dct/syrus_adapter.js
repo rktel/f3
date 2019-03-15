@@ -21,7 +21,7 @@ function Syrus(port = DEFAULT_PORT) {
       console.log('socket closed:', socket.deviceID);
 
       if (socket.deviceID) {
-        if(DEVICES_ON.includes(deviceID)){
+        if(DEVICES_ON.includes(socket.deviceID)){
           SOCKETS.splice(SOCKETS.indexOf(socket), 1);
           DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           stSyrus.emit('DEVICES_ON', DEVICES_ON)
@@ -29,16 +29,17 @@ function Syrus(port = DEFAULT_PORT) {
       }
     });
 
-    socket.on('end', Meteor.bindEnvironment(function () {
+    socket.on('end', function () {
       console.log("Socket End:", socket.deviceID);
+
       if (socket.deviceID) {
-        if(DEVICES_ON.includes(deviceID)){
+        if(DEVICES_ON.includes(socket.deviceID)){
           SOCKETS.splice(SOCKETS.indexOf(socket), 1);
           DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           stSyrus.emit('DEVICES_ON', DEVICES_ON)
         }
       }
-    }));
+    });
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
       console.log(data.toString().trim());
