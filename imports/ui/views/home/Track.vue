@@ -92,8 +92,8 @@ export default {
     </section>
     <section class="itemTwo">
       <v-divider></v-divider>
-      <v-toolbar flat>
-        <v-tabs right>
+      <v-toolbar flat class="pt-0 transparent">
+        <v-tabs right class="pt-0 transparent">
           <v-tab>
             <v-icon>info</v-icon>INFO
           </v-tab>
