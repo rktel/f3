@@ -25,7 +25,7 @@
         </td>
       </tr>
       <tr class="text-no-wrap">
-        <td>Hora conexion</td>
+        <td>Conectado</td>
         <td>: {{device.received}}</td>
       </tr>
     </table>
