@@ -3,7 +3,7 @@
     <h3 class="my-0">{{ device.info.device }}</h3>
     <table style="width:100%">
       <tr>
-        <td>Firware</td>
+        <td>Firmware</td>
         <td>: {{device.info.firmware}}</td>
       </tr>
       <tr>
