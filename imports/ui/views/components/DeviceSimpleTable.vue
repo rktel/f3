@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="my-0">{{ device.info.device }}</h3>
+    <h3 class="my-0">INFORMACION DE: {{ device.info.device }}</h3>
     <table style="width:100%">
       <tr>
         <td>Firmware</td>
