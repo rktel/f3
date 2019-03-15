@@ -92,7 +92,7 @@ export default {
     </section>
     <section class="itemTwo">
       <v-divider></v-divider>
-
+      <v-toolbar flat class="pt-0 transparent">
         <v-tabs right>
           <v-tab>
             <v-icon>info</v-icon>INFO
@@ -101,7 +101,7 @@ export default {
             <v-icon>message</v-icon>MESSENGER
           </v-tab>
         </v-tabs>
-  
+      </v-toolbar>
       <v-divider></v-divider>
       <v-card class="ma-2" flat v-if="displayDeviceCard">
         <v-card-title class="py-2">
