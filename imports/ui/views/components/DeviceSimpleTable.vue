@@ -10,7 +10,7 @@
         <td>Hardware</td>
         <td>: {{device.info.hardware}}</td>
       </tr>
-      <tr class="text-no-wrap">
+      <tr>
         <td>Cell info</td>
         <td>: {{device.info.cell}}</td>
       </tr>
