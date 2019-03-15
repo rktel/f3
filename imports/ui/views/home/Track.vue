@@ -34,8 +34,8 @@ export default {
 */
       }
     },
-    deviceSendMsg(){
-      alert(this.deviceMsg)
+    deviceSendMsg() {
+      alert(this.deviceMsg);
     }
   },
   mounted() {
@@ -52,7 +52,7 @@ export default {
     deviceInfo: {},
     deviceMessagesCardFlag: false,
     deviceMessages: [],
-    deviceMsg: null,
+    deviceMsg: null
   }),
   computed: {
     filteredDevice() {
@@ -116,15 +116,15 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
-      <v-card class="ma-2" flat v-if="deviceInfoCardFlag && deviceInfo.info.device == device ">
-        <v-card-title class="py-2">
-          <div>
-            <device-simple-table :device="deviceInfo"></device-simple-table>
-          </div>
-        </v-card-title>
-      </v-card>
-
-
+            <v-dialog v-model="deviceInfoCardFlag">
+              <v-card class="ma-2" flat>
+                <v-card-title class="py-2">
+                  <div>
+                    <device-simple-table :device="deviceInfo"></device-simple-table>
+                  </div>
+                </v-card-title>
+              </v-card>
+            </v-dialog>
           </v-list-tile>
         </v-list>
       </div>
@@ -136,8 +136,6 @@ export default {
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-divider></v-divider>
-
-
 
       <v-card class="ma-2" flat v-if="deviceMessagesCardFlag">
         <v-card-title class="py-2">
