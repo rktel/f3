@@ -8,10 +8,11 @@ export default {
   },
   methods: {
     setDeviceCard(device) {
-      this.displayDeviceCard = true;
+      
       Meteor.call("findInfo", device, function(error, deviceInfo) {
         if (!error) {
           this.deviceCard = deviceInfo;
+          this.displayDeviceCard = true;
         }
       });
     }
