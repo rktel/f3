@@ -14,6 +14,12 @@ let DEVICES_ON = []
 function Syrus(port = DEFAULT_PORT) {
   
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
+    socket.on('close',  function () {
+      console.log('socket closed', socket.deviceID);
+    });
+    socket.on('error', function (err) {
+      console.log('socket error', socket.deviceID, err.message);
+    });
 
     socket.on('end', Meteor.bindEnvironment(function () {
       console.log("Socket End", socket.deviceID);
