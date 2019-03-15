@@ -19,10 +19,18 @@ export default {
       if (!this.deviceFilter) return this.DEVICES_ON;
       let searchText = this.deviceFilter.toLowerCase();
       return this.DEVICES_ON.filter(d => {
-        return (
-          d.toLowerCase().includes(searchText) 
-        );
+        return d.toLowerCase().includes(searchText);
       });
+    },
+    heightList() {
+      const { width, height } = this.$store.getters.appSize;
+      if (width < 900) {
+        //console.log(parseInt(height / 2));
+        return parseInt(height / 2);
+      } else {
+        //console.log(height);
+        return height - 100;
+      }
     }
   }
 };
@@ -30,7 +38,7 @@ export default {
 
 <template>
   <section class="contenedor bg-color">
-    <div class="itemOne">
+    <section class="itemOne">
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-text-field
           label="Buscar dispositivo"
@@ -40,11 +48,25 @@ export default {
           clearable
         ></v-text-field>
       </v-toolbar>
-      <v-list>
-        <v-list-tile v-for="device in filteredDevice" :key="device">{{device}}</v-list-tile>
-      </v-list>
-    </div>
-    <div class="itemTwo">2</div>
+      <v-divider></v-divider>
+      <v-toolbar flat class="pt-0 transparent" dark dense>
+        <h4 class="my-0">Dispositivos Online {{ DEVICES_ON.length }}</h4>
+      </v-toolbar>
+      <v-divider></v-divider>
+      <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
+        <v-list class="pt-0 transparent" dense dark>
+          <v-list-tile v-for="device in filteredDevice" :key="device">
+            <v-list-tile-action>
+              <v-icon>device</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ device }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </div>
+    </section>
+    <section class="itemTwo">2</section>
   </section>
 </template>
 
