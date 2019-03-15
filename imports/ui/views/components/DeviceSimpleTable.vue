@@ -15,10 +15,6 @@
         <td>: {{device.info.cell}}</td>
       </tr>
       <tr class="text-no-wrap">
-        <td>Raw data</td>
-        <td>: {{device.rawData}}</td>
-      </tr>
-      <tr class="text-no-wrap">
         <td>Hora conexion</td>
         <td>: {{device.received}}</td>
       </tr>
