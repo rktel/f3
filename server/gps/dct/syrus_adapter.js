@@ -12,20 +12,14 @@ let SOCKETS = []
 let DEVICES_ON = []
 
 function Syrus(port = DEFAULT_PORT) {
-  
+
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
-    socket.on('close',  function () {
-      console.log('socket closed:', socket.deviceID);
-            
-      if (socket.deviceID) {
-        SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-        DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-        stSyrus.emit('DEVICES_ON', DEVICES_ON)
-      }
-    });
     socket.on('error', function (err) {
       console.log('socket error:', socket.deviceID, err.message);
-            
+    });
+    socket.on('close', function () {
+      console.log('socket closed:', socket.deviceID);
+
       if (socket.deviceID) {
         SOCKETS.splice(SOCKETS.indexOf(socket), 1);
         DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
@@ -35,7 +29,6 @@ function Syrus(port = DEFAULT_PORT) {
 
     socket.on('end', Meteor.bindEnvironment(function () {
       console.log("Socket End:", socket.deviceID);
-      
       if (socket.deviceID) {
         SOCKETS.splice(SOCKETS.indexOf(socket), 1);
         DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
@@ -48,19 +41,19 @@ function Syrus(port = DEFAULT_PORT) {
 
       if (data && data.length > 0) {
         const deviceID = getDeviceID(data.toString().trim())
-        
+
         if (deviceID) {
-          console.log('deviceID:',deviceID);
+          console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
           if (!SOCKETS.includes(socket)) {
             console.log('if !SOCKETS:', deviceID);
-            
+
             socket.deviceID = deviceID
             SOCKETS.push(socket)
             DEVICES_ON.push(deviceID)
             stSyrus.emit('DEVICES_ON', DEVICES_ON)
             console.log('DEVICES_ON', DEVICES_ON);
-            
+
           }
 
           saveData(data.toString().trim())
