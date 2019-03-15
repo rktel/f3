@@ -75,7 +75,7 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
 
-        <v-list two-line subheader>
+        <v-list two-line subheader class="pt-0 transparent" dense dark>
 
           <v-list-tile
             v-for="device in filteredDevice"
@@ -96,10 +96,13 @@ export default {
               <v-btn icon ripple>
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
+            </v-list-tile-action>
+            <v-list-tile-action>
               <v-btn icon ripple>
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
+
           </v-list-tile>
         </v-list>
 
