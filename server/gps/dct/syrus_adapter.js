@@ -55,6 +55,8 @@ function Syrus(port = DEFAULT_PORT) {
             SOCKETS.push(socket)
             DEVICES_ON.push(deviceID)
             stSyrus.emit('DEVICES_ON', DEVICES_ON)
+            console.log('DEVICES_ON', DEVICES_ON);
+            
           }
 
           saveData(data.toString().trim())
