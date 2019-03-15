@@ -22,7 +22,7 @@ export default {
         this.deviceInfoCardFlag = false;
       }
     },
-    deviceToggleMessages(device) {
+    deviceToggleMessages()(device) {
       if (!this.deviceMessagesCardFlag) {
         this.deviceMessagesCardFlag = true;
         /*
@@ -112,7 +112,7 @@ export default {
               </v-btn>
             </v-list-tile-action>
             <v-list-tile-action>
-              <v-btn icon ripple>
+              <v-btn icon ripple @click="deviceToggleMessages(device)">
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
