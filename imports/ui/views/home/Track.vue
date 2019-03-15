@@ -3,6 +3,7 @@ import { stSyrus } from "../../../api/streamers";
 
 export default {
   name: "Track",
+  methods:{},
   mounted() {
     stSyrus.on("DEVICES_ON", devicesOn => {
       this.DEVICES_ON = devicesOn;
@@ -56,7 +57,7 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile v-for="device in filteredDevice" :key="device">
+          <v-list-tile v-for="device in filteredDevice" :key="device" @click="setUserCard(item)">
             <v-list-tile-action>
               <v-icon>rss_feed</v-icon>
             </v-list-tile-action>
@@ -67,7 +68,10 @@ export default {
         </v-list>
       </div>
     </section>
-    <section class="itemTwo">2</section>
+    <section class="itemTwo">
+      <v-divider></v-divider>
+
+    </section>
   </section>
 </template>
 

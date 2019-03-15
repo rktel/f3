@@ -6,6 +6,10 @@
         <td>Username</td>
         <td>: {{item.username}}</td>
       </tr>
+      <tr>
+        <td>Password</td>
+        <td>: {{item.password}}</td>
+      </tr>
       <tr class="text-no-wrap">
         <td>Email</td>
         <td>: {{item.email}}</td>
