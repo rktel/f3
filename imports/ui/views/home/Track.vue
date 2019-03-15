@@ -95,10 +95,10 @@ export default {
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent">
         <v-tabs right color="transparent" v-model="deviceTab">
-          <v-tab>
+          <v-tab :href="'#info'">
             <v-icon>info</v-icon>INFO
           </v-tab>
-          <v-tab>
+          <v-tab :href="'#messenger'">
             <v-icon>message</v-icon>MESSENGER
           </v-tab>
         </v-tabs>
