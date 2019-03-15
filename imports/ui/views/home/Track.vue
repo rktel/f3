@@ -92,7 +92,7 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple>
+              <v-btn icon ripple @click="setDeviceCard(device)">
                 <v-icon color="grey lighten-1">info</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -106,20 +106,7 @@ export default {
         </v-list>
 
 
-        <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile
-            v-for="device in filteredDevice"
-            :key="device"
-            @click="setDeviceCard(device)"
-          >
-            <v-list-tile-action>
-              <v-icon>rss_feed</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ device }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
+
 
 
 
