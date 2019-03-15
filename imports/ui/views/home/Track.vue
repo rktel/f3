@@ -8,13 +8,16 @@ export default {
   },
   methods: {
     setDeviceCard(device) {
-      
-      Meteor.call("findInfo", device, (error, deviceInfo) =>{
+      Meteor.call("findInfo", device, (error, deviceInfo) => {
         if (!error) {
           this.deviceCard = deviceInfo;
           this.displayDeviceCard = true;
         }
       });
+    },
+    hideDC() {
+      this.displayDeviceCard = false;
+      this.deviceCard = {};
     }
   },
   mounted() {
@@ -104,7 +107,7 @@ export default {
         </v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="indigo">Ocultar</v-btn>
+          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
           <v-btn flat color="pink">Eliminar
             <v-icon right dark>person</v-icon>
           </v-btn>
