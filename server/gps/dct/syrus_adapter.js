@@ -45,7 +45,7 @@ function Syrus(port = DEFAULT_PORT) {
         if (deviceID) {
           console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
-          if (!SOCKETS.includes(socket.deviceID)) {
+          if (!DEVICES_ON.includes(deviceID)) {
             console.log('if !SOCKETS:', deviceID);
 
             socket.deviceID = deviceID
