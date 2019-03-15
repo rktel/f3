@@ -31,8 +31,7 @@ export default {
     DEVICES_ON: [],
     deviceFilter: null,
     displayDeviceCard: false,
-    deviceCard: {},
-    deviceTab: "messenger"
+    deviceCard: {}
   }),
   computed: {
     filteredDevice() {
@@ -93,38 +92,27 @@ export default {
     </section>
     <section class="itemTwo">
       <v-divider></v-divider>
-      <v-toolbar flat class="pt-0 transparent">
-        <v-tabs right color="transparent" v-model="deviceTab">
-          <v-tab :href="'#info'">
-            <v-icon>info</v-icon>INFO
-          </v-tab>
-          <v-tab :href="'#messenger'">
-            <v-icon>message</v-icon>MESSENGER
-          </v-tab>
-        </v-tabs>
+      <v-toolbar flat class="pt-0 transparent" dark>
+        <v-spacer></v-spacer>
+        <v-btn color="green" flat class="white--text">Info
+          <v-icon right dark>info</v-icon>
+        </v-btn>
+        <v-btn color="blue" flat class="white--text">Messenger
+          <v-icon right dark>message</v-icon>
+        </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
-
-      <v-tabs-items v-model="deviceTab">
-        <v-tab-item :value="'info'">
-          <v-card class="ma-2" flat >
-            <v-card-title class="py-2">
-              <div>
-                <device-simple-table :device="deviceCard"></device-simple-table>
-              </div>
-            </v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item :value="'messenger'">
-          <v-card >
-            <h1>Messenger</h1>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
+      <v-card class="ma-2" flat v-if="displayDeviceCard">
+        <v-card-title class="py-2">
+          <div>
+            <device-simple-table :device="deviceCard"></device-simple-table>
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
+        </v-card-actions>
+      </v-card>
     </section>
   </section>
 </template>
