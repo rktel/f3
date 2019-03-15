@@ -120,7 +120,7 @@ export default {
               <v-card class="ma-2" flat>
                 <v-card-title class="py-2">
                   <div>
-                    <device-simple-table :device="deviceInfo"></device-simple-table>
+                    
                   </div>
                 </v-card-title>
               </v-card>
