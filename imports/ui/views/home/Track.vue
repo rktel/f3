@@ -75,7 +75,7 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
 
-        <v-list two-line subheader class="pt-0 transparent" dense dark>
+        <v-list class="pt-0 transparent" dense dark>
 
           <v-list-tile
             v-for="device in filteredDevice"
@@ -89,7 +89,6 @@ export default {
 
             <v-list-tile-content>
               <v-list-tile-title>{{ device }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ device }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
