@@ -106,7 +106,7 @@ export default {
       <v-divider></v-divider>
 
       <v-tabs-items v-model="deviceTab">
-        <v-tab-item :value="info">
+        <v-tab-item :value="'info'">
           <v-card class="ma-2" flat >
             <v-card-title class="py-2">
               <div>
