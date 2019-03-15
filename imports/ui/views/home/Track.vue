@@ -94,8 +94,11 @@ export default {
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
-        <v-btn color="green" flat class="white--text">Unknow
-          <v-icon right dark>waves</v-icon>
+        <v-btn color="green" flat class="white--text">Info
+          <v-icon right dark>info</v-icon>
+        </v-btn>
+        <v-btn color="blue" flat class="white--text">Messenger
+          <v-icon right dark>message</v-icon>
         </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
@@ -108,9 +111,6 @@ export default {
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
-          <v-btn flat color="pink">Eliminar
-            <v-icon right dark>person</v-icon>
-          </v-btn>
         </v-card-actions>
       </v-card>
     </section>
