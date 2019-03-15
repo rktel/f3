@@ -18,27 +18,27 @@ function Syrus(port = DEFAULT_PORT) {
       console.log('socket error:', socket.deviceID, err.message);
     });
     socket.on('close', function () {
-      console.log('Socket closed:', socket.deviceID);
+      // console.log('Socket closed:', socket.deviceID);
 
       if (socket.deviceID) {
-        if(DEVICES_ON.includes(socket.deviceID)){
+        if (DEVICES_ON.includes(socket.deviceID)) {
           SOCKETS.splice(SOCKETS.indexOf(socket), 1);
           DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('DEVICES_ON', DEVICES_ON);
+          console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
         }
       }
     });
 
     socket.on('end', function () {
-      console.log("Socket End:", socket.deviceID);
+      // console.log("Socket End:", socket.deviceID);
 
       if (socket.deviceID) {
-        if(DEVICES_ON.includes(socket.deviceID)){
+        if (DEVICES_ON.includes(socket.deviceID)) {
           SOCKETS.splice(SOCKETS.indexOf(socket), 1);
           DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('DEVICES_ON', DEVICES_ON);
+          console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
         }
       }
     });
@@ -59,7 +59,7 @@ function Syrus(port = DEFAULT_PORT) {
             SOCKETS.push(socket)
             DEVICES_ON.push(deviceID)
             stSyrus.emit('DEVICES_ON', DEVICES_ON)
-            console.log('DEVICES_ON', DEVICES_ON);
+            console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
 
           }
 
