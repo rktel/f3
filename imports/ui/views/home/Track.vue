@@ -31,7 +31,8 @@ export default {
     DEVICES_ON: [],
     deviceFilter: null,
     displayDeviceCard: false,
-    deviceCard: {}
+    deviceCard: {},
+    deviceTab: "messenger"
   }),
   computed: {
     filteredDevice() {
@@ -93,7 +94,7 @@ export default {
     <section class="itemTwo">
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent">
-        <v-tabs right color="transparent">
+        <v-tabs right color="transparent" v-model="deviceTab">
           <v-tab>
             <v-icon>info</v-icon>INFO
           </v-tab>
@@ -103,17 +104,27 @@ export default {
         </v-tabs>
       </v-toolbar>
       <v-divider></v-divider>
-      <v-card class="ma-2" flat v-if="displayDeviceCard">
-        <v-card-title class="py-2">
-          <div>
-            <device-simple-table :device="deviceCard"></device-simple-table>
-          </div>
-        </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
-        </v-card-actions>
-      </v-card>
+
+      <v-tabs-items v-model="deviceTab">
+        <v-tab-item :value="info">
+          <v-card class="ma-2" flat >
+            <v-card-title class="py-2">
+              <div>
+                <device-simple-table :device="deviceCard"></device-simple-table>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat color="indigo" @click="hideDC">Ocultar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item :value="messenger">
+          <v-card >
+            <h1>Messenger</h1>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
     </section>
   </section>
 </template>
