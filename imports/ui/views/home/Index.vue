@@ -51,7 +51,7 @@ export default {
 </script>
 <template>
   <v-app v-resize="onResize" dark>
-    <v-navigation-drawer fixed v-model="drawer" right app width="260" class="indigo darken-4">
+    <v-navigation-drawer fixed v-model="drawer" right app width="260" >
       <user-avatar-dialog></user-avatar-dialog>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
@@ -89,7 +89,7 @@ export default {
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app flat class="indigo darken-4">
+    <v-toolbar fixed app flat >
       <v-toolbar-title class="font-italic">{{this.$route.name}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <h4 class="subheading font-italic" title="Version 3.0
