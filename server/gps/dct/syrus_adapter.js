@@ -11,7 +11,9 @@ const DEFAULT_PORT = 7100
 let SOCKETS = []
 let DEVICES_ON = []
 
-// stSyrus.on("GET_DEVICES_ON", DEVICES_ON)
+stSyrus.on("GET_DEVICES_ON", () => {
+  stSyrus.emit('DEVICES_ON', DEVICES_ON)
+})
 
 function Syrus(port = DEFAULT_PORT) {
 
