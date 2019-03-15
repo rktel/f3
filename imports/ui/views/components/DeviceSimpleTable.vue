@@ -12,7 +12,17 @@
       </tr>
       <tr>
         <td>Cell info</td>
-        <td>: {{device.info.cell}}</td>
+        <td>
+          :
+          <span>{{device.info.cell.split(',')[0]}}</span>
+          <br>
+          <span>{{device.info.cell.split(',')[1]}}</span>
+          <br>
+          <span>{{device.info.cell.split(',')[2]}}</span>
+          <br>
+          <span>{{device.info.cell.split(',')[3]}}</span>
+          <br>
+        </td>
       </tr>
       <tr class="text-no-wrap">
         <td>Hora conexion</td>
