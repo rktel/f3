@@ -22,7 +22,7 @@ export default {
         this.deviceInfoCardFlag = false;
       }
     },
-    deviceToggleMessages()(device) {
+    deviceToggleMessages(device) {
       if (!this.deviceMessagesCardFlag) {
         this.deviceMessagesCardFlag = true;
         /*
