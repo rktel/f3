@@ -7,23 +7,9 @@ export default {
     DeviceSimpleTable
   },
   methods: {
-    deviceToggleInfo(device) {
-      if (!this.deviceInfoCardFlag) {
-        Meteor.call("findInfo", device, (error, deviceInfo) => {
-          if (!error) {
-            if (deviceInfo) {
-              this.deviceInfo = deviceInfo;
-              this.deviceInfoCardFlag = true;
-            }
-          }
-        });
-      } else {
-        this.deviceInfo = {};
-        this.deviceInfoCardFlag = false;
-      }
-    },
     deviceToggleMessages(device) {
       if (!this.deviceMessagesCardFlag) {
+        this.deviceSelected = device;
         this.deviceMessagesCardFlag = true;
         /*
         Meteor.call("findMessages", device, (error, deviceMessages) => {
@@ -31,7 +17,7 @@ export default {
             console.log("deviceMessages:", deviceMessages);
           }
         });
-*/
+      */
       }
     },
     deviceSendMsg() {
@@ -52,7 +38,8 @@ export default {
     deviceInfo: {},
     deviceMessagesCardFlag: false,
     deviceMessages: [],
-    deviceMsg: null
+    deviceMsg: null,
+    deviceSelected: null
   }),
   computed: {
     filteredDevice() {
@@ -107,24 +94,10 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple @click="deviceToggleInfo(device)">
-                <v-icon color="grey lighten-1">info</v-icon>
-              </v-btn>
-            </v-list-tile-action>
-            <v-list-tile-action>
               <v-btn icon ripple @click="deviceToggleMessages(device)">
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
-            <v-dialog v-model="deviceInfoCardFlag">
-              <v-card class="ma-2" flat>
-                <v-card-title class="py-2">
-                  <div>
-                    
-                  </div>
-                </v-card-title>
-              </v-card>
-            </v-dialog>
           </v-list-tile>
         </v-list>
       </div>
@@ -140,13 +113,13 @@ export default {
       <v-card class="ma-2" flat v-if="deviceMessagesCardFlag">
         <v-card-title class="py-2">
           <div>
-            <h2>Messages</h2>
+            <h2>{{deviceSelected}}</h2>
           </div>
         </v-card-title>
         <v-card-actions>
           <v-text-field
             v-model="deviceMsg"
-            :append-outer-icon="'message'"
+            :append-outer-icon="'send'"
             box
             clear-icon="mdi-close-circle"
             clearable
