@@ -86,7 +86,7 @@ export default {
         <v-list class="pt-0 transparent" dense dark>
           <v-list-tile v-for="device in filteredDevice" :key="device" avatar @click>
             <v-list-tile-avatar>
-              <v-icon :class="['blue white--text']">rss_feed</v-icon>
+              <v-icon :class="['green white--text']">rss_feed</v-icon>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
