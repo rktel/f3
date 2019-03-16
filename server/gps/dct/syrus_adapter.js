@@ -23,8 +23,8 @@ function Syrus(port = DEFAULT_PORT) {
       console.log('socket error:', socket.deviceID, err.message);
     });
     socket.on('close', function () {
-      // console.log('Socket closed:', socket.deviceID);
-
+      console.log('Socket closed:', socket.deviceID);
+      
       if (SOCKETS[socket.deviceID]) {
         if (ONLINE[socket.deviceID]) {
           delete SOCKETS[socket.deviceID]
@@ -35,10 +35,11 @@ function Syrus(port = DEFAULT_PORT) {
           console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
         }
       }
-
+      
     });
-
+    
     socket.on('end', function () {
+      console.log('Socket End:', socket.deviceID);
       if (SOCKETS[socket.deviceID]) {
         if (ONLINE[socket.deviceID]) {
           delete SOCKETS[socket.deviceID]
