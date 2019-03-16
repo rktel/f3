@@ -83,7 +83,7 @@ export default {
       <v-divider></v-divider>
 
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
-        <v-list class="pt-0 transparent" dense dark two-line subheader>
+        <v-list class="pt-0 transparent" dark two-line>
           <v-list-tile v-for="device in filteredDevice" :key="device" avatar @click>
             <v-list-tile-avatar>
               <v-icon :class="['green white--text']">rss_feed</v-icon>
@@ -91,6 +91,7 @@ export default {
 
             <v-list-tile-content>
               <v-list-tile-title>{{ device }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ device }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
