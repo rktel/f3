@@ -24,19 +24,31 @@ function Syrus(port = DEFAULT_PORT) {
     });
     socket.on('close', function () {
       // console.log('Socket closed:', socket.deviceID);
-      /*
-            if (socket.deviceID) {
-              if (DEVICES_ON.includes(socket.deviceID)) {
-                SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-                DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-                stSyrus.emit('DEVICES_ON', DEVICES_ON)
-                console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
+      
+            if (SOCKETS[socket.deviceID]) {
+              if (ONLINE[socket.deviceID]) {
+                delete SOCKETS[socket.deviceID]
+                delete ONLINE[socket.deviceID]
+               // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+               // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+               // stSyrus.emit('DEVICES_ON', DEVICES_ON)
+                console.log('ONLINE:', ONLINE.length, ONLINE);
               }
             }
-            */
+            
     });
 
     socket.on('end', function () {
+      if (SOCKETS[socket.deviceID]) {
+        if (ONLINE[socket.deviceID]) {
+          delete SOCKETS[socket.deviceID]
+          delete ONLINE[socket.deviceID]
+         // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+         // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+         // stSyrus.emit('DEVICES_ON', DEVICES_ON)
+          console.log('ONLINE:', ONLINE.length, ONLINE);
+        }
+      }
       // console.log("Socket End:", socket.deviceID);
       /*
             if (socket.deviceID) {
@@ -60,6 +72,7 @@ function Syrus(port = DEFAULT_PORT) {
           // console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
           if (!ONLINE[deviceID]) {
+            socket.deviceID = deviceID
             SOCKETS[deviceID] = socket
             ONLINE[deviceID] = timeOnline()
             upsertOnline(ONLINE)
