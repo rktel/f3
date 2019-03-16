@@ -24,18 +24,18 @@ function Syrus(port = DEFAULT_PORT) {
     });
     socket.on('close', function () {
       // console.log('Socket closed:', socket.deviceID);
-      
-            if (SOCKETS[socket.deviceID]) {
-              if (ONLINE[socket.deviceID]) {
-                delete SOCKETS[socket.deviceID]
-                delete ONLINE[socket.deviceID]
-               // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-               // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-               // stSyrus.emit('DEVICES_ON', DEVICES_ON)
-                console.log('ONLINE:', ONLINE.length, ONLINE);
-              }
-            }
-            
+
+      if (SOCKETS[socket.deviceID]) {
+        if (ONLINE[socket.deviceID]) {
+          delete SOCKETS[socket.deviceID]
+          delete ONLINE[socket.deviceID]
+          // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+          // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+          // stSyrus.emit('DEVICES_ON', DEVICES_ON)
+          console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
+        }
+      }
+
     });
 
     socket.on('end', function () {
@@ -43,10 +43,10 @@ function Syrus(port = DEFAULT_PORT) {
         if (ONLINE[socket.deviceID]) {
           delete SOCKETS[socket.deviceID]
           delete ONLINE[socket.deviceID]
-         // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-         // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-         // stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('ONLINE:', ONLINE.length, ONLINE);
+          // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+          // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+          // stSyrus.emit('DEVICES_ON', DEVICES_ON)
+          console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
         }
       }
       // console.log("Socket End:", socket.deviceID);
@@ -76,6 +76,7 @@ function Syrus(port = DEFAULT_PORT) {
             SOCKETS[deviceID] = socket
             ONLINE[deviceID] = timeOnline()
             upsertOnline(ONLINE)
+            console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
             //stSyrus.emit('DEVICES_ON', DEVICES_ON)
             //console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
 
