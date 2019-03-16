@@ -12,7 +12,7 @@ Meteor.methods({
         return Infos.findOne({ 'info.device': deviceID })
     },
     upsertOnline: function (devices) {
-        Online.upsert({ 'type': 'syrus' }, { $set: devices })
+        Online.upsert({ 'type': 'syrus' }, { devices })
     },
 });
 
