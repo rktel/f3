@@ -33,6 +33,7 @@ function Syrus(port = DEFAULT_PORT) {
           // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           // stSyrus.emit('DEVICES_ON', DEVICES_ON)
           console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
+          upsertOnline(ONLINE)
         }
       }
       
@@ -48,6 +49,7 @@ function Syrus(port = DEFAULT_PORT) {
           // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
           // stSyrus.emit('DEVICES_ON', DEVICES_ON)
           console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
+          upsertOnline(ONLINE)
         }
       }
       // console.log("Socket End:", socket.deviceID);
