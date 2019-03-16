@@ -59,7 +59,7 @@ function Syrus(port = DEFAULT_PORT) {
         if (deviceID) {
           // console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
-          if (!ONLINE.includes(deviceID)) {
+          if (!ONLINE[deviceID]) {
             SOCKETS[deviceID] = socket
             ONLINE[deviceID] = timeOnline()
             upsertOnline(ONLINE)
