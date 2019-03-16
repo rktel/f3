@@ -25,11 +25,13 @@ export default {
     }
   },
   mounted() {
+    /*
     stSyrus.on("DEVICES_ON", devicesOn => {
       this.DEVICES_ON = devicesOn;
       console.log(devicesOn);
     });
     stSyrus.emit("GET_DEVICES_ON");
+    */
   },
   data: () => ({
     DEVICES_ON: [],
@@ -99,7 +101,6 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
-            <v-divider></v-divider>
           </v-list-tile>
         </v-list>
       </div>

@@ -8,13 +8,14 @@ import { stSyrus } from '../../../imports/api/streamers'
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
 
 const DEFAULT_PORT = 7100
-let SOCKETS = []
-let DEVICES_ON = []
+let SOCKETS = {}
+let ONLINE = {}
 
+/*
 stSyrus.on("GET_DEVICES_ON", () => {
   stSyrus.emit('DEVICES_ON', DEVICES_ON)
 })
-
+*/
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
@@ -23,28 +24,30 @@ function Syrus(port = DEFAULT_PORT) {
     });
     socket.on('close', function () {
       // console.log('Socket closed:', socket.deviceID);
-
-      if (socket.deviceID) {
-        if (DEVICES_ON.includes(socket.deviceID)) {
-          SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-          DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-          stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
-        }
-      }
+      /*
+            if (socket.deviceID) {
+              if (DEVICES_ON.includes(socket.deviceID)) {
+                SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+                DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+                stSyrus.emit('DEVICES_ON', DEVICES_ON)
+                console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
+              }
+            }
+            */
     });
 
     socket.on('end', function () {
       // console.log("Socket End:", socket.deviceID);
-
-      if (socket.deviceID) {
-        if (DEVICES_ON.includes(socket.deviceID)) {
-          SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-          DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-          stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
-        }
-      }
+      /*
+            if (socket.deviceID) {
+              if (DEVICES_ON.includes(socket.deviceID)) {
+                SOCKETS.splice(SOCKETS.indexOf(socket), 1);
+                DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
+                stSyrus.emit('DEVICES_ON', DEVICES_ON)
+                console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
+              }
+            }
+      */
     });
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
@@ -56,12 +59,12 @@ function Syrus(port = DEFAULT_PORT) {
         if (deviceID) {
           // console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
-          if (!DEVICES_ON.includes(deviceID)) {
-            socket.deviceID = deviceID
-            SOCKETS.push(socket)
-            DEVICES_ON.push(deviceID)
-            stSyrus.emit('DEVICES_ON', DEVICES_ON)
-            console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
+          if (!ONLINE.includes(deviceID)) {
+            SOCKETS[deviceID] = socket
+            ONLINE[deviceID] = timeOnline()
+            upsertOnline(ONLINE)
+            //stSyrus.emit('DEVICES_ON', DEVICES_ON)
+            //console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
 
           }
 
@@ -97,6 +100,12 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
+function timeOnline() {
+  return { online: (new Date).toISOString() }
+}
+function upsertOnline(devices) {
+  Meteor.call('upsertOnline', devices)
+}
 function saveData(data) {
   new SyrusParser(data)
 }

@@ -24,7 +24,7 @@ export default class SyrusParser {
             this._hardware = splitMessage[2]
             this._cell = splitMessage[4]
             this._rawData = message
-            Meteor.call('insertInfo', this.info())
+            Meteor.call('upsertInfo', this.info())
         }
 
     }
