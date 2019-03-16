@@ -99,6 +99,7 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
+            <v-divider></v-divider>
           </v-list-tile>
         </v-list>
       </div>
