@@ -21,29 +21,17 @@ function Syrus(port = DEFAULT_PORT) {
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
     socket.on('error', Meteor.bindEnvironment(function (err) {
-      console.log('Socket error:', socket.deviceID, err);
+      //console.log('Socket error:', socket.deviceID, err);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
     }));
     socket.on('close', Meteor.bindEnvironment(function () {
-      console.log('Socket closed:', socket.deviceID);
+      //console.log('Socket closed:', socket.deviceID);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
     }));
 
     socket.on('end', Meteor.bindEnvironment(function () {
-      console.log('Socket End:', socket.deviceID);
+      //console.log('Socket End:', socket.deviceID);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
-
-      // console.log("Socket End:", socket.deviceID);
-      /*
-            if (socket.deviceID) {
-              if (DEVICES_ON.includes(socket.deviceID)) {
-                SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-                DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-                stSyrus.emit('DEVICES_ON', DEVICES_ON)
-                console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
-              }
-            }
-      */
     }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
@@ -54,13 +42,10 @@ function Syrus(port = DEFAULT_PORT) {
 
         if (deviceID) {
           // console.log('deviceID:', deviceID);
-          // Si el socket no ha sido guardado en SOCKETS, lo guardamos
           updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID)
           saveData(data.toString().trim())
-          //Enviamos ACK al Equipos
+          //Enviamos ACK al Equipo
           socket.write(deviceID)
-
-          //socket.write('>SXADP0201190.223.32.141;7100<')
         }
       }
 
@@ -93,15 +78,15 @@ function upsertDevicesOnline() {
   Meteor.call('upsertDevicesOnline', DEVICES_ONLINE)
 }
 function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
-  //const deviceAddress = socket.remoteAddress
-  //const devicePort = socket.remotePort
+  const ip = socket.remoteAddress
+  const port = socket.remotePort
   const time = (new Date()).toISOString()
 
   if (DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
     SOCKETS.push(socket)
-    DEVICES_ONLINE.push({ deviceID, time })
-    console.log(DEVICES_ONLINE);
+    DEVICES_ONLINE.push({ deviceID, time, ip, port })
+    //console.log(DEVICES_ONLINE);
     upsertDevicesOnline()
   }
 
@@ -112,7 +97,7 @@ function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
   if (deviceID && DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 1) {
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICES_ONLINE = DEVICES_ONLINE.filter(el => el.deviceID !== deviceID)
-    console.log(DEVICES_ONLINE);
+    //console.log(DEVICES_ONLINE);
     upsertDevicesOnline()
   }
 
