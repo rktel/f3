@@ -8,8 +8,8 @@ import { stSyrus } from '../../../imports/api/streamers'
 //Configuration parameters  >RXART;3.4.18;EHS6.T;interface=1.9.1.1T;imsi=214074301431066,operator=MOVISTAR,sim_id=8934072100261855798,;ID=357042066587636<
 
 const DEFAULT_PORT = 7100
-let SOCKETS = {}
-let ONLINE = {}
+let SOCKETS = []
+let DEVICES_ONLINE = []
 
 /*
 stSyrus.on("GET_DEVICES_ON", () => {
@@ -19,39 +19,20 @@ stSyrus.on("GET_DEVICES_ON", () => {
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
+
     socket.on('error', function (err) {
-      console.log('socket error:', socket.deviceID, err.message);
+      console.log('Socket error:', socket.deviceID, err);
+      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
     });
     socket.on('close', function () {
       console.log('Socket closed:', socket.deviceID);
-      
-      if (SOCKETS[socket.deviceID]) {
-        if (ONLINE[socket.deviceID]) {
-          delete SOCKETS[socket.deviceID]
-          delete ONLINE[socket.deviceID]
-          // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-          // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-          // stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
-          upsertOnline(ONLINE)
-        }
-      }
-      
+      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
     });
-    
+
     socket.on('end', function () {
       console.log('Socket End:', socket.deviceID);
-      if (SOCKETS[socket.deviceID]) {
-        if (ONLINE[socket.deviceID]) {
-          delete SOCKETS[socket.deviceID]
-          delete ONLINE[socket.deviceID]
-          // SOCKETS.splice(SOCKETS.indexOf(socket), 1);
-          // DEVICES_ON.splice(DEVICES_ON.indexOf(socket.deviceID), 1);
-          // stSyrus.emit('DEVICES_ON', DEVICES_ON)
-          console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
-          upsertOnline(ONLINE)
-        }
-      }
+      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
+
       // console.log("Socket End:", socket.deviceID);
       /*
             if (socket.deviceID) {
@@ -74,20 +55,11 @@ function Syrus(port = DEFAULT_PORT) {
         if (deviceID) {
           // console.log('deviceID:', deviceID);
           // Si el socket no ha sido guardado en SOCKETS, lo guardamos
-          if (!ONLINE[deviceID]) {
-            socket.deviceID = deviceID
-            SOCKETS[deviceID] = socket
-            ONLINE[deviceID] = timeOnline()
-            upsertOnline(ONLINE)
-            console.log('ONLINE:', Object.keys(ONLINE).length, ONLINE);
-            //stSyrus.emit('DEVICES_ON', DEVICES_ON)
-            //console.log('DEVICES_ON:', DEVICES_ON.length, DEVICES_ON);
-
-          }
-
+          updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID)
           saveData(data.toString().trim())
           //Enviamos ACK al Equipos
           socket.write(deviceID)
+
           //socket.write('>SXADP0201190.223.32.141;7100<')
         }
       }
@@ -117,12 +89,26 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
-function timeOnline() {
-  return { online: (new Date).toISOString() }
+function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
+  //const deviceAddress = socket.remoteAddress
+  //const devicePort = socket.remotePort
+  const time = (new Date()).toISOString()
+  socket['deviceID'] = deviceID
+  SOCKETS.push(socket)
+  DEVICES_ONLINE.push({ deviceID, time })
+  console.log(DEVICES_ONLINE);
+  
 }
-function upsertOnline(devices) {
-  Meteor.call('upsertOnline', devices)
+function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
+  const { deviceID } = socket
+  if (deviceID) {
+    SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
+    DEVICES_ONLINE = DEVICES_ONLINE.filter(el => el.deviceID !== deviceID)
+    console.log(DEVICES_ONLINE);
+  }
+
 }
+
 function saveData(data) {
   new SyrusParser(data)
 }
