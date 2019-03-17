@@ -74,8 +74,8 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
-function upsertDevicesOnline() {
-  Meteor.call('upsertDevicesOnline', DEVICES_ONLINE)
+function upsertDevicesOnline(devices) {
+  Meteor.call('upsertDevicesOnline', devices)
 }
 function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
   const ip = socket.remoteAddress.split(':')[3]
@@ -87,7 +87,7 @@ function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
     SOCKETS.push(socket)
     DEVICES_ONLINE.push({ deviceID, time, ip, port })
     //console.log(DEVICES_ONLINE);
-    Meteor.setTimeout(ns => upsertDevicesOnline(), 100)
+    upsertDevicesOnline(DEVICES_ONLINE)
   
   }
 
@@ -99,7 +99,7 @@ function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICES_ONLINE = DEVICES_ONLINE.filter(el => el.deviceID !== deviceID)
     //console.log(DEVICES_ONLINE);
-    Meteor.setTimeout(ns => upsertDevicesOnline(), 100)
+    upsertDevicesOnline(DEVICES_ONLINE)
   }
 
 }
