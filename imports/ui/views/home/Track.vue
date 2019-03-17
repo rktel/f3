@@ -1,10 +1,18 @@
 <script>
 import { stSyrus } from "../../../api/streamers";
-import DeviceSimpleTable from "../components/DeviceSimpleTable";
+import { DevicesOnline } from "../../../api/collections.js";
 export default {
   name: "Track",
   components: {
-    DeviceSimpleTable
+
+  },
+  meteor: {
+    $subscribe: {
+      devicesOnline: []
+    },
+    personal() {
+      return DevicesOnline.find({});
+    }
   },
   methods: {
     deviceToggleMessages(device) {
