@@ -93,11 +93,15 @@ function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
   //const deviceAddress = socket.remoteAddress
   //const devicePort = socket.remotePort
   const time = (new Date()).toISOString()
-  socket['deviceID'] = deviceID
-  SOCKETS.push(socket)
-  DEVICES_ONLINE.push({ deviceID, time })
-  console.log(DEVICES_ONLINE);
-  
+
+  if (DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length > 0) {
+    socket['deviceID'] = deviceID
+    SOCKETS.push(socket)
+    DEVICES_ONLINE.push({ deviceID, time })
+    console.log(DEVICES_ONLINE);
+  }
+
+
 }
 function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
   const { deviceID } = socket
