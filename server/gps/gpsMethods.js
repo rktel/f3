@@ -1,4 +1,4 @@
-import { Events, Infos, Last, DevicesOnline } from '../../imports/api/collections'
+import { Events, Infos, Last, DevicesOnline, Commands } from '../../imports/api/collections'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -11,8 +11,17 @@ Meteor.methods({
     findInfo: function (deviceID) {
         return Infos.findOne({ 'info.device': deviceID })
     },
-    upsertDevicesOnline: function (devices) {
+    upsertSyrusDevicesOnline: function (devices) {
         DevicesOnline.upsert({ 'type': 'syrus' }, { $set: { devices } })
     },
+    insertCommand: function (commandObject) {
+        //{author:"Pipo",deviceID:"0007",command: ">SRT<",status:1, sendTime: "2019-03-16T23:34:51.000Z",requestedBy:"Pipo",}
+        Commands.insert(commandObject)
+    },
+    updateCommand: function (commandObject) {
+        //	{...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
+        const seudoResponse = 'R' + commandObject.response.substr(1, 3)
+        Commands.update({ deviceID: commandObject.deviceID, status: 1, command: { '$regex': seudoResponse, '$options': 'i' } }, { $set: { response: commandObject.response, status: 2, receivedTime: commandObject.receivedTime } })
+    }
 });
 
