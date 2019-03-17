@@ -20,16 +20,16 @@ function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
-    socket.on('error', function (err) {
+    socket.on('error', Meteor.bindEnvironment(function (err) {
       console.log('Socket error:', socket.deviceID, err);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
-    });
-    socket.on('close', function () {
+    }));
+    socket.on('close', Meteor.bindEnvironment(function () {
       console.log('Socket closed:', socket.deviceID);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
-    });
+    }));
 
-    socket.on('end', function () {
+    socket.on('end', Meteor.bindEnvironment(function () {
       console.log('Socket End:', socket.deviceID);
       deleteSOCKETS_AND_DEVICES_ONLINE(socket)
 
@@ -44,7 +44,7 @@ function Syrus(port = DEFAULT_PORT) {
               }
             }
       */
-    });
+    }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
       console.log(data.toString().trim());
