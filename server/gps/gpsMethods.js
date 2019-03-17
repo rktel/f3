@@ -1,4 +1,4 @@
-import { Events, Infos, Last, Online } from '../../imports/api/collections'
+import { Events, Infos, Last, DevicesOnline } from '../../imports/api/collections'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -12,9 +12,7 @@ Meteor.methods({
         return Infos.findOne({ 'info.device': deviceID })
     },
     upsertDevicesOnline: function (devices) {
-        console.log('method:',devices);
-        
-        Online.upsert({ 'type': 'syrus' }, { $set: { devices } })
+        DevicesOnline.upsert({ 'type': 'syrus' }, { $set: { devices } })
     },
 });
 
