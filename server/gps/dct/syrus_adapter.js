@@ -105,7 +105,7 @@ function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
 }
 function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
   const { deviceID } = socket
-  if (deviceID) {
+  if (deviceID && DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 1) {
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICES_ONLINE = DEVICES_ONLINE.filter(el => el.deviceID !== deviceID)
     console.log(DEVICES_ONLINE);
