@@ -8,9 +8,9 @@ export default {
   },
   meteor: {
     $subscribe: {
-      devicesOnline: []
+      devices_online: []
     },
-    personal() {
+    devices_online() {
       return DevicesOnline.find({});
     }
   },
