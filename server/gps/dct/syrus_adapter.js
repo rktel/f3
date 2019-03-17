@@ -94,7 +94,7 @@ function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
   //const devicePort = socket.remotePort
   const time = (new Date()).toISOString()
 
-  if (DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length > 0) {
+  if (DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
     SOCKETS.push(socket)
     DEVICES_ONLINE.push({ deviceID, time })
