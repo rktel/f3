@@ -78,7 +78,7 @@ function upsertDevicesOnline() {
   Meteor.call('upsertDevicesOnline', DEVICES_ONLINE)
 }
 function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
-  const ip = socket.remoteAddress
+  const ip = socket.remoteAddress.split(':')[3]
   const port = socket.remotePort
   const time = (new Date()).toISOString()
 
