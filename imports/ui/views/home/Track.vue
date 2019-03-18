@@ -1,7 +1,7 @@
 <script>
-import { stSyrus } from "../../../api/streamers";
+import { stSyrus } from "../../../api/streamers.js";
 import { Devices } from "../../../api/collections.js";
-import { addHours } from "../../../tools/time";
+import { addHours } from "../../../tools/time.js";
 export default {
   name: "Track",
   components: {},
