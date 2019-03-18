@@ -4,5 +4,5 @@ Meteor.publish('personal', () => {
     return Personal.find({ role: { $ne: Meteor.settings.private.HYPER_PERSONAL_ROLE } })
 })
 Meteor.publish('devices', () => {
-    return Devices.find({})
+    return Devices.find({}, { sort: { connectionTime: -1 } })
 })
