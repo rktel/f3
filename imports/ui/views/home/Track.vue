@@ -53,7 +53,7 @@ export default {
     filteredDevice() {
         const devicesOnline = this.devices_online.filter(el => el.type == "syrus")[0].devices
         if(devicesOnline.length>0 && !this.deviceFilter) {
-          console.log(devicesOnlines);
+          console.log(devicesOnline);
           
           return devicesOnline
           }
