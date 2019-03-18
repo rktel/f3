@@ -51,9 +51,10 @@ export default {
   }),
   computed: {
     filteredDevice() {
-  
         const devicesOnline = this.devices_online.filter(el => el.type == "syrus")
-        console.log(devicesOnline);
+        if(devicesOnline.length>0){
+          if(!deviceFilter) return devicesOnline.devices
+        }
       return[]
     },
     heightList() {
