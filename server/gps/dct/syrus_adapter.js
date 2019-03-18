@@ -76,8 +76,10 @@ const srs = new Syrus()
 
 /**FUNCIONES DE APOYO */
 function sendCommand(deviceID, message) {
-  const socket = SOCKETS.filter(d => d.deviceID == deviceID)[0]
-  socket.write(message)
+  const socket = SOCKETS.filter(d => d.deviceID == deviceID)
+  console.log(socket);
+  
+
 }
 function deviceOn(device) {
   Meteor.call('deviceOn', device)
