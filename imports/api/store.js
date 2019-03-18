@@ -11,7 +11,8 @@ export default new Vuex.Store({
             height: 0
         },
         flagUFD: false,
-        flagUAD: false
+        flagUAD: false,
+        flagDMD: false,
     },
     getters: {
         persona: state => state.personaProfile,
@@ -25,6 +26,7 @@ export default new Vuex.Store({
         },
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
+        flagDMD: state => state.flagDMD,
     },
     mutations: {
         setPersonaProfile: (state, personaProfile) => {
@@ -38,6 +40,9 @@ export default new Vuex.Store({
         },
         toggleFlagUAD: (state) => {
             state.flagUAD = !state.flagUAD
+        },
+        toggleFlagDMD: (state) => {
+            state.flagDMD = !state.flagDMD
         }
     },
     actions: {}

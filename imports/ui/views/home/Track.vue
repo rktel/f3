@@ -21,10 +21,10 @@ export default {
     restFiveHours(time) {
       return addHours(time, -5);
     },
-    openDeviceDialog(device){
-      this.deviceSelected = device
-      this.deviceDialog = true
-    }
+    toggleFlagDMD(device) {
+      this.$store.commit("toggleFlagDMD");
+      this.deviceSelected = device;
+    },
   },
   mounted() {
     /*
@@ -38,7 +38,7 @@ export default {
   data: () => ({
     deviceFilter: null,
     deviceSelected: null,
-    deviceDialog:false
+    deviceDialog: false
   }),
   computed: {
     filteredDevice() {
