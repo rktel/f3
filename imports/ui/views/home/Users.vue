@@ -53,14 +53,7 @@ export default {
       });
     },
     heightList() {
-      const { width, height } = this.$store.getters.appSize;
-      if (width < 900) {
-        //console.log(parseInt(height / 2));
-        return parseInt(height / 2);
-      } else {
-        //console.log(height);
-        return height - 100;
-      }
+      return this.$store.getters.heightList;
     }
   }
 };
@@ -71,7 +64,13 @@ export default {
       <user-form-dialog></user-form-dialog>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
-        <v-text-field label="Buscar usuario" prepend-icon="search" single-line v-model="userFilter" clearable></v-text-field>
+        <v-text-field
+          label="Buscar usuario"
+          prepend-icon="search"
+          single-line
+          v-model="userFilter"
+          clearable
+        ></v-text-field>
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>

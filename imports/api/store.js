@@ -15,7 +15,14 @@ export default new Vuex.Store({
     },
     getters: {
         persona: state => state.personaProfile,
-        appSize: state => state.appSize,
+        heightList: state => {
+            const { width, height } = state.appSize
+            if (width < 900) {
+                return parseInt(height / 2);
+            } else {
+                return height - 100;
+            }
+        },
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
     },

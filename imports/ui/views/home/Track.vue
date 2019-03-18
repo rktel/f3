@@ -46,28 +46,18 @@ export default {
   },
   data: () => ({
     deviceFilter: null,
-    deviceInfoCardFlag: false,
-    deviceInfo: {},
-    deviceMessagesCardFlag: false,
-    deviceMessages: [],
-    deviceMsg: null,
     deviceSelected: null
   }),
   computed: {
     filteredDevice() {
       if (!this.deviceFilter) return sortDescDevice(this.devices);
       let searchText = this.deviceFilter.toLowerCase();
-      return sortDescDevice(this.devices).filter(d => d.deviceID.toLowerCase().includes(searchText));
-     },
+      return sortDescDevice(this.devices).filter(d =>
+        d.deviceID.toLowerCase().includes(searchText)
+      );
+    },
     heightList() {
-      const { width, height } = this.$store.getters.appSize;
-      if (width < 900) {
-        //console.log(parseInt(height / 2));
-        return parseInt(height / 2);
-      } else {
-        //console.log(height);
-        return height - 100;
-      }
+      return this.$store.getters.heightList;
     }
   }
 };
@@ -101,7 +91,9 @@ export default {
 
             <v-list-tile-content>
               <v-list-tile-title>{{ device.deviceID }}</v-list-tile-title>
-              <v-list-tile-sub-title title="Hora de conexion">{{ restFiveHours(device.connectionTime) }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title
+                title="Hora de conexion"
+              >{{ restFiveHours(device.connectionTime) }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
@@ -120,26 +112,6 @@ export default {
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-divider></v-divider>
-
-      <v-card class="ma-2" flat v-if="deviceMessagesCardFlag">
-        <v-card-title class="py-2">
-          <div>
-            <h2>{{deviceSelected}}</h2>
-          </div>
-        </v-card-title>
-        <v-card-actions>
-          <v-text-field
-            v-model="deviceMsg"
-            :append-outer-icon="'send'"
-            box
-            clear-icon="mdi-close-circle"
-            clearable
-            label="Message"
-            type="text"
-            @click:append-outer="deviceSendMsg"
-          ></v-text-field>
-        </v-card-actions>
-      </v-card>
     </section>
   </section>
 </template>
