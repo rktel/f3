@@ -22,6 +22,8 @@
               clearable
               label="Message"
               type="text"
+              @keyup="toUppercase"
+              @keyup.enter.native="sendMsg"
               @click:append-outer="sendMsg"
             ></v-text-field>
           </div>
@@ -51,6 +53,9 @@ export default {
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
       this.$store.commit("setDeviceMessenger", {});
+    },
+    toUppercase(){
+      this.deviceMsg = this.deviceMsg.toUpperCase()
     },
     sendMsg() {
       alert("Hello");
