@@ -1,5 +1,7 @@
-export function addHours(time, hours) {
+function addHours(time, hours) {
     let dateTime = new Date(time)
     dateTime.setHours(dateTime.getHours() + hours)
     return dateTime
 }
+
+export { addHours }
