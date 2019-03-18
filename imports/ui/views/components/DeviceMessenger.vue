@@ -19,9 +19,7 @@
               style
               v-model="deviceMsg"
               :append-outer-icon="'send'"
-
-              clear-icon="mdi-close-circle"
-
+              clearable
               label="Message"
               type="text"
               @click:append-outer="sendMsg"
