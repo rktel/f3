@@ -52,7 +52,7 @@ export default {
   computed: {
     filteredDevice() {
       if(this.$subReady.devices_online){
-        console.log(this.devices_online.devices);
+        console.log(this.device_online.filter(el => el.type == "syrus"));
         return["Pepa"]
       }
       else{
