@@ -52,10 +52,8 @@ export default {
   computed: {
     filteredDevice() {
         const devicesOnline = this.devices_online.filter(el => el.type == "syrus")
-        if(devicesOnline.length>0){
-          if(!this.deviceFilter) return devicesOnline.devices
-        }
-      return[]
+        if(devicesOnline.length>0 && !this.deviceFilter) return devicesOnline.devices
+        return[]
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
