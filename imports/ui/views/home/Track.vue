@@ -55,8 +55,10 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      return sortDescDevice(this.devices);
-    },
+      if (!this.deviceFilter) return sortDescDevice(this.devices);
+      let searchText = this.deviceFilter.toLowerCase();
+      return sortDescDevice(this.devices).filter(d => d.deviceID.toLowerCase().includes(searchText));
+     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
       if (width < 900) {
