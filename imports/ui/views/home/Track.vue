@@ -53,9 +53,9 @@ export default {
     filteredDevice() {
   
         const devicesOnline = this.devices_online.filter(el => el.type == "syrus").devices
-        if (!this.deviceFilter) return this.devicesOnline;
+        if (!this.deviceFilter) return devicesOnline;
         let searchText = this.deviceFilter.toLowerCase();
-        return this.devicesOnline.filter(d => d.deviceID.toLowerCase().includes(searchText));
+        return devicesOnline.filter(d => d.deviceID.toLowerCase().includes(searchText));
       
     },
     heightList() {
