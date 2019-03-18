@@ -20,6 +20,7 @@
           label="Message"
           type="text"
           @click:append-outer="sendMsg"
+          class="mx-2"
         ></v-text-field>
       </v-card>
     </v-dialog>
