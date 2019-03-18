@@ -11,7 +11,7 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <section>
+
           <v-footer class="pa-3">
             <v-text-field
               style
@@ -25,7 +25,7 @@
               @click:append-outer="sendMsg"
             ></v-text-field>
           </v-footer>
-        </section>
+  
       </v-card>
     </v-dialog>
   </v-layout>
