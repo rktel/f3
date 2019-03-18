@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { stSyrus } from "../../../api/streamers.js";
 export default {
   computed: {
     flagDMD() {

@@ -1,5 +1,5 @@
 <script>
-import { stSyrus } from "../../../api/streamers.js";
+
 import { Devices } from "../../../api/collections.js";
 import { addHours, sortDescDevice } from "../../../tools/time.js";
 import DeviceMessenger from "../components/DeviceMessenger";
