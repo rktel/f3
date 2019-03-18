@@ -12,7 +12,7 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <section class="messengerContent">
+        <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
           <div class="messengerMsg">message</div>
           <div class="messengerCommand">command</div>
         </section>
@@ -29,6 +29,9 @@ export default {
     },
     deviceMessenger() {
       return this.$store.getters.deviceMessenger;
+    },
+    heightDeviceMessenger(){
+      return this.$store.getters.heightDeviceMessenger;
     }
   },
   data: () => ({

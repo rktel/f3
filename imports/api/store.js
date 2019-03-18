@@ -13,7 +13,7 @@ export default new Vuex.Store({
         flagUFD: false,
         flagUAD: false,
         flagDMD: false,
-        deviceMessenger:{}
+        deviceMessenger: {}
     },
     getters: {
         persona: state => state.personaProfile,
@@ -24,6 +24,10 @@ export default new Vuex.Store({
             } else {
                 return height - 100;
             }
+        },
+        heightDeviceMessenger: state => {
+            const { width, height } = state.appSize
+            return height - 50;
         },
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
@@ -46,7 +50,7 @@ export default new Vuex.Store({
         toggleFlagDMD: (state) => {
             state.flagDMD = !state.flagDMD
         },
-        setDeviceMessenger: (state, deviceMessenger)=>{
+        setDeviceMessenger: (state, deviceMessenger) => {
             state.deviceMessenger = deviceMessenger
         }
     },

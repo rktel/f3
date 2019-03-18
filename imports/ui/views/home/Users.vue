@@ -77,7 +77,7 @@ export default {
         <h4 class="my-0">Usuarios registrados {{ personal.length }}</h4>
       </v-toolbar>
       <v-divider></v-divider>
-      <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
+      <div class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
           <v-list-tile v-for="item in filteredUser" :key="item.index" @click="setUserCard(item)">
             <v-list-tile-action>
