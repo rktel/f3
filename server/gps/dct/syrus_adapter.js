@@ -12,11 +12,11 @@ let SOCKETS = []
 let DEVICE = null
 const APP_VERSION = Meteor.settings.public.appVersion
 const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
-/*
-stSyrus.on("GET_DEVICES_ON", () => {
-  stSyrus.emit('DEVICES_ON', DEVICES_ON)
+// stSyrus.emit('sendCommand', device.deviceID, message)
+stSyrus.on("SEND_COMMAND_SYRUS", (deviceID, message) => {
+  sendCommand(deviceID, message)
 })
-*/
+
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
@@ -75,6 +75,10 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
+function sendCommand(deviceID, message) {
+  const socket = SOCKETS.filter(d => d.deviceID == deviceID)[0]
+  socket.write(message)
+}
 function deviceOn(device) {
   Meteor.call('deviceOn', device)
 }

@@ -58,7 +58,16 @@ export default {
       if (this.deviceMsg) this.deviceMsg = this.deviceMsg.trim().toUpperCase();
     },
     sendMsg() {
-      alert("Hello");
+      const device = this.deviceMessenger
+      const message = this.deviceMsg
+      switch (device.protocol) {
+        case "Syrus":
+          stSyrus.emit('SEND_COMMAND_SYRUS', device.deviceID, message)
+          break;
+      
+        default:
+          break;
+      }
     }
   }
 };
