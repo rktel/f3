@@ -77,8 +77,10 @@ const srs = new Syrus()
 /**FUNCIONES DE APOYO */
 function sendCommand(deviceID, message) {
   const socket = SOCKETS.filter(d => d.deviceID == deviceID)
-  console.log(socket);
-  
+  if (socket) {
+    message = message.includes('>') && message.includes('<') ? message : '>' + message + '<'
+    socket[0].write(message)
+  }
 
 }
 function deviceOn(device) {
