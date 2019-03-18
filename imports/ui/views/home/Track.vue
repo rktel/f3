@@ -51,12 +51,12 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      if(this.$subReady.devices_online){
+  
         const devicesOnline = this.devices_online.filter(el => el.type == "syrus").devices
         if (!this.deviceFilter) return this.devicesOnline;
         let searchText = this.deviceFilter.toLowerCase();
         return this.devicesOnline.filter(d => d.deviceID.toLowerCase().includes(searchText));
-      }
+      
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
