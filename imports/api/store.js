@@ -27,7 +27,7 @@ export default new Vuex.Store({
         },
         heightDeviceMessenger: state => {
             const { width, height } = state.appSize
-            return height - 50;
+            return height - 100;
         },
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
