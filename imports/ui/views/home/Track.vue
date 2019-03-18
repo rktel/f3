@@ -2,10 +2,13 @@
 import { stSyrus } from "../../../api/streamers.js";
 import { Devices } from "../../../api/collections.js";
 import { addHours, sortDescDevice } from "../../../tools/time.js";
+import DeviceMessenger from "../components/DeviceMessenger";
 
 export default {
   name: "Track",
-  components: {},
+  components: {
+    DeviceMessenger
+  },
   meteor: {
     $subscribe: {
       devices: []
@@ -18,21 +21,9 @@ export default {
     restFiveHours(time) {
       return addHours(time, -5);
     },
-    deviceToggleMessages(device) {
-      if (!this.deviceMessagesCardFlag) {
-        this.deviceSelected = device;
-        this.deviceMessagesCardFlag = true;
-        /*
-        Meteor.call("findMessages", device, (error, deviceMessages) => {
-          if (!error) {
-            console.log("deviceMessages:", deviceMessages);
-          }
-        });
-      */
-      }
-    },
-    deviceSendMsg() {
-      alert(this.deviceMsg);
+    openDeviceDialog(device){
+      this.deviceSelected = device
+      this.deviceDialog = true
     }
   },
   mounted() {
@@ -46,7 +37,8 @@ export default {
   },
   data: () => ({
     deviceFilter: null,
-    deviceSelected: null
+    deviceSelected: null,
+    deviceDialog:false
   }),
   computed: {
     filteredDevice() {
@@ -97,13 +89,14 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple @click="deviceToggleMessages(device)">
+              <v-btn icon ripple @click="openDeviceDialog(device)">
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </div>
+      <device-messenger :deviceDialog="deviceDialog" :device="deviceSelected"></device-messenger>
     </section>
 
     <section class="itemTwo">
