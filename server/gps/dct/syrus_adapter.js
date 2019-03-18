@@ -13,8 +13,8 @@ let DEVICE = null
 const APP_VERSION = Meteor.settings.public.appVersion
 const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 // stSyrus.emit('sendCommand', device.deviceID, message)
-stSyrus.on("SEND_COMMAND_SYRUS", (deviceID, message) => {
-  sendCommand(deviceID, message)
+stSyrus.on("SEND_COMMAND_SYRUS", (deviceID, message, persona) => {
+  sendCommand(deviceID, message, persona)
 })
 
 function Syrus(port = DEFAULT_PORT) {
@@ -75,11 +75,23 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
-function sendCommand(deviceID, message) {
+function sendCommand(deviceID, message, persona) {
   const socket = SOCKETS.filter(d => d.deviceID == deviceID)
   if (socket) {
     message = message.includes('>') && message.includes('<') ? message : '>' + message + '<'
-    socket[0].write(message)
+    socket[0].write(message, () => {
+      const commandObject = {
+        author: persona.firstname + " " + persona.lastname,
+        deviceID,
+        command: message,
+        status: 1,
+        sendTime: (new Date()).toISOString(),
+        requestedBy: persona.firstname + " " + persona.lastname
+      }
+      // {author:"Pipo",deviceID:"0007",command: ">SRT<",status:1, sendTime: "2019-03-16T23:34:51.000Z",requestedBy:"Pipo",}
+      // insertCommand
+      Meteor.call('insertCommand', commandObject);
+    })
   }
 
 }

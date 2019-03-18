@@ -37,6 +37,9 @@
 import { stSyrus } from "../../../api/streamers.js";
 export default {
   computed: {
+    persona() {
+      return this.$store.getters.persona;
+    },
     flagDMD() {
       return this.$store.getters.flagDMD;
     },
@@ -59,13 +62,14 @@ export default {
       if (this.deviceMsg) this.deviceMsg = this.deviceMsg.trim().toUpperCase();
     },
     sendMsg() {
-      const device = this.deviceMessenger
-      const message = this.deviceMsg
+      const device = this.deviceMessenger;
+      const message = this.deviceMsg;
+      const persona = this.persona;
       switch (device.protocol) {
         case "Syrus":
-          stSyrus.emit('SEND_COMMAND_SYRUS', device.deviceID, message)
+          stSyrus.emit("SEND_COMMAND_SYRUS", device.deviceID, message, persona);
           break;
-      
+
         default:
           break;
       }
