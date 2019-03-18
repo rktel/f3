@@ -52,7 +52,7 @@ export default {
   computed: {
     filteredDevice() {
   
-        const devicesOnline = this.devices_online.filter(el => el.type == "syrus").devices
+        const devicesOnline = this.devices_online.filter(el => el.type == "syrus")
         console.log(devicesOnline);
       return[]
     },
