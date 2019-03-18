@@ -14,7 +14,19 @@
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
           <div class="messengerMsg">message</div>
-          <div class="messengerCommand">command</div>
+          <div class="messengerCommand">
+            <v-text-field
+              style
+              v-model="deviceMsg"
+              :append-outer-icon="'send'"
+              box
+              clear-icon="mdi-close-circle"
+              clearable
+              label="Message"
+              type="text"
+              @click:append-outer="sendMsg"
+            ></v-text-field>
+          </div>
         </section>
       </v-card>
     </v-dialog>
@@ -30,7 +42,7 @@ export default {
     deviceMessenger() {
       return this.$store.getters.deviceMessenger;
     },
-    heightDeviceMessenger(){
+    heightDeviceMessenger() {
       return this.$store.getters.heightDeviceMessenger;
     }
   },
