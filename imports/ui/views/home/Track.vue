@@ -22,8 +22,10 @@ export default {
       return addHours(time, -5);
     },
     toggleFlagDMD(device) {
-      this.$store.commit("toggleFlagDMD");
-      this.$store.commit("setDeviceMessenger", device);
+      if (device.connectionStatus == "on") {
+        this.$store.commit("toggleFlagDMD");
+        this.$store.commit("setDeviceMessenger", device);
+      }
     }
   },
   mounted() {
