@@ -51,6 +51,14 @@ export default {
   }),
   computed: {
     filteredDevice() {
+      if(this.$subReady.devices_online){
+        console.log(this.devices_online.devices);
+        return["Pepa"]
+      }
+      else{
+        return["Pipo"]
+      }
+      /*
       if (this.$subReady.devices_online) {
         if (!this.deviceFilter) return this.devices_online.devices;
         let searchText = this.deviceFilter.toLowerCase();
@@ -58,6 +66,7 @@ export default {
           return d.toLowerCase().includes(searchText);
         });
       }
+      */
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
