@@ -16,7 +16,7 @@
           <div class="messengerMsg">message</div>
           <div class="messengerCommand">
             <v-text-field
-              class="mx-4"
+              class="mx-2"
               v-model="deviceMsg"
               :append-outer-icon="'send'"
               clearable
