@@ -53,7 +53,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      console.log(this.$meteor);
+      console.log(this.$subReady);
       console.log(this.devices_online);
       if (!this.deviceFilter) return this.DEVICES_ON;
       let searchText = this.deviceFilter.toLowerCase();
