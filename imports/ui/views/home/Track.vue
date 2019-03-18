@@ -81,7 +81,7 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>
-        <h4 class="my-0">Dispositivos online {{ DEVICES_ON.length }}</h4>
+        <h4 class="my-0">Dispositivos online {{ devices.length }}</h4>
       </v-toolbar>
       <v-divider></v-divider>
 
