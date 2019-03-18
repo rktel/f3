@@ -1,12 +1,8 @@
 <script>
 import { stSyrus } from "../../../api/streamers.js";
 import { Devices } from "../../../api/collections.js";
-// import { addHours } from "../../../tools/time.js";
-function addHours(time, hours) {
-    let dateTime = new Date(time)
-    dateTime.setHours(dateTime.getHours() + hours)
-    return dateTime
-}
+import { addHours } from "../../../tools/time.js";
+
 export default {
   name: "Track",
   components: {},
@@ -19,6 +15,9 @@ export default {
     }
   },
   methods: {
+    restFiveHours(time) {
+      return addHours(time, -5);
+    },
     deviceToggleMessages(device) {
       if (!this.deviceMessagesCardFlag) {
         this.deviceSelected = device;
@@ -102,7 +101,7 @@ export default {
 
             <v-list-tile-content>
               <v-list-tile-title>{{ device.deviceID }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ device.connectionTime?addHours(device.connectionTime, -5):'' }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ device.connectionTime?restFiveHours(device.connectionTime):'' }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
