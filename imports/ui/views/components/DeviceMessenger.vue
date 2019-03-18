@@ -12,7 +12,7 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <section :style="{position:'absolute', bottom: -10+ 'px', left:0, right:10+'px'}">
+        <section :style="{position:'absolute', bottom: 0, left:0, right:0}">
           <v-text-field
             style
             v-model="deviceMsg"
