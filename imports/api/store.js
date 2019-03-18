@@ -22,7 +22,7 @@ export default new Vuex.Store({
             if (width < 900) {
                 return parseInt(height / 2);
             } else {
-                return height - 100;
+                return height - 64;
             }
         },
         heightDeviceMessenger: state => {
