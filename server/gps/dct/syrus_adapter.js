@@ -84,7 +84,7 @@ function deviceOff(device) {
 function inSOCKETS_DEVICE(socket, deviceID) {
   const connectionStatus = "on"
   const appVersion = APP_VERSION
-  const syrusProtocol = SYRUS_PROTOCOL
+  const protocol = SYRUS_PROTOCOL
   const ip = socket.remoteAddress.split(':')[3]
   const port = socket.remotePort
   const connectionTime = (new Date()).toISOString()
@@ -92,7 +92,7 @@ function inSOCKETS_DEVICE(socket, deviceID) {
   if (SOCKETS.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
     SOCKETS.push(socket)
-    DEVICE = { appVersion, syrusProtocol, deviceID, connectionStatus, connectionTime, ip, port }
+    DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
   }
 }
