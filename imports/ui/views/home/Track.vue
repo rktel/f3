@@ -50,7 +50,9 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      return this.devices.sort((a, b) => new Date(b.connectionTime) - new Date(a.connectionTime));
+      return this.devices.sort(
+        (a, b) => new Date(b.connectionTime) - new Date(a.connectionTime)
+      );
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
@@ -81,7 +83,7 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>
-        <h4 class="my-0">Dispositivos online {{ devices.length }}</h4>
+        <h4 class="my-0">Dispositivos {{ devices.length }}</h4>
       </v-toolbar>
       <v-divider></v-divider>
 
@@ -89,7 +91,7 @@ export default {
         <v-list class="pt-0 transparent" dark two-line dense>
           <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click>
             <v-list-tile-avatar>
-              <v-icon>developer_board</v-icon>
+              <v-icon :class="device.status=='on'?'green':''">developer_board</v-icon>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
