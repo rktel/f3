@@ -22,12 +22,12 @@ export default new Vuex.Store({
             if (width < 900) {
                 return parseInt(height / 2);
             } else {
-                return height - 64;
+                return height - 100;
             }
         },
         heightDeviceMessenger: state => {
             const { width, height } = state.appSize
-            return height - 100;
+            return height - 64;
         },
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
