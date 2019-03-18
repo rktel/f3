@@ -1,4 +1,4 @@
-import { Events, Infos, Last, DevicesOnline, Commands } from '../../imports/api/collections'
+import { Events, Infos, Last, SyrusDevicesOn, Commands } from '../../imports/api/collections'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -11,8 +11,13 @@ Meteor.methods({
     findInfo: function (deviceID) {
         return Infos.findOne({ 'info.device': deviceID })
     },
-    upsertSyrusDevicesOnline: function (devices) {
-        DevicesOnline.upsert({ 'type': 'syrus' }, { $set: { devices } })
+    deviceOn: function (device) {
+        const { deviceID, connectionStatus, connectionTime, ip, port } = device
+        SyrusDevicesOn.upsert({ deviceID }, { $set: { connectionStatus, connectionTime, ip, port } })
+    },
+    deviceOff: function (device) {
+        const { deviceID, connectionStatus, disconnectionTime } = device
+        SyrusDevicesOn.upsert({ deviceID }, { $set: { connectionStatus, disconnectionTime } })
     },
     insertCommand: function (commandObject) {
         //{author:"Pipo",deviceID:"0007",command: ">SRT<",status:1, sendTime: "2019-03-16T23:34:51.000Z",requestedBy:"Pipo",}

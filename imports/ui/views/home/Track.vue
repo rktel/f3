@@ -5,12 +5,14 @@ export default {
   name: "Track",
   components: {},
   meteor: {
+    /*
     $subscribe: {
       devices_online: []
     },
     devices_online() {
       return DevicesOnline.find({});
     }
+    */
   },
   methods: {
     deviceToggleMessages(device) {
@@ -51,12 +53,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
-        const devicesOnline = this.devices_online.filter(el => el.type == "syrus")[0].devices
-        if(devicesOnline.length>0 && !this.deviceFilter) {
-          console.log(devicesOnline);
-          
-          return devicesOnline
-          }
+ 
         return[]
     },
     heightList() {

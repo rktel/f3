@@ -9,7 +9,7 @@ import { stSyrus } from '../../../imports/api/streamers'
 
 const DEFAULT_PORT = 7100
 let SOCKETS = []
-let DEVICES_ONLINE = []
+let DEVICE = null
 
 /*
 stSyrus.on("GET_DEVICES_ON", () => {
@@ -22,16 +22,16 @@ function Syrus(port = DEFAULT_PORT) {
 
     socket.on('error', Meteor.bindEnvironment(function (err) {
       //console.log('Socket error:', socket.deviceID, err);
-      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
+      outSOCKETS_DEVICE(socket)
     }));
     socket.on('close', Meteor.bindEnvironment(function () {
       //console.log('Socket closed:', socket.deviceID);
-      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
+      outSOCKETS_DEVICE(socket)
     }));
 
     socket.on('end', Meteor.bindEnvironment(function () {
       //console.log('Socket End:', socket.deviceID);
-      deleteSOCKETS_AND_DEVICES_ONLINE(socket)
+      outSOCKETS_DEVICE(socket)
     }));
 
     socket.on('data', Meteor.bindEnvironment(function (data) {
@@ -42,7 +42,7 @@ function Syrus(port = DEFAULT_PORT) {
 
         if (deviceID) {
           // console.log('deviceID:', deviceID);
-          updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID)
+          inSOCKETS_DEVICE(socket, deviceID)
           saveData(data.toString().trim())
           //Enviamos ACK al Equipo
           socket.write(deviceID)
@@ -74,27 +74,33 @@ const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
-function upsertDevicesOnline(devices) {
-  Meteor.call('upsertSyrusDevicesOnline', devices)
+function deviceOn(device) {
+  Meteor.call('deviceOn', device)
 }
-function updateSOCKETS_AND_DEVICES_ONLINE(socket, deviceID) {
+function deviceOff(device) {
+  Meteor.call('deviceOff', device)
+}
+function inSOCKETS_DEVICE(socket, deviceID) {
+  const connectionStatus = "on"
   const ip = socket.remoteAddress.split(':')[3]
   const port = socket.remotePort
   const connectionTime = (new Date()).toISOString()
 
-  if (DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 0) {
+  if (SOCKETS.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
     SOCKETS.push(socket)
-    DEVICES_ONLINE.push({ deviceID, connectionTime, ip, port })
-    upsertDevicesOnline(DEVICES_ONLINE)
-    }
+    DEVICE = { deviceID, connectionStatus, connectionTime, ip, port }
+    deviceOn(DEVICE)
+  }
 }
-function deleteSOCKETS_AND_DEVICES_ONLINE(socket) {
+function outSOCKETS_DEVICE(socket) {
   const { deviceID } = socket
-  if (deviceID && DEVICES_ONLINE.filter(el => el.deviceID == deviceID).length == 1) {
+  const connectionStatus = "off"
+  const disconnectionTime = (new Date()).toISOString()
+  if (deviceID) {
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
-    DEVICES_ONLINE = DEVICES_ONLINE.filter(el => el.deviceID !== deviceID)
-    upsertDevicesOnline(DEVICES_ONLINE)
+    DEVICE = { deviceID, connectionStatus, disconnectionTime }
+    deviceOff(DEVICE)
   }
 }
 

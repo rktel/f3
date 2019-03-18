@@ -19,7 +19,7 @@
             "Supervisor",
             "Tecnico"
         ],
-        "avatar":[
+        "avatar": [
             "https://randomuser.me/api/portraits/lego/0.jpg",
             "https://randomuser.me/api/portraits/lego/1.jpg",
             "https://randomuser.me/api/portraits/lego/2.jpg",
@@ -31,6 +31,7 @@
             "https://randomuser.me/api/portraits/lego/8.jpg",
             "https://randomuser.me/api/portraits/lego/9.jpg"
         ],
-        "version": "3.0"
+        "appVersion": "3.0",
+        "syrusProtocol": "Syrus"
     }
 }

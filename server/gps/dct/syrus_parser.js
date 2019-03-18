@@ -1,9 +1,11 @@
 import { Time, Latitude, Longitude, Speed } from './syrus_convert'
 
-const VERSION_FG = Meteor.settings.public.version
+const APP_VERSION = Meteor.settings.public.appVersion
+const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 
 export default class SyrusParser {
     constructor(message) {
+
         if (message.includes('REV')) {
             this._deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
             this._eventCode = parseInt(message.substr(4, 2))
@@ -30,9 +32,10 @@ export default class SyrusParser {
     }
     event() {
         return {
-            version: VERSION_FG,
+            appVersion: APP_VERSION,
+            protocol: SYRUS_PROTOCOL,
             rawData: this._rawData,
-            received:this._received,
+            received: this._received,
             event:
             {
                 device: this._deviceID,
@@ -50,9 +53,10 @@ export default class SyrusParser {
     }
     info() {
         return {
-            version: VERSION_FG,
+            appVersion: APP_VERSION,
+            protocol: SYRUS_PROTOCOL,
             rawData: this._rawData,
-            received:this._received,
+            received: this._received,
             info:
             {
                 device: this._deviceID,
