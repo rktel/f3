@@ -1,7 +1,7 @@
 <script>
 import { stSyrus } from "../../../api/streamers.js";
 import { Devices } from "../../../api/collections.js";
-import { addHours } from "../../../tools/time.js";
+import { addHours, sortDescDevice } from "../../../tools/time.js";
 
 export default {
   name: "Track",
@@ -55,9 +55,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      return this.devices.sort(
-        (a, b) => new Date(b.connectionTime) - new Date(a.connectionTime)
-      );
+      return sortDescDevice(this.devices);
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;

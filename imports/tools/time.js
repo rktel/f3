@@ -3,5 +3,9 @@ function addHours(time, hours) {
     dateTime.setHours(dateTime.getHours() + hours)
     return dateTime.toISOString()
 }
-
-export { addHours }
+function sortDescDevice(array) {
+    return array.sort(
+        (a, b) => new Date(b.connectionTime) - new Date(a.connectionTime)
+    );
+}
+export { addHours, sortDescDevice }
