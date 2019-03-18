@@ -23,8 +23,8 @@ export default {
     },
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
-      this.deviceSelected = device;
-    },
+      this.$store.commit("setDeviceMessenger", device);
+    }
   },
   mounted() {
     /*
@@ -89,14 +89,14 @@ export default {
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn icon ripple @click="openDeviceDialog(device)">
+              <v-btn icon ripple @click="toggleFlagDMD(device)">
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </div>
-      <device-messenger :deviceDialog="deviceDialog" :device="deviceSelected"></device-messenger>
+      <device-messenger></device-messenger>
     </section>
 
     <section class="itemTwo">

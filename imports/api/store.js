@@ -13,6 +13,7 @@ export default new Vuex.Store({
         flagUFD: false,
         flagUAD: false,
         flagDMD: false,
+        deviceMessenger:{}
     },
     getters: {
         persona: state => state.personaProfile,
@@ -27,6 +28,7 @@ export default new Vuex.Store({
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
         flagDMD: state => state.flagDMD,
+        deviceMessenger: state => state.deviceMessenger
     },
     mutations: {
         setPersonaProfile: (state, personaProfile) => {
@@ -43,6 +45,9 @@ export default new Vuex.Store({
         },
         toggleFlagDMD: (state) => {
             state.flagDMD = !state.flagDMD
+        },
+        setDeviceMessenger: (state, deviceMessenger)=>{
+            state.deviceMessenger = deviceMessenger
         }
     },
     actions: {}
