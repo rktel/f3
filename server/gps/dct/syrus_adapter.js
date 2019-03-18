@@ -14,7 +14,7 @@ const APP_VERSION = Meteor.settings.public.appVersion
 const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 // stSyrus.emit('sendCommand', device.deviceID, message)
 stSyrus.on("SEND_COMMAND_SYRUS", Meteor.bindEnvironment((deviceID, message, persona) => {
-  sendCommand(deviceID, message, persona)
+  sendCommand(Meteor.bindEnvironment(deviceID, message, persona))
 }))
 
 function Syrus(port = DEFAULT_PORT) {
