@@ -12,21 +12,19 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <v-card-actions>
-          <v-footer class="pa-3">
-            <v-text-field
-              style
-              v-model="deviceMsg"
-              :append-outer-icon="'send'"
-              box
-              clear-icon="mdi-close-circle"
-              clearable
-              label="Message"
-              type="text"
-              @click:append-outer="sendMsg"
-            ></v-text-field>
-          </v-footer>
-        </v-card-actions>
+        <section>
+          <v-text-field
+            style
+            v-model="deviceMsg"
+            :append-outer-icon="'send'"
+            box
+            clear-icon="mdi-close-circle"
+            clearable
+            label="Message"
+            type="text"
+            @click:append-outer="sendMsg"
+          ></v-text-field>
+        </section>
       </v-card>
     </v-dialog>
   </v-layout>
