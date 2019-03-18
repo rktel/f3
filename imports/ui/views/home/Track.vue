@@ -101,7 +101,7 @@ export default {
 
             <v-list-tile-content>
               <v-list-tile-title>{{ device.deviceID }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ restFiveHours(device.connectionTime) }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title title="Hora de conexion">{{ restFiveHours(device.connectionTime) }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
