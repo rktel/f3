@@ -91,7 +91,7 @@ export default {
         <v-list class="pt-0 transparent" dark two-line dense>
           <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click>
             <v-list-tile-avatar>
-              <v-icon :class="device.status=='on'?'green':''">developer_board</v-icon>
+              <v-icon :class="{'green': device.connectionStatus == 'on'}">developer_board</v-icon>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
