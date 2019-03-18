@@ -55,7 +55,7 @@ export default {
       this.$store.commit("setDeviceMessenger", {});
     },
     toUppercase(){
-      this.deviceMsg = this.deviceMsg.toUpperCase()
+      this.deviceMsg = this.deviceMsg.trim().toUpperCase()
     },
     sendMsg() {
       alert("Hello");
