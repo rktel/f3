@@ -87,7 +87,7 @@ export default {
 
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dark two-line dense>
-          <v-list-tile v-for="device in filteredDevice" :key="device" avatar @click>
+          <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click>
             <v-list-tile-avatar>
               <v-icon>developer_board</v-icon>
             </v-list-tile-avatar>
