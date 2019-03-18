@@ -1,18 +1,16 @@
 <script>
 import { stSyrus } from "../../../api/streamers";
-import { DevicesOnline } from "../../../api/collections.js";
+import { Devices } from "../../../api/collections.js";
 export default {
   name: "Track",
   components: {},
   meteor: {
-    /*
     $subscribe: {
-      devices_online: []
+      devices: []
     },
-    devices_online() {
-      return DevicesOnline.find({});
+    devices() {
+      return Devices.find({});
     }
-    */
   },
   methods: {
     deviceToggleMessages(device) {
@@ -53,8 +51,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
- 
-        return[]
+      return [];
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;

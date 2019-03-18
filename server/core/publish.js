@@ -1,5 +1,8 @@
-import { Personal, SyrusDevicesOn } from '../../imports/api/collections'
+import { Personal, Devices } from '../../imports/api/collections'
 
 Meteor.publish('personal', () => {
     return Personal.find({ role: { $ne: Meteor.settings.private.HYPER_PERSONAL_ROLE } })
+})
+Meteor.publish('devices', () => {
+    return Devices.find({})
 })
