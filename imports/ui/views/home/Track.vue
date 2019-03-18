@@ -40,7 +40,6 @@ export default {
     */
   },
   data: () => ({
-    DEVICES_ON: [],
     deviceFilter: null,
     deviceInfoCardFlag: false,
     deviceInfo: {},
@@ -51,7 +50,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      return [];
+      return this.devices;
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
