@@ -32,7 +32,27 @@
             /* IE6-9 */
         }
 
-
+        .messengerContent{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: stretch;
+            align-content: flex-start;
+            background-color: red
+        }
+        .messengerMsg{
+            order: 0;
+            flex: 1 0 auto;
+            align-self: auto;
+            background-color: white
+        }
+        .messengerCommand{
+            order: 0;
+            flex: 0 0 auto;
+            align-self: auto;
+            background-color: orange;
+        }
 
         .contenedor {
             display: flex;

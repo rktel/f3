@@ -12,18 +12,9 @@
           </v-toolbar-items>
         </v-toolbar>
 
-        <section :style="{position:'absolute', bottom: 0, left:0, right:0 ,margin: 0}">
-          <v-text-field
-            style
-            v-model="deviceMsg"
-            :append-outer-icon="'send'"
-            box
-            clear-icon="mdi-close-circle"
-            clearable
-            label="Message"
-            type="text"
-            @click:append-outer="sendMsg"
-          ></v-text-field>
+        <section class="messengerContent">
+          <div class="messengerMsg">message</div>
+          <div class="messengerCommand">command</div>
         </section>
       </v-card>
     </v-dialog>
