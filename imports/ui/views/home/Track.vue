@@ -50,7 +50,7 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      return this.devices;
+      return this.devices.sort((a, b) => new Date(b.connectionTime) - new Date(a.connectionTime));
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
