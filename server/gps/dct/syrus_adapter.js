@@ -10,7 +10,8 @@ import { stSyrus } from '../../../imports/api/streamers'
 const DEFAULT_PORT = 7100
 let SOCKETS = []
 let DEVICE = null
-
+const APP_VERSION = Meteor.settings.public.appVersion
+const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 /*
 stSyrus.on("GET_DEVICES_ON", () => {
   stSyrus.emit('DEVICES_ON', DEVICES_ON)
@@ -82,6 +83,8 @@ function deviceOff(device) {
 }
 function inSOCKETS_DEVICE(socket, deviceID) {
   const connectionStatus = "on"
+  const appVersion = APP_VERSION
+  const syrusProtocol = SYRUS_PROTOCOL
   const ip = socket.remoteAddress.split(':')[3]
   const port = socket.remotePort
   const connectionTime = (new Date()).toISOString()
@@ -89,17 +92,17 @@ function inSOCKETS_DEVICE(socket, deviceID) {
   if (SOCKETS.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
     SOCKETS.push(socket)
-    DEVICE = { deviceID, connectionStatus, connectionTime, ip, port }
+    DEVICE = { appVersion, syrusProtocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
   }
 }
 function outSOCKETS_DEVICE(socket) {
   const { deviceID } = socket
   const connectionStatus = "off"
-  const disconnectionTime = (new Date()).toISOString()
+  const lastDisconnectionTime = (new Date()).toISOString()
   if (deviceID) {
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
-    DEVICE = { deviceID, connectionStatus, disconnectionTime }
+    DEVICE = { deviceID, connectionStatus, lastDisconnectionTime }
     deviceOff(DEVICE)
   }
 }

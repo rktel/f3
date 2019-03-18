@@ -12,12 +12,12 @@ Meteor.methods({
         return Infos.findOne({ 'info.device': deviceID })
     },
     deviceOn: function (device) {
-        const { deviceID, connectionStatus, connectionTime, ip, port } = device
-        Devices.upsert({ deviceID }, { $set: { connectionStatus, connectionTime, ip, port } })
+        const { deviceID, appVersion, syrusProtocol, connectionStatus, connectionTime, ip, port } = device
+        Devices.upsert({ deviceID }, { $set: { appVersion, syrusProtocol, connectionStatus, connectionTime, ip, port } })
     },
     deviceOff: function (device) {
-        const { deviceID, connectionStatus, disconnectionTime } = device
-        Devices.upsert({ deviceID }, { $set: { connectionStatus, disconnectionTime } })
+        const { deviceID, connectionStatus, lastDisconnectionTime } = device
+        Devices.upsert({ deviceID }, { $set: { connectionStatus, lastDisconnectionTime } })
     },
     insertCommand: function (commandObject) {
         //{author:"Pipo",deviceID:"0007",command: ">SRT<",status:1, sendTime: "2019-03-16T23:34:51.000Z",requestedBy:"Pipo",}
