@@ -52,21 +52,11 @@ export default {
   computed: {
     filteredDevice() {
       if(this.$subReady.devices_online){
-        console.log(this.devices_online.filter(el => el.type == "syrus"));
-        return["Pepa"]
-      }
-      else{
-        return["Pipo"]
-      }
-      /*
-      if (this.$subReady.devices_online) {
-        if (!this.deviceFilter) return this.devices_online.devices;
+        const devicesOnline = this.devices_online.filter(el => el.type == "syrus").devices
+        if (!this.deviceFilter) return this.devicesOnline;
         let searchText = this.deviceFilter.toLowerCase();
-        return this.devices_online.devices.filter(d => {
-          return d.toLowerCase().includes(searchText);
-        });
+        return this.devicesOnline.filter(d => d.deviceID.toLowerCase().includes(searchText));
       }
-      */
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
@@ -109,8 +99,8 @@ export default {
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{ device }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ device }}</v-list-tile-sub-title>
+              <v-list-tile-title>{{ device.deviceID }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ device.connectionTime }}</v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
