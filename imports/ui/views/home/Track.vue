@@ -3,9 +3,7 @@ import { stSyrus } from "../../../api/streamers";
 import { DevicesOnline } from "../../../api/collections.js";
 export default {
   name: "Track",
-  components: {
-
-  },
+  components: {},
   meteor: {
     $subscribe: {
       devices_online: []
@@ -53,13 +51,13 @@ export default {
   }),
   computed: {
     filteredDevice() {
-      console.log(this.$subReady);
-      console.log(this.devices_online);
-      if (!this.deviceFilter) return this.DEVICES_ON;
-      let searchText = this.deviceFilter.toLowerCase();
-      return this.DEVICES_ON.filter(d => {
-        return d.toLowerCase().includes(searchText);
-      });
+      if (this.$subReady.devices_online) {
+        if (!this.deviceFilter) return this.devices_online.devices;
+        let searchText = this.deviceFilter.toLowerCase();
+        return this.devices_online.devices.filter(d => {
+          return d.toLowerCase().includes(searchText);
+        });
+      }
     },
     heightList() {
       const { width, height } = this.$store.getters.appSize;
