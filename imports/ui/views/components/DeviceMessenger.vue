@@ -54,8 +54,8 @@ export default {
       this.$store.commit("toggleFlagDMD");
       this.$store.commit("setDeviceMessenger", {});
     },
-    toUppercase(){
-      this.deviceMsg = this.deviceMsg.trim().toUpperCase()
+    toUppercase() {
+      if (this.deviceMsg) this.deviceMsg = this.deviceMsg.trim().toUpperCase();
     },
     sendMsg() {
       alert("Hello");
