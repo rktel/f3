@@ -51,11 +51,11 @@ export default {
   }),
   computed: {
     filteredDevice() {
-        const devicesOnline = this.devices_online.filter(el => el.type == "syrus")
+        const devicesOnline = this.devices_online.filter(el => el.type == "syrus")[0].devices
         if(devicesOnline.length>0 && !this.deviceFilter) {
-          console.log(devicesOnline[0].devices);
+          console.log(devicesOnlines);
           
-          return devicesOnline.devices
+          return devicesOnline
           }
         return[]
     },
