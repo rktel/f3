@@ -13,20 +13,15 @@
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-          <div class="messengerMsg vuebar-element" v-bar :style="{height: heightDeviceMessenger-64 +'px' }">
-          <v-timeline>
-              <v-timeline-item
-                v-for="(command,index) in deviceCommands"
-                :key="index"
-                large
-              >
-                <template v-slot:icon>
-                  <v-avatar>
-                    <img src="http://i.pravatar.cc/64">
-                  </v-avatar>
-                </template>
+          <div
+            class="messengerMsg vuebar-element"
+            v-bar
+            :style="{height: heightDeviceMessenger-64 +'px' }"
+          >
+            <v-timeline>
+              <v-timeline-item v-for="(command,index) in deviceCommands" :key="index">
                 <template v-slot:opposite>
-                  <span>Tus eu perfecto</span>
+                  <span>{{restFiveHours(command.sendTime)}}</span>
                 </template>
                 <v-card class="elevation-2">
                   <v-card-title class="headline">{{ command.command }}</v-card-title>
@@ -57,6 +52,7 @@
 <script>
 import { stSyrus } from "../../../api/streamers.js";
 import { Commands } from "../../../api/collections.js";
+import { addHours } from "../../../tools/time.js";
 export default {
   meteor: {
     $subscribe: {
@@ -86,6 +82,9 @@ export default {
     deviceMsg: null
   }),
   methods: {
+    restFiveHours(time) {
+      return addHours(time, -5);
+    },
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
       this.$store.commit("setDeviceMessenger", {});
