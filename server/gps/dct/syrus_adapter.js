@@ -70,8 +70,8 @@ function Syrus(port = DEFAULT_PORT) {
 
   });
 }
+export { Syrus }
 
-const srs = new Syrus()
 
 
 /**FUNCIONES DE APOYO */
@@ -80,10 +80,10 @@ function sendCommand(deviceID, message, persona) {
   if (socket && socket[0]) {
     message = message.includes('>') && message.includes('<') ? message : '>' + message + '<'
     socket[0].write(message)
-    const fullname = persona.firstname+ " " + persona.lastname
+    const fullname = persona.firstname + " " + persona.lastname
     const now = (new Date()).toISOString()
     const commandObject = {
-      author:fullname,deviceID:deviceID,command: message,status:1, sendTime: now,requestedBy:fullname
+      author: fullname, deviceID: deviceID, command: message, status: 1, sendTime: now, requestedBy: fullname
     }
     // {author:"Pipo",deviceID:"0007",command: ">SRT<",status:1, sendTime: "2019-03-16T23:34:51.000Z",requestedBy:"Pipo",}
     // insertCommand
@@ -136,6 +136,8 @@ function getDeviceID(data) {
   }
   return null
 }
+
+
 
 /*
 
