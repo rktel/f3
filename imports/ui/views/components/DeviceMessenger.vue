@@ -20,9 +20,9 @@
           >
             <div class="px-0 mx-0">
               <p v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
-                <v-chip color="secondary" text-color="white" label><v-icon>person</v-icon>{{ command.command }}</v-chip>
+                <v-chip color="secondary" text-color="white" label><v-icon right>person</v-icon>{{ command.command }}</v-chip>
                 <br>
-                <v-chip color="orange" text-color="white" label>{{ command.response }} <v-icon right>developer_board</v-icon></v-chip>
+                <v-chip color="teal" text-color="white" label>{{ command.response }} <v-icon>developer_board</v-icon></v-chip>
               </p>
             </div>
           </div>
