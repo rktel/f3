@@ -107,9 +107,15 @@ function inSOCKETS_DEVICE(socket, deviceID) {
 
   if (SOCKETS.filter(el => el.deviceID == deviceID).length == 0) {
     socket['deviceID'] = deviceID
+    socket['ip'] = ip
+    socket['port'] = port
     SOCKETS.push(socket)
     DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
+  }else{
+    if (SOCKETS.filter(el => el.port == port).length == 0) {
+      outSOCKETS_DEVICE(socket) 
+    }
   }
 }
 function outSOCKETS_DEVICE(socket) {
