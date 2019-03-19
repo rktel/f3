@@ -11,6 +11,9 @@ Meteor.methods({
     findInfo: function (deviceID) {
         return Infos.findOne({ 'info.device': deviceID })
     },
+    devicesReset: function () {
+        Devices.update({ connectionStatus: 'on' }, { connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() }, { multi: true })
+    },
     deviceOn: function (device) {
         const { deviceID, appVersion, protocol, connectionStatus, connectionTime, ip, port } = device
         Devices.upsert({ deviceID }, { $set: { appVersion, protocol, connectionStatus, connectionTime, ip, port } })
