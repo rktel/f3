@@ -113,7 +113,10 @@ function inSOCKETS_DEVICE(socket, deviceID) {
     DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
   }else{
-    if (SOCKETS.filter(el => el.port == port).length == 0) {
+    if (SOCKETS.filter(el => {
+      console.log(el.port,port);
+      
+      return el.port == port}).length == 0) {
       outSOCKETS_DEVICE(socket) 
     }
   }
