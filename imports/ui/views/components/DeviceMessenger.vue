@@ -100,7 +100,7 @@ export default {
   }),
   methods: {
     restFiveHours(time) {
-      return addHours(time, -5);
+      if(time) return addHours(time, -5);
     },
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
