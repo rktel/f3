@@ -42,7 +42,7 @@ export default {
       deviceCommands: []
     },
     deviceCommands() {
-      return Commands.find({ deviceID: this.deviceMessenger.deviceID });
+      return Commands.find({});
     }
   },
   computed: {
