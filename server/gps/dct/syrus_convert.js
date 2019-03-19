@@ -1,10 +1,11 @@
 
 export function Time(data) {
-    console.log('data Time: ', data);
-    const week = parseInt(data.substr(0, 4))
-    const day = parseInt(data.substr(4, 1))
-    const seconds = parseInt(data.substr(5, 5))
-    return (new Date((new Date(1980, 0, 6)).getTime() + ((week * 7 + day) * 24 * 60 * 60 + seconds) * 1000)).toISOString()
+    if (parseInt(data).length == 10) {
+        const week = parseInt(data.substr(0, 4))
+        const day = parseInt(data.substr(4, 1))
+        const seconds = parseInt(data.substr(5, 5))
+        return (new Date((new Date(1980, 0, 6)).getTime() + ((week * 7 + day) * 24 * 60 * 60 + seconds) * 1000)).toISOString()
+    }
 }
 export function Latitude(data) {
     const sign = data.substr(0, 1)
