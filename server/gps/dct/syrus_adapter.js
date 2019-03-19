@@ -113,11 +113,7 @@ function inSOCKETS_DEVICE(socket, deviceID) {
     DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
   }else{
-    if (SOCKETS.filter(el => {
-      console.log(el.port,port);
-      
-      return el.port == port}).length == 0) {
-        console.log('port length == 0');
+    if (SOCKETS.filter(el => el.port == port).length == 0) {
         
         SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
         DEVICE = { deviceID, connectionStatus: 'off', lastDisconnectionTime : (new Date()).toISOString()}
@@ -134,12 +130,10 @@ function inSOCKETS_DEVICE(socket, deviceID) {
 }
 function outSOCKETS_DEVICE(socket) {
   const { deviceID } = socket
-  console.log("deviceID:", socket);
-  
+ 
   const connectionStatus = "off"
   const lastDisconnectionTime = (new Date()).toISOString()
   if (deviceID) {
-    console.log("En deviceID:", deviceID);
     
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICE = { deviceID, connectionStatus, lastDisconnectionTime }
