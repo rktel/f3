@@ -13,7 +13,7 @@
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-          <div
+          <div id="listCMD"
             class="messengerMsg vuebar-element"
             v-bar
             :style="{height: heightDeviceMessenger-100 +'px' }"
@@ -122,6 +122,9 @@ export default {
       }
       setTimeout(ns => {
         window.scrollTo(0,document.body.scrollHeight);
+        let listCMD = document.getElementById('listCMD')
+        listCMD.scrollTop = listCMD.scrollHeight
+
       }, 200);
     }
   }
