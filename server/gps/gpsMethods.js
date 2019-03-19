@@ -30,7 +30,7 @@ Meteor.methods({
         //	{...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
         const commandFirst = Commands.findOne({ deviceID: commandObject.deviceID, status: 1 })
         if (commandFirst) {
-            const command = commandFirst.command.substr(2,commandFirst.command.length-2)
+            const command = commandFirst.command.substring(2,commandFirst.command.length-2)
             console.log('command:', command);
             console.log(commandObject.response);
             console.log(commandObject.response.includes(command));
