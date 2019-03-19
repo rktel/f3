@@ -128,6 +128,8 @@ function outSOCKETS_DEVICE(socket) {
   const connectionStatus = "off"
   const lastDisconnectionTime = (new Date()).toISOString()
   if (deviceID) {
+    console.log("En deviceID:", deviceID);
+    
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICE = { deviceID, connectionStatus, lastDisconnectionTime }
     deviceOff(DEVICE)
