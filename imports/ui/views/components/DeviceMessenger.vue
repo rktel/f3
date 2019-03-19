@@ -42,8 +42,9 @@ export default {
       deviceCommands: []
     },
     deviceCommands() {
-      console.log(this.deviceMessenger);
-      return Commands.find({});
+      if(this.deviceMessenger && this.deviceMessenger.deviceID){
+        return Commands.find({deviceID: this.deviceMessenger.deviceID});
+      }
     }
   },
   computed: {
