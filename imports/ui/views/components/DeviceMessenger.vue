@@ -35,7 +35,16 @@
 
 <script>
 import { stSyrus } from "../../../api/streamers.js";
+import { Commands } from "../../../api/collections.js";
 export default {
+  meteor: {
+    $subscribe: {
+      deviceCommands: []
+    },
+    deviceCommands() {
+      return Commands.find({ deviceID: this.deviceMessenger.deviceID });
+    }
+  },
   computed: {
     persona() {
       return this.$store.getters.persona;
