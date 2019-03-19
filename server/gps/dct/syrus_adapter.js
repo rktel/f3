@@ -117,6 +117,8 @@ function inSOCKETS_DEVICE(socket, deviceID) {
       console.log(el.port,port);
       
       return el.port == port}).length == 0) {
+        console.log('port length == 0');
+        
       outSOCKETS_DEVICE(socket) 
     }
   }
