@@ -28,7 +28,7 @@ Meteor.methods({
     },
     updateCommand: function (commandObject) {
         //	{...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
-        const initialCommands = Commands.find({ deviceID: commandObject.deviceID, status: 1 })
+        const initialCommands = Commands.find({ deviceID: commandObject.deviceID, status: 1 }).fetch()
         console.log('initialCommands:',initialCommands);
         if (initialCommands.length>0) {
             console.log('initialCommands.length>0');
