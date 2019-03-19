@@ -13,18 +13,27 @@
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-          <div
-            class="messengerMsg vuebar-element"
-            v-bar
-            :style="{height: heightDeviceMessenger-64 +'px' }"
-          >
-            <v-list class="pt-0 transparent" dense dark>
-              <v-list-tile v-for="(command,index) in deviceCommands" :key="index">
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ command.command }}&nbsp;{{command.response}}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
+          <div class="messengerMsg vuebar-element" v-bar :style="{height: heightDeviceMessenger-64 +'px' }">
+          <v-timeline>
+              <v-timeline-item
+                v-for="(command,index) in deviceCommands"
+                :key="index"
+                large
+              >
+                <template v-slot:icon>
+                  <v-avatar>
+                    <img src="http://i.pravatar.cc/64">
+                  </v-avatar>
+                </template>
+                <template v-slot:opposite>
+                  <span>Tus eu perfecto</span>
+                </template>
+                <v-card class="elevation-2">
+                  <v-card-title class="headline">{{ command.command }}</v-card-title>
+                  <v-card-text>{{command.response}}</v-card-text>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
           </div>
           <div class="messengerCommand">
             <v-text-field
