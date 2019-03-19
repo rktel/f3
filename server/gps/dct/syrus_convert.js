@@ -1,5 +1,6 @@
 
 export function Time(data) {
+    console.log('data Time: ', data);
     const week = parseInt(data.substr(0, 4))
     const day = parseInt(data.substr(4, 1))
     const seconds = parseInt(data.substr(5, 5))
