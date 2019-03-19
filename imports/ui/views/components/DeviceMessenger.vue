@@ -27,7 +27,7 @@
                   {{ command.command }}
                 </v-chip>
                 <br>
-                <v-chip color="teal" text-color="white" label>
+                <v-chip color="teal" text-color="white" label class="caption">
                   {{ command.response }}
                   <v-icon>developer_board</v-icon>
                 </v-chip>
