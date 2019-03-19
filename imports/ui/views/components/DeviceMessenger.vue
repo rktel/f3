@@ -32,7 +32,7 @@
                   </v-chip>
                 </p>
 
-                <p class="my-0 caption ml-2 grey--text">
+                <p class="my-0 caption ml-2 black--text">
                   {{command.deviceID}} - {{restFiveHours(command.receivedTime)}}
                 </p>
                 <p class="my-0">
