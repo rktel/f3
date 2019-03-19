@@ -121,8 +121,8 @@ export default {
           break;
       }
       setTimeout(ns => {
-        window.scrollTo(0, this.$store.getters.heightDeviceMessenger);
-      }, 250);
+        window.scrollTo(0, 1000);
+      }, 200);
     }
   }
 };
