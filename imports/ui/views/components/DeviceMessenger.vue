@@ -13,22 +13,18 @@
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-
           <div
             class="messengerMsg vuebar-element"
             v-bar
-            :style="{height: heightDeviceMessenger-64 +'px' }"
+            :style="{height: heightDeviceMessenger-100 +'px' }"
           >
-
-<ul>
-            <p v-for="(command,index) in deviceCommands" :key="index">
-             <v-chip color="primary" text-color="white">{{ command.command }}</v-chip>
-             <v-chip color="secondary" text-color="white">{{ command.response }}</v-chip>
-          </p>
-</ul>
-
-
-
+            <ul>
+              <p v-for="(command,index) in deviceCommands" :key="index">
+                <v-chip color="primary" text-color="white">{{ command.command }}</v-chip>
+                <br>
+                <v-chip color="secondary" text-color="white">{{ command.response }}</v-chip>
+              </p>
+            </ul>
           </div>
 
           <div class="messengerCommand">
@@ -44,7 +40,6 @@
               @click:append-outer="sendMsg"
             ></v-text-field>
           </div>
-          
         </section>
       </v-card>
     </v-dialog>
