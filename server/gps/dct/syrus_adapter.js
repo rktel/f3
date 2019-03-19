@@ -45,6 +45,7 @@ function Syrus(port = DEFAULT_PORT) {
           // console.log('deviceID:', deviceID);
           inSOCKETS_DEVICE(socket, deviceID)
           saveData(data.toString().trim())
+          findResponseCommand(deviceID, data.toString().trim())
           //Enviamos ACK al Equipo
           socket.write(deviceID)
         }
@@ -75,6 +76,13 @@ export { Syrus }
 
 
 /**FUNCIONES DE APOYO */
+function findResponseCommand(deviceID, data){
+  // {...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
+  const commandObject = {
+    deviceID, response: data, receivedTime: (new Date()).toISOString()
+  }
+  Meteor.call('updateCommand', commandObject)
+}
 function sendCommand(deviceID, message, persona) {
   const socket = SOCKETS.filter(d => d.deviceID == deviceID)
   if (socket && socket[0]) {
