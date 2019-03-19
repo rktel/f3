@@ -33,6 +33,8 @@ Meteor.methods({
             const command = commandFirst.command.substr(2)
             console.log('command:', command);
             if (commandObject.response.includes(command)) {
+                console.log("here");
+                
                 Commands.update({ deviceID: commandObject.deviceID, status: 1 }, { $set: { response: commandObject.response, status: 2, receivedTime: commandObject.receivedTime } })
             }
         }
