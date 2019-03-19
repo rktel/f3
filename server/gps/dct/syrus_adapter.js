@@ -125,6 +125,8 @@ function inSOCKETS_DEVICE(socket, deviceID) {
 }
 function outSOCKETS_DEVICE(socket) {
   const { deviceID } = socket
+  console.log("deviceID:", socket);
+  
   const connectionStatus = "off"
   const lastDisconnectionTime = (new Date()).toISOString()
   if (deviceID) {
