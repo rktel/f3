@@ -23,18 +23,16 @@
                 <p class="text-xs-right my-0">
                   <v-chip color="secondary" text-color="white" label class="caption">
                     {{ command.command }}
-          
-                      <v-icon right>account_circle</v-icon>
-    
+                    <v-icon right>account_circle</v-icon>
                   </v-chip>
                 </p>
 
                 <p class="my-0">
                   <v-chip color="indigo" text-color="white" label class="caption">
+                    <v-avatar>
+                      <v-icon>account_circle</v-icon>
+                    </v-avatar>
                     {{ command.response }}
-   
-                      <v-icon left>developer_board</v-icon>
-      
                   </v-chip>
                 </p>
               </div>
