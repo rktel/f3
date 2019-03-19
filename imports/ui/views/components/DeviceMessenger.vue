@@ -28,9 +28,9 @@
                 </p>
 
                 <p class="my-0">
-                  <v-chip color="indigo" text-color="white" label class="caption">
+                  <v-chip color="white" text-color="black" label class="caption">
                     <v-avatar>
-                      <v-icon>account_circle</v-icon>
+                      <v-icon>developer_board</v-icon>
                     </v-avatar>
                     {{ command.response }}
                   </v-chip>
