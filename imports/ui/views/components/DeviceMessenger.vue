@@ -125,7 +125,7 @@ export default {
         let listCMD = document.getElementById('listCMD')
         listCMD.scrollTop = listCMD.scrollHeight
 
-      }, 200);
+      }, 1000);
     }
   }
 };
