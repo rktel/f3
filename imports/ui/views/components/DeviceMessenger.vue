@@ -22,7 +22,6 @@
 
           <p v-for="(command,index) in deviceCommands" :key="index">
              <v-chip color="primary" text-color="white">{{ command.command }}</v-chip>
-             <br>
              <v-chip color="secondary" text-color="white">{{ command.response }}</v-chip>
           </p>
 
