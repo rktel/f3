@@ -121,6 +121,7 @@ export default {
         default:
           break;
       }
+      window.scrollTo(0,this.$store.getters.heightDeviceMessenger);
     }
   }
 };
