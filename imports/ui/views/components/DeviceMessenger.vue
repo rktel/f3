@@ -20,10 +20,9 @@
           >
             <div class="px-0 mx-0">
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
-
-                <p class="text-xs-right my-0 caption grey--text">
-                  {{command.author}} - {{restFiveHours(command.sendTime)}}
-                </p>
+                <p
+                  class="text-xs-right my-0 caption grey--text"
+                >{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
 
                 <p class="text-xs-right my-0">
                   <v-chip color="secondary" text-color="white" label class="caption">
@@ -32,9 +31,9 @@
                   </v-chip>
                 </p>
 
-                <p class="my-0 caption ml-2 grey--text text--darken-3">
-                  {{command.deviceID}} - {{restFiveHours(command.receivedTime)}}
-                </p>
+                <p
+                  class="my-0 caption ml-2 grey--text text--darken-3"
+                >{{command.deviceID}} - {{restFiveHours(command.receivedTime)}}</p>
                 <p class="my-0">
                   <v-chip color="white" text-color="black" label class="caption">
                     <v-avatar>
@@ -100,7 +99,7 @@ export default {
   }),
   methods: {
     restFiveHours(time) {
-      if(time) return addHours(time, -5);
+      if (time) return addHours(time, -5);
     },
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
@@ -121,7 +120,9 @@ export default {
         default:
           break;
       }
-      window.scrollTo(0,this.$store.getters.heightDeviceMessenger);
+      setTimeout(ns => {
+        window.scrollTo(0, this.$store.getters.heightDeviceMessenger);
+      }, 250);
     }
   }
 };
