@@ -21,7 +21,7 @@
             <div class="px-0 mx-0">
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
 
-                <p class="text-xs-right my-0 caption">
+                <p class="text-xs-right my-0 caption gray">
                   {{command.author}} - {{restFiveHours(command.sendTime)}}
                 </p>
 
@@ -32,7 +32,7 @@
                   </v-chip>
                 </p>
 
-                <p class="my-0 caption">
+                <p class="my-0 caption gray">
                   {{command.deviceID}} - {{restFiveHours(command.receivedTime)}}
                 </p>
                 <p class="my-0">
