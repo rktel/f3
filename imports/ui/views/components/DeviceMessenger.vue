@@ -121,7 +121,7 @@ export default {
           break;
       }
       setTimeout(ns => {
-        window.scrollTo(0, 1000);
+        window.scrollTo(0,document.body.scrollHeight);
       }, 200);
     }
   }
