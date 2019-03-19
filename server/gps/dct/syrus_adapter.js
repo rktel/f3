@@ -119,7 +119,16 @@ function inSOCKETS_DEVICE(socket, deviceID) {
       return el.port == port}).length == 0) {
         console.log('port length == 0');
         
-      outSOCKETS_DEVICE(socket) 
+        SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
+        DEVICE = { deviceID, connectionStatus: 'off', lastDisconnectionTime : (new Date()).toISOString()}
+        deviceOff(DEVICE)
+        socket['deviceID'] = deviceID
+        socket['ip'] = ip
+        socket['port'] = port
+        SOCKETS.push(socket)
+        DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
+        deviceOn(DEVICE)
+        
     }
   }
 }
