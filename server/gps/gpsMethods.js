@@ -32,6 +32,9 @@ Meteor.methods({
         if (commandFirst) {
             const command = commandFirst.command.substr(2)
             console.log('command:', command);
+            console.log(commandObject.response);
+            console.log(commandObject.response.includes(command));
+            
             if (commandObject.response.includes(command)) {
                 console.log("here");
                 
