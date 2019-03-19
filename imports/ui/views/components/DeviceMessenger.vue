@@ -19,17 +19,15 @@
             v-bar
             :style="{height: heightDeviceMessenger-64 +'px' }"
           >
-            <v-timeline>
-              <v-timeline-item v-for="(command,index) in deviceCommands" :key="index">
-                <template v-slot:opposite>
-                  <span>{{restFiveHours(command.sendTime)}}</span>
-                </template>
-                <v-card class="elevation-2">
-                  <v-card-title class="headline">{{ command.command }}</v-card-title>
-                  <v-card-text>{{command.response}}</v-card-text>
-                </v-card>
-              </v-timeline-item>
-            </v-timeline>
+
+          <p v-for="(command,index) in deviceCommands" :key="index">
+             <v-chip color="primary" text-color="white">{{ command.command }}</v-chip>
+             <br>
+             <v-chip color="secondary" text-color="white">{{ command.response }}</v-chip>
+          </p>
+
+
+
           </div>
 
           <div class="messengerCommand">
