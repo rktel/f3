@@ -14,9 +14,10 @@
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
           <div class="messengerMsg vuebar-element" v-bar :style="{height: heightDeviceMessenger-64 +'px' }">
-            <ol>
-            <li v-for="(command,index) in deviceCommands" :key="index">{{command.command}}</li>
-            </ol>
+            <div v-for="(command,index) in deviceCommands" :key="index">
+              <div>{{command.command}}</div>
+              <div>{{command.response}}</div>
+            </div>
           </div>
           <div class="messengerCommand">
             <v-text-field
