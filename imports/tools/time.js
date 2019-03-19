@@ -1,7 +1,10 @@
 function addHours(time, hours) {
-    let dateTime = new Date(time)
-    dateTime.setHours(dateTime.getHours() + hours)
-    return dateTime.toISOString()
+    if (time.length > 0) {
+        let dateTime = new Date(time)
+        dateTime.setHours(dateTime.getHours() + hours)
+        return dateTime.toISOString()
+    } else { return '0' }
+
 }
 function sortDescDevice(array) {
     return array.sort(

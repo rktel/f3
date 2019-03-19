@@ -22,16 +22,16 @@ function Syrus(port = DEFAULT_PORT) {
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
 
     socket.on('error', Meteor.bindEnvironment(function (err) {
-      //console.log('Socket error:', socket.deviceID, err);
+      console.log('Socket error:', socket.deviceID, err);
       outSOCKETS_DEVICE(socket)
     }));
     socket.on('close', Meteor.bindEnvironment(function () {
-      //console.log('Socket closed:', socket.deviceID);
+      console.log('Socket closed:', socket.deviceID);
       outSOCKETS_DEVICE(socket)
     }));
 
     socket.on('end', Meteor.bindEnvironment(function () {
-      //console.log('Socket End:', socket.deviceID);
+      console.log('Socket End:', socket.deviceID);
       outSOCKETS_DEVICE(socket)
     }));
 
