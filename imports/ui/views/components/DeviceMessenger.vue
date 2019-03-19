@@ -22,19 +22,19 @@
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
                 <p class="text-xs-right my-0">
                   <v-chip color="secondary" text-color="white" label class="caption">
-                    <v-avatar>
-                      <v-icon right>account_circle</v-icon>
-                    </v-avatar>
                     {{ command.command }}
+          
+                      <v-icon right>account_circle</v-icon>
+    
                   </v-chip>
                 </p>
 
                 <p class="my-0">
-                  <v-chip color="teal" text-color="white" label class="caption">
+                  <v-chip color="indigo" text-color="white" label class="caption">
                     {{ command.response }}
-                    <v-avatar class="teal darken-4">
+   
                       <v-icon left>developer_board</v-icon>
-                    </v-avatar>
+      
                   </v-chip>
                 </p>
               </div>
