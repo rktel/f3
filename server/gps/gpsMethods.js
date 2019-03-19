@@ -29,11 +29,20 @@ Meteor.methods({
     updateCommand: function (commandObject) {
         //	{...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
         const initialCommands = Commands.find({ deviceID: commandObject.deviceID, status: 1 })
+        console.log('initialCommands:',initialCommands);
         if (initialCommands.length>0) {
-
+            console.log('initialCommands.length>0');
+            
             initialCommands.forEach((el,index,array)=>{
+                console.log('el:', el);
+                
                 const command = el.command.substring(2, el.command.length - 1)
+
+                console.log('command:',command);
+                
                 if (commandObject.response.includes(command)) {
+                    console.log('commandObject.response.includes(command)');
+                    
                     Commands.update({ deviceID: commandObject.deviceID, status: 1 }, { $set: { response: commandObject.response, status: 2, receivedTime: commandObject.receivedTime } })
                 }
             })
