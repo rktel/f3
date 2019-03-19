@@ -14,11 +14,8 @@
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
           <div
-            class="messengerMsg vuebar-element"
-            v-bar="{
-                  preventParentScroll: true,
-                  scrollThrottle: 30,
-              }"
+            class="messengerMsg"
+
             :style="{height: heightDeviceMessenger-100 +'px' }"
           >
             <div class="px-0 mx-0">
