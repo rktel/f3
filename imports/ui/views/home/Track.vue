@@ -17,6 +17,12 @@ export default {
     }
   },
   methods: {
+    dblclick(){
+      console.log('dblclick');
+    },
+    click(){
+      console.log('click');
+    },
     scrollToBottomDM() {
       setTimeout(ns => {
         const se = document.getElementById("scrollElements");
@@ -82,7 +88,7 @@ export default {
 
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dark two-line dense>
-          <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click>
+          <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click="click" @dblclick="dblclick">
             <v-list-tile-avatar>
               <v-icon :class="{'green': device.connectionStatus == 'on'}">developer_board</v-icon>
             </v-list-tile-avatar>
