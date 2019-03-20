@@ -122,12 +122,13 @@ export default {
 
     <section class="itemTwo">
       <v-divider></v-divider>
-      <v-toolbar flat class="pt-0 transparent" dark>Seleccion
+      <v-toolbar flat class="pt-0 transparent" dark>
+        <v-chip>Masivo</v-chip>
         <v-spacer></v-spacer>
-        <v-btn color="grey" flat class="white--text" @click="toggleFlagUFD">Agregar
+        <v-btn color="green" flat class="white--text" @click="toggleFlagUFD">
           <v-icon dark>message</v-icon>
         </v-btn>
-        <v-btn color="grey" flat class="white--text" @click="toggleFlagUFD">Agregar
+        <v-btn color="green" flat class="white--text" @click="toggleFlagUFD">
           <v-icon dark>cloud_upload</v-icon>
         </v-btn>
       </v-toolbar>
