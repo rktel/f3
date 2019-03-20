@@ -85,7 +85,7 @@ export default {
         <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
 
           <div v-bar class="vuebar-element messengerMsg" :style="{height: heightDeviceMessenger-100 +'px' }">
-            <div class="px-0 mx-0 transparent" id="scrollElements" >
+            <div class="px-0 mx-0" id="scrollElements" >
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
                 <p
                   class="text-xs-right my-0 caption grey--text"
