@@ -46,7 +46,7 @@ export default {
   },
   data: () => ({
     deviceFilter: null,
-    deviceSelected: null,
+    // deviceSelected: null,
     deviceDialog: false
   }),
   computed: {
@@ -59,6 +59,9 @@ export default {
     },
     heightList() {
       return this.$store.getters.heightList;
+    },
+    devicesArraySelected(){
+      return this.$store.getters.devicesArraySelected;
     }
   }
 };
@@ -114,6 +117,13 @@ export default {
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-divider></v-divider>
+
+<div>
+  <ol>
+    <li v-for="(element, index) in devicesArraySelected" :key="index">{{element.deviceID}}</li>
+  </ol>
+</div>
+
     </section>
   </section>
 </template>
