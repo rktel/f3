@@ -17,6 +17,10 @@ export default {
     }
   },
   methods: {
+    masiveMessage() {
+      console.log(this.devicesArraySelected);
+    },
+    masiveScript() {},
     selectDevice(device) {
       this.$store.commit("setDAS", device);
     },
@@ -38,18 +42,8 @@ export default {
       this.scrollToBottomDM();
     }
   },
-  mounted() {
-    /*
-    stSyrus.on("DEVICES_ON", devicesOn => {
-      this.DEVICES_ON = devicesOn;
-      console.log(devicesOn);
-    });
-    stSyrus.emit("GET_DEVICES_ON");
-    */
-  },
   data: () => ({
     deviceFilter: null,
-    // deviceSelected: null,
     deviceDialog: false
   }),
   computed: {
@@ -125,11 +119,11 @@ export default {
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-chip>Masivo</v-chip>
         <v-spacer></v-spacer>
-        <v-btn color="green" flat class="white--text" @click="">
+        <v-btn color="green" flat class="white--text" @click="masiveMessage">
           <v-icon dark>message</v-icon>
         </v-btn>
-        <v-btn color="green" flat class="white--text" @click="">
-          <v-icon dark>cloud_upload</v-icon>
+        <v-btn color="green" flat class="white--text" @click="masiveScript">
+          <v-icon dark>insert_drive_file</v-icon>
         </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
