@@ -24,6 +24,8 @@ export default {
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
       this.$store.commit("setDeviceMessenger", device);
+      const se = document.getElementById("scrollElements");
+      se.scrollTop = se.scrollHeight;
     }
   },
   mounted() {

@@ -71,7 +71,7 @@ import { Commands } from "../../../api/collections.js";
 import { addHours } from "../../../tools/time.js";
 export default {
   mounted(){
-    setInterval(ns=>{this.scrollToBottom()},1000)
+   // setInterval(ns=>{this.scrollToBottom()},1000)
   },
   meteor: {
     $subscribe: {
@@ -103,8 +103,8 @@ export default {
   methods: {
     scrollToBottom() {
       const se = document.getElementById("scrollElements");
-     // console.log(se);
       se.scrollTop = se.scrollHeight;
+     // console.log(se);
     },
     restFiveHours(time) {
       if (time) return addHours(time, -5);
