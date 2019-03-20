@@ -13,8 +13,12 @@
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-          <div class="messengerMsg vuebar-element" v-bar :style="{height: heightDeviceMessenger-100 +'px' }">
-            <div class="px-0 mx-0">
+          <div
+            class="messengerMsg vuebar-element"
+            v-bar
+            :style="{height: heightDeviceMessenger-100 +'px' }"
+          >
+            <div class="px-0 mx-0" id="scrollElements">
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
                 <p
                   class="text-xs-right my-0 caption grey--text"
@@ -116,7 +120,8 @@ export default {
         default:
           break;
       }
-
+      const se = document.getElementById("scrollElements");
+      se.scrollTop = se.scrollHeight;
     }
   }
 };
