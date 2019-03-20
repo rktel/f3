@@ -13,7 +13,8 @@ export default new Vuex.Store({
         flagUFD: false,
         flagUAD: false,
         flagDMD: false,
-        deviceMessenger: {}
+        deviceMessenger: {},
+        devicesArraySelected: []
     },
     getters: {
         persona: state => state.personaProfile,
@@ -32,7 +33,8 @@ export default new Vuex.Store({
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
         flagDMD: state => state.flagDMD,
-        deviceMessenger: state => state.deviceMessenger
+        deviceMessenger: state => state.deviceMessenger,
+        devicesArraySelected: state => state.devicesArraySelected
     },
     mutations: {
         setPersonaProfile: (state, personaProfile) => {
@@ -52,6 +54,16 @@ export default new Vuex.Store({
         },
         setDeviceMessenger: (state, deviceMessenger) => {
             state.deviceMessenger = deviceMessenger
+        },
+        setDAS:(state, device) =>{
+            if(state.devicesArraySelected.filter(el => el.deviceID == device.deviceID).length == 0){
+                state.devicesArraySelected.push(device)
+            }
+        },
+        deleteDAS:(state,device) =>{
+            if(state.devicesArraySelected.filter(el => el.deviceID == device.deviceID).length == 1){
+                state.devicesArraySelected = state.devicesArraySelected.filter(el => el.deviceID !== device.deviceID)
+            }
         }
     },
     actions: {}
