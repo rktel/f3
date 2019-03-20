@@ -103,7 +103,7 @@ export default {
   methods: {
     scrollToBottom() {
       const se = document.getElementById("scrollElements");
-      console.log(se);
+     // console.log(se);
       se.scrollTop = se.scrollHeight;
     },
     restFiveHours(time) {
