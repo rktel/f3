@@ -17,9 +17,11 @@ export default {
     }
   },
   methods: {
-    selectDevice(device){
-      this.$store.commit("setDAS", device)
-      this.$store.commit("deleteDAS", device)
+    selectDevice(device) {
+      this.$store.commit("setDAS", device);
+    },
+    deleteSelectedDevice(device) {
+      this.$store.commit("deleteDAS", device);
     },
     scrollToBottomDM() {
       setTimeout(ns => {
@@ -61,7 +63,7 @@ export default {
     heightList() {
       return this.$store.getters.heightList;
     },
-    devicesArraySelected(){
+    devicesArraySelected() {
       return this.$store.getters.devicesArraySelected;
     }
   }
@@ -89,7 +91,13 @@ export default {
 
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dark two-line dense>
-          <v-list-tile v-for="device in filteredDevice" :key="device.deviceID" avatar @click @dblclick="selectDevice(device)">
+          <v-list-tile
+            v-for="device in filteredDevice"
+            :key="device.deviceID"
+            avatar
+            @click
+            @dblclick="selectDevice(device)"
+          >
             <v-list-tile-avatar>
               <v-icon :class="{'green': device.connectionStatus == 'on'}">developer_board</v-icon>
             </v-list-tile-avatar>
@@ -119,12 +127,15 @@ export default {
       </v-toolbar>
       <v-divider></v-divider>
 
-<div>
-  <ol>
-    <li v-for="(element, index) in devicesArraySelected" :key="index">{{element.deviceID}}</li>
-  </ol>
-</div>
-
+      <div>
+        <ol>
+          <li v-for="(element, index) in devicesArraySelected" :key="index">
+            <div class="text-xs-center">
+              <v-chip close @click="deleteSelectedDevice(element)">{{element.deviceID}}</v-chip>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
   </section>
 </template>
