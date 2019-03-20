@@ -70,8 +70,8 @@ import { stSyrus } from "../../../api/streamers.js";
 import { Commands } from "../../../api/collections.js";
 import { addHours } from "../../../tools/time.js";
 export default {
-  mounted(){
-   // setInterval(ns=>{this.scrollToBottom()},1000)
+  mounted() {
+    // setInterval(ns=>{this.scrollToBottom()},1000)
   },
   meteor: {
     $subscribe: {
@@ -101,10 +101,11 @@ export default {
     deviceMsg: null
   }),
   methods: {
-    scrollToBottom() {
-      const se = document.getElementById("scrollElements");
-      se.scrollTop = se.scrollHeight;
-     // console.log(se);
+    scrollToBottomDM() {
+      setTimeout(ns => {
+        const se = document.getElementById("scrollElements");
+        se.scrollTop = se.scrollHeight;
+      }, 450);
     },
     restFiveHours(time) {
       if (time) return addHours(time, -5);
@@ -128,7 +129,7 @@ export default {
         default:
           break;
       }
-
+      this.scrollToBottomDM();
     }
   }
 };

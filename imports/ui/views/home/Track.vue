@@ -1,5 +1,4 @@
 <script>
-
 import { Devices } from "../../../api/collections.js";
 import { addHours, sortDescDevice } from "../../../tools/time.js";
 import DeviceMessenger from "../components/DeviceMessenger";
@@ -18,16 +17,19 @@ export default {
     }
   },
   methods: {
+    scrollToBottomDM() {
+      setTimeout(ns => {
+        const se = document.getElementById("scrollElements");
+        se.scrollTop = se.scrollHeight;
+      }, 450);
+    },
     restFiveHours(time) {
-      if(time) return addHours(time, -5);
+      if (time) return addHours(time, -5);
     },
     toggleFlagDMD(device) {
       this.$store.commit("toggleFlagDMD");
       this.$store.commit("setDeviceMessenger", device);
-      setTimeout(ns=>{      const se = document.getElementById("scrollElements");
-      se.scrollTop = se.scrollHeight;
-      console.log('Hello');
-      },2000)
+      this.scrollToBottomDM();
     }
   },
   mounted() {
