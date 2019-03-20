@@ -70,6 +70,9 @@ import { stSyrus } from "../../../api/streamers.js";
 import { Commands } from "../../../api/collections.js";
 import { addHours } from "../../../tools/time.js";
 export default {
+  mounted(){
+    setTimeout(ns=>{this.scrollToBottom()},450)
+  },
   meteor: {
     $subscribe: {
       deviceCommands: []
@@ -98,6 +101,10 @@ export default {
     deviceMsg: null
   }),
   methods: {
+    scrollToBottom() {
+      const se = document.getElementById("scrollElements");
+      se.scrollTop = se.scrollHeight;
+    },
     restFiveHours(time) {
       if (time) return addHours(time, -5);
     },
@@ -120,8 +127,7 @@ export default {
         default:
           break;
       }
-      const se = document.getElementById("scrollElements");
-      se.scrollTop = se.scrollHeight;
+
     }
   }
 };
