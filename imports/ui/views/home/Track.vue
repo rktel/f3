@@ -131,7 +131,10 @@ export default {
         <ol>
           <li v-for="(element, index) in devicesArraySelected" :key="index">
             <div class="text-xs-center">
-              <v-chip close @click="deleteSelectedDevice(element)">{{element.deviceID}}</v-chip>
+              <v-chip color="secondary" text-color="white" label class="caption">
+                {{element.deviceID}}
+                <v-icon right @click="deleteSelectedDevice(element)">close</v-icon>
+              </v-chip>
             </div>
           </li>
         </ol>
