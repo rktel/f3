@@ -83,7 +83,7 @@ export default {
         </v-toolbar>
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
-          <div v-bar class="vuebar-element messengerMsg">
+          <div v-bar class="vuebar-element messengerMsg" :style="{height: heightDeviceMessenger +'px' }">
             <div class="px-0 mx-0" id="scrollElements">
               <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
                 <p
