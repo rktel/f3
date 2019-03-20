@@ -19,6 +19,7 @@ export default {
   methods: {
     selectDevice(device){
       this.$store.commit("setDAS", device)
+      this.$store.commit("deleteDAS", device)
     },
     scrollToBottomDM() {
       setTimeout(ns => {
