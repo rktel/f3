@@ -84,9 +84,9 @@ export default {
 
         <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
 
-          <div v-bar class="vuebar-element messengerMsg" :style="{height: heightDeviceMessenger-100 +'px',overflowY:'hidden' }">
-            <div class="px-0 mx-0" id="scrollElements" :style="{overflowY:'hidden' }">
-              <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
+          <div v-bar class="vuebar-element messengerMsg" :style="{height: heightDeviceMessenger-100 +'px' }">
+            <div class="px-0 mx-0" id="scrollElements" >
+              <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0" :style="{overflowY:'hidden' }">
                 <p
                   class="text-xs-right my-0 caption grey--text"
                 >{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
