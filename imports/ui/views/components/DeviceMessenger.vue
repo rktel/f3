@@ -1,70 +1,3 @@
-<template>
-  <v-layout row justify-center>
-    <v-dialog v-model="flagDMD" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <v-card>
-        <v-toolbar dark color="primary">
-          <v-toolbar-title>{{deviceMessenger.deviceID}}</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn icon dark @click="toggleFlagDMD">
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-
-        <section class="messengerContent" :style="{height: heightDeviceMessenger+'px' }">
-          <div
-            class="messengerMsg vuebar-element"
-            v-bar
-            :style="{height: heightDeviceMessenger-100 +'px' }"
-          >
-            <div class="px-0 mx-0" id="scrollElements">
-              <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
-                <p
-                  class="text-xs-right my-0 caption grey--text"
-                >{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
-
-                <p class="text-xs-right my-0">
-                  <v-chip color="secondary" text-color="white" label class="caption">
-                    {{ command.command }}
-                    <v-icon right>account_circle</v-icon>
-                  </v-chip>
-                </p>
-
-                <p
-                  class="my-0 caption ml-2 grey--text text--darken-3"
-                >{{command.deviceID}} - {{restFiveHours(command.receivedTime)}}</p>
-                <p class="my-0">
-                  <v-chip color="white" text-color="black" label class="caption">
-                    <v-avatar>
-                      <v-icon>developer_board</v-icon>
-                    </v-avatar>
-                    {{ command.response }}
-                  </v-chip>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="messengerCommand">
-            <v-text-field
-              class="mx-2"
-              v-model="deviceMsg"
-              :append-outer-icon="'send'"
-              clearable
-              label="Message"
-              type="text"
-              @keyup="toUppercase"
-              @keyup.enter.native="sendMsg"
-              @click:append-outer="sendMsg"
-            ></v-text-field>
-          </div>
-        </section>
-      </v-card>
-    </v-dialog>
-  </v-layout>
-</template>
-
 <script>
 import { stSyrus } from "../../../api/streamers.js";
 import { Commands } from "../../../api/collections.js";
@@ -135,5 +68,66 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<template>
+  <v-layout row justify-center>
+    <v-dialog v-model="flagDMD" fullscreen hide-overlay transition="dialog-bottom-transition">
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>{{deviceMessenger.deviceID}}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn icon dark @click="toggleFlagDMD">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <section class="messengerContent" >
+          <div v-bar class="vuebar-element"  :style="{height: heightDeviceMessenger-100 +'px' }">
+            <div class="px-0 mx-0" id="scrollElements">
+              <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
+                <p
+                  class="text-xs-right my-0 caption grey--text"
+                >{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
+
+                <p class="text-xs-right my-0">
+                  <v-chip color="secondary" text-color="white" label class="caption">
+                    {{ command.command }}
+                    <v-icon right>account_circle</v-icon>
+                  </v-chip>
+                </p>
+
+                <p
+                  class="my-0 caption ml-2 grey--text text--darken-3"
+                >{{command.deviceID}} - {{restFiveHours(command.receivedTime)}}</p>
+                <p class="my-0">
+                  <v-chip color="white" text-color="black" label class="caption">
+                    <v-avatar>
+                      <v-icon>developer_board</v-icon>
+                    </v-avatar>
+                    {{ command.response }}
+                  </v-chip>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="messengerCommand">
+            <v-text-field
+              class="mx-2"
+              v-model="deviceMsg"
+              :append-outer-icon="'send'"
+              clearable
+              label="Message"
+              type="text"
+              @keyup="toUppercase"
+              @keyup.enter.native="sendMsg"
+              @click:append-outer="sendMsg"
+            ></v-text-field>
+          </div>
+        </section>
+      </v-card>
+    </v-dialog>
+  </v-layout>
+</template>
+
