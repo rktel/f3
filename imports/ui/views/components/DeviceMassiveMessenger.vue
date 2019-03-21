@@ -51,6 +51,7 @@ export default {
           </v-toolbar-items>
         </v-toolbar>
         <section>
+          {{[devicesArraySelected.length]}}
           <v-chip
             v-for="(device,index) in devicesArraySelected"
             :key="index"
@@ -62,6 +63,7 @@ export default {
             {{ device.deviceID }}
             <v-icon right>developer_board</v-icon>
           </v-chip>
+          
         </section>
       </v-card>
     </v-dialog>
