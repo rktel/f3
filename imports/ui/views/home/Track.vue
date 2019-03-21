@@ -126,12 +126,12 @@ export default {
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-chip>Masivo</v-chip>
         <v-spacer></v-spacer>
-        <v-btn color="green" flat class="white--text" @click="toggleFlagDMMD">
+        <!--v-btn color="green" flat class="white--text" @click="toggleFlagDMMD">
           <v-icon dark>message</v-icon>
-        </v-btn>
-        <v-btn color="green" flat class="white--text" @click="toggleFlagDMSD">
+        </v-btn-->
+        <!--v-btn color="green" flat class="white--text" @click="toggleFlagDMSD">
           <v-icon dark>insert_drive_file</v-icon>
-        </v-btn>
+        </v-btn-->
       </v-toolbar>
       <v-divider></v-divider>
 
