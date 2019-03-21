@@ -2,11 +2,13 @@
 import { Devices } from "../../../api/collections.js";
 import { addHours, sortDescDevice } from "../../../tools/time.js";
 import DeviceMessenger from "../components/DeviceMessenger";
+import DeviceMassiveMessenger from "../components/DeviceMassiveMessenger";
 
 export default {
   name: "Track",
   components: {
-    DeviceMessenger
+    DeviceMessenger,
+    DeviceMassiveMessenger
   },
   meteor: {
     $subscribe: {
@@ -110,6 +112,7 @@ export default {
         </v-list>
       </div>
       <device-messenger></device-messenger>
+      <device-massive-messenger></device-massive-messenger>
     </section>
 
     <section class="itemTwo">
