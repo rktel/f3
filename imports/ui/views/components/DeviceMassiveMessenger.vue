@@ -40,7 +40,7 @@ export default {
     <v-dialog v-model="flagDMMD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-toolbar-title>Massive</v-toolbar-title>
+          <v-toolbar-title>Masivo <v-icon>message</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDMMD">
