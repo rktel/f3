@@ -7,5 +7,5 @@ Meteor.publish('devices', () => {
     return Devices.find({}, { sort: { "lastDisconnectionTime": 1 } })
 })
 Meteor.publish('deviceCommands', () => {
-    return Commands.find({}, { limit: 10, sort: { "sendTime": 1 } })
+    return Commands.find({}, { sort: { "sendTime": 1 }, limit: 10 })
 })
