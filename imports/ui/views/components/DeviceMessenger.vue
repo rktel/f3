@@ -70,7 +70,7 @@ export default {
     <v-dialog v-model="flagDMD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-toolbar-title><v-icon>message</v-icon>{{deviceMessenger.deviceID}}</v-toolbar-title>
+          <v-toolbar-title><v-icon>message</v-icon> {{deviceMessenger.deviceID}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDMD">
