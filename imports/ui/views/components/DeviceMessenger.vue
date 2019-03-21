@@ -3,9 +3,6 @@ import { stSyrus } from "../../../api/streamers.js";
 import { Commands } from "../../../api/collections.js";
 import { addHours } from "../../../tools/time.js";
 export default {
-  mounted() {
-    // setInterval(ns=>{this.scrollToBottom()},1000)
-  },
   meteor: {
     $subscribe: {
       deviceCommands: []

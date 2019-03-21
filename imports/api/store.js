@@ -13,6 +13,7 @@ export default new Vuex.Store({
         flagUFD: false,
         flagUAD: false,
         flagDMD: false,
+        flagDMMD: false,
         deviceMessenger: {},
         devicesArraySelected: []
     },
@@ -33,6 +34,7 @@ export default new Vuex.Store({
         flagUFD: state => state.flagUFD,
         flagUAD: state => state.flagUAD,
         flagDMD: state => state.flagDMD,
+        flagDMMD: state => state.flagDMMD,
         deviceMessenger: state => state.deviceMessenger,
         devicesArraySelected: state => state.devicesArraySelected
     },
@@ -55,6 +57,9 @@ export default new Vuex.Store({
         setDeviceMessenger: (state, deviceMessenger) => {
             state.deviceMessenger = deviceMessenger
         },
+        toggleFlagDMMD:(state) =>{
+            state.flagDMMD = !state.flagDMMD
+        },
         setDAS:(state, device) =>{
             if(state.devicesArraySelected.filter(el => el.deviceID == device.deviceID).length == 0){
                 state.devicesArraySelected.push(device)
@@ -64,7 +69,7 @@ export default new Vuex.Store({
             if(state.devicesArraySelected.filter(el => el.deviceID == device.deviceID).length == 1){
                 state.devicesArraySelected = state.devicesArraySelected.filter(el => el.deviceID !== device.deviceID)
             }
-        }
+        },
     },
     actions: {}
 })
