@@ -94,7 +94,7 @@ export default {
           </v-toolbar-items>
         </v-toolbar>
         <section>
-          <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
+          <section class="messengerContent" :style="{height: heightDeviceMessenger-100 +'px' }">
             <div
               v-bar
               class="vuebar-element messengerMsg"
