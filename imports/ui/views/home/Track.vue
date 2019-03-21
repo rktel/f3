@@ -3,12 +3,14 @@ import { Devices } from "../../../api/collections.js";
 import { addHours, sortDescDevice } from "../../../tools/time.js";
 import DeviceMessenger from "../components/DeviceMessenger";
 import DeviceMassiveMessenger from "../components/DeviceMassiveMessenger";
+import DeviceMassiveScript from "../components/DeviceMassiveScript";
 
 export default {
   name: "Track",
   components: {
     DeviceMessenger,
-    DeviceMassiveMessenger
+    DeviceMassiveMessenger,
+    DeviceMassiveScript
   },
   meteor: {
     $subscribe: {
@@ -41,6 +43,9 @@ export default {
     },
     toggleFlagDMMD() {
       this.$store.commit("toggleFlagDMMD");
+    },
+    toggleFlagDMSD() {
+      this.$store.commit("toggleFlagDMSD");
     }
   },
   data: () => ({
@@ -113,6 +118,7 @@ export default {
       </div>
       <device-messenger></device-messenger>
       <device-massive-messenger></device-massive-messenger>
+      <device-massive-script></device-massive-script>
     </section>
 
     <section class="itemTwo">
@@ -123,7 +129,7 @@ export default {
         <v-btn color="green" flat class="white--text" @click="toggleFlagDMMD">
           <v-icon dark>message</v-icon>
         </v-btn>
-        <v-btn color="green" flat class="white--text" @click="">
+        <v-btn color="green" flat class="white--text" @click="toggleFlagDMSD">
           <v-icon dark>insert_drive_file</v-icon>
         </v-btn>
       </v-toolbar>
