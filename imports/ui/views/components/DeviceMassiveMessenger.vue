@@ -50,7 +50,19 @@ export default {
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <section>{{devicesArraySelected}}</section>
+        <section>
+          <v-chip
+            v-for="(device,index) in devicesArraySelected"
+            :key="index"
+            color="secondary"
+            text-color="white"
+            label
+            class="caption"
+          >
+            {{ device.deviceID }}
+            <v-icon right>developer_board</v-icon>
+          </v-chip>
+        </section>
       </v-card>
     </v-dialog>
   </v-layout>
