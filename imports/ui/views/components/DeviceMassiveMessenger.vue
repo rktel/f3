@@ -94,25 +94,24 @@ export default {
           </v-toolbar-items>
         </v-toolbar>
         <section>
-          {{[devicesArraySelected.length]}}
-          <v-chip
-            v-for="(device,index) in devicesArraySelected"
-            :key="index"
-            color="secondary"
-            text-color="white"
-            label
-            class="caption"
-          >
-            {{ device.deviceID }}
-            <v-icon right>developer_board</v-icon>
-          </v-chip>
-
-          <section class="messengerContent" :style="{height: heightDeviceMessenger-100 +'px' }">
+          <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
             <div
               v-bar
               class="vuebar-element messengerMsg"
               :style="{height: heightDeviceMessenger-100 +'px' }"
             >
+              {{[devicesArraySelected.length]}}
+              <v-chip
+                v-for="(device,index) in devicesArraySelected"
+                :key="index"
+                color="secondary"
+                text-color="white"
+                label
+                class="caption"
+              >
+                {{ device.deviceID }}
+                <v-icon right>developer_board</v-icon>
+              </v-chip>
               <div class="px-0 mx-0" id="scrollElements">
                 <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
                   <p
