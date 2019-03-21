@@ -103,10 +103,10 @@ export default {
  
               <div class="px-0 mx-0" id="scrollElements">
                 <div v-for="(command,index) in deviceCommands" :key="index" class="px-0 mx-0">
-                  
-                  <p v-if="index == 0"  class="text-xs-right my-0 caption grey--text">{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
 
-                  <p v-if="index == 0" class="text-xs-right my-0">
+                  <p class="text-xs-right my-0 caption grey--text">{{command.author}} - {{restFiveHours(command.sendTime)}}</p>
+
+                  <p class="text-xs-right my-0">
                     <v-chip color="secondary" text-color="white" label class="caption">
                       {{ command.command }}
                       <v-icon right>account_circle</v-icon>
