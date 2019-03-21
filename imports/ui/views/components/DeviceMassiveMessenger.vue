@@ -37,6 +37,9 @@ export default {
     deviceMsg: null
   }),
   methods: {
+    restFiveHours(time) {
+      if (time) return addHours(time, -5);
+    },
     toggleFlagDMMD(device) {
       this.$store.commit("toggleFlagDMMD");
     },
