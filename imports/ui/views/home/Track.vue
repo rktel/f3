@@ -113,6 +113,11 @@ export default {
                 <v-icon color="grey lighten-1">message</v-icon>
               </v-btn>
             </v-list-tile-action>
+            <v-list-tile-action>
+              <v-btn icon ripple @click="toggleFlagDMD(device)">
+                <v-icon color="grey lighten-1">insert_drive_file</v-icon>
+              </v-btn>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </div>
