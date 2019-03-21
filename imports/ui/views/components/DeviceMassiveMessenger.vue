@@ -98,7 +98,7 @@ export default {
             <div
               v-bar
               class="vuebar-element messengerMsg"
-              :style="{height: heightDeviceMessenger-120 +'px' }"
+              :style="{height: heightDeviceMessenger-200 +'px' }"
             >
               {{[devicesArraySelected.length]}}
               <v-chip
