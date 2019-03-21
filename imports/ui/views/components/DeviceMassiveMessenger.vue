@@ -8,7 +8,7 @@ export default {
       deviceCommands: []
     },
     deviceCommands() {
-        /*
+      /*
       if (this.deviceMessenger && this.deviceMessenger.deviceID) {
         return Commands.find({ deviceID: this.deviceMessenger.deviceID });
       }
@@ -22,15 +22,15 @@ export default {
     flagDMMD() {
       return this.$store.getters.flagDMMD;
     },
+    devicesArraySelected() {
+      return this.$store.getters.devicesArraySelected;
+    }
   },
-  data: () => ({
-    
-  }),
+  data: () => ({}),
   methods: {
     toggleFlagDMMD(device) {
       this.$store.commit("toggleFlagDMMD");
-    },
-
+    }
   }
 };
 </script>
@@ -40,7 +40,9 @@ export default {
     <v-dialog v-model="flagDMMD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-toolbar-title>Masivo <v-icon>message</v-icon></v-toolbar-title>
+          <v-toolbar-title>Masivo
+            <v-icon>message</v-icon>
+          </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDMMD">
@@ -48,8 +50,7 @@ export default {
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-
-
+        <section>{{devicesArraySelected}}</section>
       </v-card>
     </v-dialog>
   </v-layout>

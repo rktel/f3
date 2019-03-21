@@ -18,7 +18,7 @@ export default {
       return this.$store.getters.persona;
     },
     flagDMD() {
-      return this.$store.getters.flagDMD;
+      return thtis.$store.getters.flagDMD;
     },
     deviceMessenger() {
       return this.$store.getters.deviceMessenger;
