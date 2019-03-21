@@ -13,7 +13,7 @@ Meteor.methods({
     },
     devicesReset: function () {
         console.log('devicesReset');
-        Devices.update({  }, { $set: { connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() } }, { $multi: true })
+        Devices.updateMany({  }, { $set: { connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() } })
     },
     deviceOn: function (device) {
         const { deviceID, appVersion, protocol, connectionStatus, connectionTime, ip, port } = device
