@@ -107,7 +107,7 @@ export default {
             <v-icon right>developer_board</v-icon>
           </v-chip>
 
-          <section class="messengerContent" :style="{height: heightDeviceMessenger +'px' }">
+          <section class="messengerContent" :style="{height: heightDeviceMessenger-100 +'px' }">
             <div
               v-bar
               class="vuebar-element messengerMsg"
