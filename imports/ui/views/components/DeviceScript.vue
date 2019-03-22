@@ -61,10 +61,10 @@ export default {
               <v-select :items="['A','B','C','D']" label="Scripts" v-model="scriptSelect"></v-select>
             </v-card-title>
 
-            <v-card-text>
+            <v-layout align-center justify-end>
               <v-btn>Enviar</v-btn>
-            </v-card-text>
-
+            </v-layout>
+            
             <v-card-actions>
               <v-list-tile class="grow">
                 <v-list-tile-avatar color="grey darken-3">
