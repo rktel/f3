@@ -19,7 +19,8 @@ export default {
     }
   },
   data: () => ({
-    value: 0
+    value: 0,
+    scriptSelect: null
   }),
   methods: {
     scrollToBottomDM() {
@@ -60,7 +61,7 @@ export default {
                 {{deviceScript.deviceID}}
               </v-toolbar-title>
             </v-toolbar>
-            
+
             <v-card-title>
               <v-select :items="['A','B','C','D']" label="Scripts" v-model="scriptSelect"></v-select>
             </v-card-title>
