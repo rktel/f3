@@ -61,9 +61,8 @@ export default {
               <v-select :items="['A','B','C','D']" label="Standard" v-model="scriptSelect"></v-select>
             </v-card-title>
 
-            <v-card-text
-              class="headline font-weight-bold"
-            >"Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."</v-card-text>
+            <v-card-text class="headline font-weight-bold"
+            ></v-card-text>
 
             <v-card-actions>
               <v-list-tile class="grow">
@@ -78,7 +77,7 @@ export default {
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>Evan You</v-list-tile-title>
+                  <v-list-tile-title>{{persona.firstname}} {persona.lastname}</v-list-tile-title>
                 </v-list-tile-content>
 
                 <v-layout align-center justify-end>
