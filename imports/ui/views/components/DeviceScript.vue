@@ -44,7 +44,7 @@ export default {
   <v-layout row justify-center>
     <v-dialog v-model="flagDSD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
-        <v-toolbar dark color="primary">
+        <v-toolbar dark>
           <v-toolbar-title></v-toolbar-title>
           
           <v-toolbar-items>
@@ -55,8 +55,8 @@ export default {
           <v-spacer></v-spacer>
         </v-toolbar>
         <section>
-          <v-card class="mx-auto" color="#26c6da" dark max-width="400">
-            <v-toolbar dark>
+          <v-card class="mx-auto" dark max-width="400">
+            <v-toolbar>
               <v-toolbar-title>
                 <v-icon>insert_drive_file</v-icon>
                 {{deviceScript.deviceID}}
