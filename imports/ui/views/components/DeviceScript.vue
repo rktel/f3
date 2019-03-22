@@ -58,11 +58,12 @@ export default {
         <section>
           <v-card class="mx-auto" color="#26c6da" dark max-width="400">
             <v-card-title>
-              <v-select :items="['A','B','C','D']" label="Standard" v-model="scriptSelect"></v-select>
+              <v-select :items="['A','B','C','D']" label="Scripts" v-model="scriptSelect"></v-select>
             </v-card-title>
 
-            <v-card-text class="headline font-weight-bold"
-            ></v-card-text>
+            <v-card-text>
+              <v-btn>Enviar</v-btn>
+            </v-card-text>
 
             <v-card-actions>
               <v-list-tile class="grow">
