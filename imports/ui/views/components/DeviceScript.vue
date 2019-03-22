@@ -37,9 +37,6 @@ export default {
       this.$store.commit("toggleFlagDSD");
       this.$store.commit("setDeviceScript", {});
     },
-    toUppercase() {
-      if (this.deviceMsg) this.deviceMsg = this.deviceMsg.trim().toUpperCase();
-    },
 
   }
 };
