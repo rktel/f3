@@ -12,13 +12,12 @@ export default {
     }
   },
   methods: {
-
+    fileChange(...arg){
+      console.log(...arg);
+    }
   },
-  data: () => ({
-
-  }),
+  data: () => ({}),
   computed: {
-
     heightList() {
       return this.$store.getters.heightList;
     }
@@ -30,13 +29,7 @@ export default {
     <section class="itemOne">
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
-        <v-text-field
-          label="Buscar script"
-          prepend-icon="search"
-          single-line
-
-          clearable
-        ></v-text-field>
+        <v-text-field label="Buscar script" prepend-icon="search" single-line clearable></v-text-field>
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>
@@ -61,18 +54,20 @@ export default {
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
         <v-spacer></v-spacer>
-        <v-btn color="green" flat class="white--text">Agregar
+        <input v-show="false" ref="inputUpload" type="file" @change="fileChange">
+        <v-btn color="green" flat class="white--text" @click="$refs.inputUpload.click()">
+          Agregar
           <v-icon right dark>insert_drive_file</v-icon>
         </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
       <v-card class="ma-2" flat>
-        <v-card-title class="py-2">
-        </v-card-title>
+        <v-card-title class="py-2"></v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo">Ocultar</v-btn>
-          <v-btn flat color="pink">Eliminar
+          <v-btn flat color="pink">
+            Eliminar
             <v-icon right dark>insert_drive_file</v-icon>
           </v-btn>
         </v-card-actions>
