@@ -17,6 +17,7 @@ export default new Vuex.Store({
         flagDMMD: false,
         flagDMSD: false,
         deviceMessenger: {},
+        deviceScript: {},
         devicesArraySelected: []
     },
     getters: {
@@ -40,6 +41,7 @@ export default new Vuex.Store({
         flagDMSD: state => state.flagDMSD,
         flagDSD: state => state.flagDSD,
         deviceMessenger: state => state.deviceMessenger,
+        deviceScript: state => state.deviceScript,
         devicesArraySelected: state => state.devicesArraySelected
     },
     mutations: {
@@ -63,6 +65,9 @@ export default new Vuex.Store({
         },
         setDeviceMessenger: (state, deviceMessenger) => {
             state.deviceMessenger = deviceMessenger
+        },
+        setDeviceScript: (state, deviceScript) => {
+            state.deviceScript = deviceScript
         },
         toggleFlagDMMD:(state) =>{
             state.flagDMMD = !state.flagDMMD
