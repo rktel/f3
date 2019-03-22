@@ -77,7 +77,7 @@ export default {
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{persona.firstname}} {persona.lastname}</v-list-tile-title>
+                  <v-list-tile-title>{{persona.firstname}} {{persona.lastname}}</v-list-tile-title>
                 </v-list-tile-content>
 
                 <v-layout align-center justify-end>
