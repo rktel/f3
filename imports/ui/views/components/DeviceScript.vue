@@ -56,7 +56,7 @@ export default {
         </v-toolbar>
         <section>
           <v-card class="mx-auto" dark max-width="400">
-            <v-toolbar>
+            <v-toolbar color="transparent">
               <v-toolbar-title>
                 <v-icon>insert_drive_file</v-icon>
                 {{deviceScript.deviceID}}
