@@ -77,15 +77,11 @@ export default {
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{persona.firstname}} {{persona.lastname}}</v-list-tile-title>
+                  <v-list-tile-title>{{45}} {{200}}</v-list-tile-title>
                 </v-list-tile-content>
 
                 <v-layout align-center justify-end>
-                  <v-icon class="mr-1">mdi-heart</v-icon>
-                  <span class="subheading mr-2">256</span>
-                  <span class="mr-1">·</span>
-                  <v-icon class="mr-1">mdi-share-variant</v-icon>
-                  <span class="subheading">45</span>
+                  <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
                 </v-layout>
               </v-list-tile>
             </v-card-actions>
