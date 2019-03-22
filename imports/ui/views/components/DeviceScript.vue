@@ -46,16 +46,17 @@ export default {
       <v-card>
         <v-toolbar dark color="primary">
           <v-toolbar-title></v-toolbar-title>
-          <v-spacer></v-spacer>
+          
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDSD">
-              <v-icon>close</v-icon>
+              <v-icon>arrow_back</v-icon>
             </v-btn>
           </v-toolbar-items>
+          <v-spacer></v-spacer>
         </v-toolbar>
         <section>
           <v-card class="mx-auto" color="#26c6da" dark max-width="400">
-            <v-toolbar dark color="primary">
+            <v-toolbar dark>
               <v-toolbar-title>
                 <v-icon>insert_drive_file</v-icon>
                 {{deviceScript.deviceID}}
