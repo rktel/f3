@@ -4,13 +4,15 @@ import { addHours, sortDescDevice } from "../../../tools/time.js";
 import DeviceMessenger from "../components/DeviceMessenger";
 import DeviceMassiveMessenger from "../components/DeviceMassiveMessenger";
 import DeviceMassiveScript from "../components/DeviceMassiveScript";
+import DeviceScript from "../components/DeviceScript";
 
 export default {
   name: "Track",
   components: {
     DeviceMessenger,
     DeviceMassiveMessenger,
-    DeviceMassiveScript
+    DeviceMassiveScript,
+    DeviceScript
   },
   meteor: {
     $subscribe: {
@@ -119,7 +121,7 @@ export default {
               </v-btn>
             </v-list-tile-action>
             <v-list-tile-action>
-              <v-btn icon ripple @click="toggleFlagDsD(device)">
+              <v-btn icon ripple @click="toggleFlagDSD(device)">
                 <v-icon color="grey lighten-1">insert_drive_file</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -129,6 +131,7 @@ export default {
       <device-messenger></device-messenger>
       <device-massive-messenger></device-massive-messenger>
       <device-massive-script></device-massive-script>
+      <device-script></device-script>
     </section>
 
     <section class="itemTwo">
