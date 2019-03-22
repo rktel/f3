@@ -44,10 +44,7 @@ export default {
     <v-dialog v-model="flagDSD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-toolbar-title>
-            <v-icon>insert_drive_file</v-icon>
-            {{deviceScript.deviceID}}
-          </v-toolbar-title>
+          <v-toolbar-title></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDSD">
@@ -57,14 +54,21 @@ export default {
         </v-toolbar>
         <section>
           <v-card class="mx-auto" color="#26c6da" dark max-width="400">
+            <v-toolbar dark color="primary">
+              <v-toolbar-title>
+                <v-icon>insert_drive_file</v-icon>
+                {{deviceScript.deviceID}}
+              </v-toolbar-title>
+            </v-toolbar>
+            
             <v-card-title>
               <v-select :items="['A','B','C','D']" label="Scripts" v-model="scriptSelect"></v-select>
             </v-card-title>
 
             <v-layout align-center justify-end>
-              <v-btn>Enviar</v-btn>
+              <v-btn>Iniciar</v-btn>
             </v-layout>
-            
+
             <v-card-actions>
               <v-list-tile class="grow">
                 <v-list-tile-avatar color="grey darken-3">
