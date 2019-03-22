@@ -41,6 +41,11 @@ export default {
       this.$store.commit("setDeviceMessenger", device);
       this.scrollToBottomDM();
     },
+    toggleFlagDSD(device) {
+      this.$store.commit("toggleFlagDSD");
+      this.$store.commit("setDeviceScript", device);
+
+    },
     toggleFlagDMMD() {
       this.$store.commit("toggleFlagDMMD");
     },
@@ -114,7 +119,7 @@ export default {
               </v-btn>
             </v-list-tile-action>
             <v-list-tile-action>
-              <v-btn icon ripple @click="toggleFlagDMD(device)">
+              <v-btn icon ripple @click="toggleFlagDsD(device)">
                 <v-icon color="grey lighten-1">insert_drive_file</v-icon>
               </v-btn>
             </v-list-tile-action>

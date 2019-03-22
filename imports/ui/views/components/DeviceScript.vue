@@ -47,7 +47,7 @@ export default {
     <v-dialog v-model="flagDSD" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-toolbar-title><v-icon>file</v-icon></v-toolbar-title>
+          <v-toolbar-title><v-icon>insert_drive_file</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDSD">
