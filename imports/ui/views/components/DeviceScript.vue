@@ -58,8 +58,7 @@ export default {
         <section>
           <v-card class="mx-auto" color="#26c6da" dark max-width="400">
             <v-card-title>
-              <v-icon large left>mdi-twitter</v-icon>
-              <span class="title font-weight-light">Twitter</span>
+              <v-select :items="['A','B','C','D']" label="Standard" v-model="scriptSelect"></v-select>
             </v-card-title>
 
             <v-card-text
