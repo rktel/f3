@@ -69,7 +69,7 @@ Meteor.methods({
 function scriptToCommands(file) {
     let commands = []
     if (file.includes('>') && file.includes('<')) {
-        console.log('file.includes('>') && file.includes('<')', file.includes('>') && file.includes('<') );
+        console.log('if', file.includes('>') && file.includes('<') );
         const lines = file.split('\r\n').filter(line => {
             return line.startsWith('>') && line.endsWith('<') &&
                 !line.includes('SRT;ALL') &&
