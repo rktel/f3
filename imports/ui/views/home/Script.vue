@@ -24,8 +24,8 @@ export default {
         reader.readAsText(file);
       }
     },
-    onScriptSelected(script){
-      this.scriptSelected = script
+    onScriptSelected(script) {
+      this.scriptSelected = script;
       console.log(script);
     }
   },
@@ -53,7 +53,11 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile v-for="script in scripts" :key="script.commands.index" @click="onScriptSelected(script)">
+          <v-list-tile
+            v-for="script in scripts"
+            :key="script.commands.index"
+            @click="onScriptSelected(script)"
+          >
             <v-list-tile-action>
               <v-icon>insert_drive_file</v-icon>
             </v-list-tile-action>
@@ -78,12 +82,6 @@ export default {
       <v-divider></v-divider>
 
       <v-card class="ma-2" flat v-if="scriptSelected">
-        <v-card-title class="py-2">{{scriptSelected.name}} - Lineas{{[scriptSelected.commands.length]}}</v-card-title>
-        <v-card-text>
-          <p v-for="command in (scriptSelected.commands)" :key="command.index">
-            {{command.index}}.- {{command.command}}
-          </p>
-        </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo">Ocultar</v-btn>
@@ -92,6 +90,15 @@ export default {
             <v-icon right dark>insert_drive_file</v-icon>
           </v-btn>
         </v-card-actions>
+        <v-card-title
+          class="py-2"
+        >{{scriptSelected.name}} - Lineas{{[scriptSelected.commands.length]}}</v-card-title>
+        <v-card-text>
+          <p
+            v-for="command in (scriptSelected.commands)"
+            :key="command.index"
+          >{{command.index}}.- {{command.command}}</p>
+        </v-card-text>
       </v-card>
     </section>
   </section>
