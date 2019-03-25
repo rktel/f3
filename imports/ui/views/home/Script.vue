@@ -26,7 +26,13 @@ export default {
     },
     onScriptSelected(script) {
       this.scriptSelected = script;
-      console.log(script);
+    },
+    onHideScriptSelected(){
+      this.scriptSelected = null
+    },
+    onRemoveScript(){
+      Meteor.call('removeScript',this.scriptSelected)
+      this.scriptSelected = null
     }
   },
   data: () => ({
@@ -84,8 +90,8 @@ export default {
       <v-card class="ma-2" flat v-if="scriptSelected">
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="indigo">Ocultar</v-btn>
-          <v-btn flat color="pink">
+          <v-btn flat color="indigo" @click="onHideScriptSelected">Ocultar</v-btn>
+          <v-btn flat color="pink" @click="onRemoveScript">
             Eliminar
             <v-icon right dark>insert_drive_file</v-icon>
           </v-btn>

@@ -56,6 +56,10 @@ Meteor.methods({
         if (commands.length > 0) {
             Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
         }
+    },
+    removeScript: function (script) {
+        const { name } = script
+        Scripts.remove({ name })
     }
 });
 
