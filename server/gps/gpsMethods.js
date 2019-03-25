@@ -51,8 +51,10 @@ Meteor.methods({
         }
     },
     upsertScript: function (script) {
-        const fileName = script.name
-        scriptToCommands(script.original)
+        console.log(script);
+        
+       // const fileName = script.name
+       // scriptToCommands(script.original)
        // const commands = scriptToCommands(script.original)
         /**        if (commands.length > 0) {
             Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
