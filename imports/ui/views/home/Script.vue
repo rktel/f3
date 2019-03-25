@@ -27,20 +27,28 @@ export default {
     onScriptSelected(script) {
       this.scriptSelected = script;
     },
-    onHideScriptSelected(){
-      this.scriptSelected = null
+    onHideScriptSelected() {
+      this.scriptSelected = null;
     },
-    onRemoveScript(){
-      Meteor.call('removeScript',this.scriptSelected)
-      this.scriptSelected = null
+    onRemoveScript() {
+      Meteor.call("removeScript", this.scriptSelected);
+      this.scriptSelected = null;
     }
   },
   data: () => ({
-    scriptSelected: null
+    scriptSelected: null,
+    scriptFilter: null
   }),
   computed: {
     heightList() {
       return this.$store.getters.heightList;
+    },
+    filteredScript() {
+      if (!this.scriptFilter) return this.scripts;
+      let searchText = this.scriptFilter;
+      return this.scripts.filter(s =>
+        s.name.includes(searchText)
+      );
     }
   }
 };
@@ -50,7 +58,7 @@ export default {
     <section class="itemOne">
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark>
-        <v-text-field label="Buscar script" prepend-icon="search" single-line clearable></v-text-field>
+        <v-text-field label="Buscar script" prepend-icon="search" single-line clearable v-model="scriptFilter"></v-text-field>
       </v-toolbar>
       <v-divider></v-divider>
       <v-toolbar flat class="pt-0 transparent" dark dense>
