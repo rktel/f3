@@ -1,4 +1,4 @@
-import { Events, Infos, Last, Devices, Commands } from '../../imports/api/collections'
+import { Events, Infos, Last, Devices, Commands, Scripts } from '../../imports/api/collections'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -13,7 +13,7 @@ Meteor.methods({
     },
     devicesReset: function () {
         console.log('devicesReset');
-        Devices.rawCollection().updateMany({  }, { $set: { connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() } })
+        Devices.rawCollection().updateMany({}, { $set: { connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() } })
     },
     deviceOn: function (device) {
         const { deviceID, appVersion, protocol, connectionStatus, connectionTime, ip, port } = device
@@ -31,24 +31,64 @@ Meteor.methods({
         //	{...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
         const initialCommands = Commands.find({ deviceID: commandObject.deviceID, status: 1 }).fetch()
         //console.log('initialCommands:',initialCommands);
-        if (initialCommands.length>0) {
+        if (initialCommands.length > 0) {
             //console.log('initialCommands.length>0');
-            
-            initialCommands.forEach((el,index,array)=>{
+
+            initialCommands.forEach((el, index, array) => {
                 //console.log('el:', el);
-                
+
                 const command = el.command.substring(2, el.command.length - 1)
 
                 //console.log('command:',command);
-                
+
                 if (commandObject.response.includes(command)) {
                     //console.log('commandObject.response.includes(command)');
-                    
+
                     Commands.update({ deviceID: commandObject.deviceID, status: 1 }, { $set: { response: commandObject.response, status: 2, receivedTime: commandObject.receivedTime } })
                 }
             })
-          
+
+        }
+    },
+    upsertScript: function (script) {
+        const fileName = script.name
+        const commands = scriptToCommands(script.original)
+        if (commands.length > 0) {
+            Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
         }
     }
 });
 
+
+
+function scriptToCommands(file) {
+    let commands = []
+    if (file.includes('>') && file.includes('<')) {
+
+        const lines = file.split('\r\n').filter(line => {
+            return line.startsWith('>') && line.endsWith('<') &&
+                !line.includes('SRT;ALL') &&
+                !line.includes('SXADP00') &&
+                !line.includes('SXADP01') &&
+                !line.includes('SXADP02') &&
+                !line.includes('SRFA') &&
+                !line.includes('SXAFU0C') &&
+                !line.includes('SID')
+        })
+        if (lines.length > 0) {
+            commands = lines.forEach((line, index) => {
+                return {
+                    index: (index + 1),
+                    command: line.trim(),
+                    // hopeResponse: line.replace('>S', '>R').substr(0, line.length - 1).trim()
+                }
+            })
+        }
+
+    }
+    if (commands.length > 0) {
+        return commands
+    } else {
+        return []
+    }
+}

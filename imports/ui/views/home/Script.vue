@@ -18,7 +18,8 @@ export default {
         let reader = new FileReader();
         reader.onload = function(e) {
           const text = reader.result;
-          console.log(text);
+          const script = { name: file.name, original: text };
+          Meteor.call("upsertScript", script);
         };
         reader.readAsText(file);
       }
