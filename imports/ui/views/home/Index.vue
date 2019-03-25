@@ -7,7 +7,14 @@ export default {
     Meteor.call("getPersona", (error, persona) => {
       if (!error) {
         this.$store.commit("setPersonaProfile", persona);
-        this.links = this.$router.options.routes[1].children;
+        if(persona.role=='Supervisor' || persona.role=='Tecnico'){
+          let preLinks = this.$router.options.routes[1].children;
+          preLinks = preLinks.filter(e=> e.name!='Users')
+          this.links = preLinks
+        }else{
+          
+          this.links = this.$router.options.routes[1].children;
+        }
       }
     });
   },
