@@ -1,5 +1,6 @@
 <script>
 import UserAvatarDialog from "../components/UserAvatarDialog";
+import { Scripts } from "../../../api/collections.js";
 export default {
   name: "Index",
   components: { UserAvatarDialog },
