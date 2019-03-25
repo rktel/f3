@@ -25,7 +25,9 @@ export default {
       }
     }
   },
-  data: () => ({}),
+  data: () => ({
+    scriptSelected: null
+  }),
   computed: {
     heightList() {
       return this.$store.getters.heightList;
@@ -70,7 +72,8 @@ export default {
         </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
-      <v-card class="ma-2" flat>
+
+      <v-card class="ma-2" flat v-if="scriptSelected">
         <v-card-title class="py-2"></v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
