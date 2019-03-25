@@ -12,8 +12,9 @@ export default {
     }
   },
   methods: {
-    fileChange(...arg){
-      console.log(...arg);
+    fileChange(event){
+      const file = event.target.files[0]
+      console.log(file);
     }
   },
   data: () => ({}),
