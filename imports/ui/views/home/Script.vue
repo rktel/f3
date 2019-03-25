@@ -78,6 +78,7 @@ export default {
 
       <v-card class="ma-2" flat v-if="scriptSelected">
         <v-card-title class="py-2">{{scriptSelected.name}}</v-card-title>
+        <div>{{scriptSelected.name}}</div>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn flat color="indigo">Ocultar</v-btn>
