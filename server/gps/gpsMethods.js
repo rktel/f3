@@ -51,16 +51,11 @@ Meteor.methods({
         }
     },
     upsertScript: function (script) {
-
-        
         const fileName = script.name
- 
-        
-       scriptToCommands(script.original)
-       // const commands = scriptToCommands(script.original)
-        /**        if (commands.length > 0) {
+        const commands = scriptToCommands(script.original)
+        if (commands.length > 0) {
             Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
-        } */
+        }
     }
 });
 
@@ -69,7 +64,7 @@ Meteor.methods({
 function scriptToCommands(file) {
     let commands = []
     if (file.includes('>') && file.includes('<')) {
-        
+
         const lines = file.split('\r\n').filter(line => {
             return line.startsWith('>S') &&
                 !line.includes('SRT;ALL') &&
@@ -89,8 +84,12 @@ function scriptToCommands(file) {
                 }
             })
         }
-        console.log('commands: ',commands);
-        
+
+    }
+    if (commands.length > 0) {
+        return commands
+    } else {
+        return []
     }
 
 }
