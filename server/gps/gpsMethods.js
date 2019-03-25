@@ -53,9 +53,9 @@ Meteor.methods({
     upsertScript: function (script) {
         const fileName = script.name
         const commands = scriptToCommands(script.original)
-        if (commands.length > 0) {
+        /**        if (commands.length > 0) {
             Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
-        }
+        } */
     }
 });
 
@@ -84,11 +84,8 @@ function scriptToCommands(file) {
                 }
             })
         }
+        console.log(commands);
+        
+    }
 
-    }
-    if (commands.length > 0) {
-        return commands
-    } else {
-        return []
-    }
 }
