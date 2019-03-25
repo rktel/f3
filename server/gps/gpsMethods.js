@@ -81,7 +81,7 @@ function scriptToCommands(file) {
                 !line.includes('SID')
         })
         if (lines.length > 0) {
-            commands = lines.forEach((line, index) => {
+            commands = lines.map((line, index) => {
                 return {
                     index: (index + 1),
                     command: line.trim(),
