@@ -4,10 +4,10 @@ export default {
   name: "Index",
   components: { UserAvatarDialog },
   created() {
-    this.links = this.$router.options.routes[1].children;
     Meteor.call("getPersona", (error, persona) => {
       if (!error) {
         this.$store.commit("setPersonaProfile", persona);
+        this.links = this.$router.options.routes[1].children;
       }
     });
   },
@@ -51,7 +51,7 @@ export default {
 </script>
 <template>
   <v-app v-resize="onResize" dark>
-    <v-navigation-drawer fixed v-model="drawer" right app width="260" >
+    <v-navigation-drawer fixed v-model="drawer" right app width="260">
       <user-avatar-dialog></user-avatar-dialog>
       <v-toolbar flat class="transparent">
         <v-list class="pa-0">
@@ -89,7 +89,7 @@ export default {
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app flat >
+    <v-toolbar fixed app flat>
       <v-toolbar-title class="font-italic">{{this.$route.name}}</v-toolbar-title>
       <v-spacer></v-spacer>
       <h4 class="subheading font-italic" title="Version 3.0
