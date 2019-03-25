@@ -3,13 +3,8 @@ import { Scripts } from "../../../api/collections.js";
 
 export default {
   name: "Script",
-  meteor: {
-    $subscribe: {
-      scripts: []
-    },
-    scripts() {
-      return Scripts.find({});
-    }
+  mounted(){
+    this.script = this.$store.getters.storeScripts
   },
   methods: {
     fileChange(event) {
@@ -37,7 +32,8 @@ export default {
   },
   data: () => ({
     scriptSelected: null,
-    scriptFilter: null
+    scriptFilter: null,
+    scripts:[]
   }),
   computed: {
     heightList() {

@@ -18,9 +18,11 @@ export default new Vuex.Store({
         flagDMSD: false,
         deviceMessenger: {},
         deviceScript: {},
-        devicesArraySelected: []
+        devicesArraySelected: [],
+        scripts:[]
     },
     getters: {
+        storeScripts: state => state.scripts,
         persona: state => state.personaProfile,
         heightList: state => {
             const { width, height } = state.appSize
@@ -85,6 +87,9 @@ export default new Vuex.Store({
                 state.devicesArraySelected = state.devicesArraySelected.filter(el => el.deviceID !== device.deviceID)
             }
         },
+        setStoreScripts:(state, scripts)=>{
+            state.scripts = scripts
+        }
     },
     actions: {}
 })
