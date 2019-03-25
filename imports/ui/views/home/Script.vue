@@ -47,12 +47,12 @@ export default {
       <v-divider></v-divider>
       <div v-bar class="vuebar-element" :style="{height: heightList+'px' }">
         <v-list class="pt-0 transparent" dense dark>
-          <v-list-tile>
+          <v-list-tile v-for="script in scripts" :key="script.commands.index">
             <v-list-tile-action>
               <v-icon>insert_drive_file</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{'script name'}}</v-list-tile-title>
+              <v-list-tile-title>{{script.name}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
