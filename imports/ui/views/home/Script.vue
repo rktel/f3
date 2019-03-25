@@ -12,9 +12,16 @@ export default {
     }
   },
   methods: {
-    fileChange(event){
-      const file = event.target.files[0]
-      console.log(file);
+    fileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+          const text = reader.result;
+          console.log(text);
+        };
+        reader.readAsText(file);
+      }
     }
   },
   data: () => ({}),
