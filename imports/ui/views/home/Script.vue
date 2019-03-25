@@ -78,7 +78,7 @@ export default {
       <v-divider></v-divider>
 
       <v-card class="ma-2" flat v-if="scriptSelected">
-        <v-card-title class="py-2">{{scriptSelected.name}} {{[scriptSelected.commands.length]}}</v-card-title>
+        <v-card-title class="py-2">{{scriptSelected.name}} - Lineas{{[scriptSelected.commands.length]}}</v-card-title>
         <v-card-text>
           <p v-for="command in (scriptSelected.commands)" :key="command.index">
             {{command.index}}.- {{command.command}}
