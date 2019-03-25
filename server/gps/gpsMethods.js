@@ -51,12 +51,12 @@ Meteor.methods({
         }
     },
     upsertScript: function (script) {
-        console.log(script);
+
         
         const fileName = script.name
-        console.log(fileName);
+ 
         
-       // scriptToCommands(script.original)
+       scriptToCommands(script.original)
        // const commands = scriptToCommands(script.original)
         /**        if (commands.length > 0) {
             Scripts.upsert({ name: fileName }, { $set: { commands, original: script.original, createdAt: (new Date()).toISOString() } })
@@ -69,7 +69,7 @@ Meteor.methods({
 function scriptToCommands(file) {
     let commands = []
     if (file.includes('>') && file.includes('<')) {
-
+        console.log('file.includes('>') && file.includes('<')');
         const lines = file.split('\r\n').filter(line => {
             return line.startsWith('>') && line.endsWith('<') &&
                 !line.includes('SRT;ALL') &&
