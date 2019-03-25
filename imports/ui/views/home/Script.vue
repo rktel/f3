@@ -45,9 +45,9 @@ export default {
     },
     filteredScript() {
       if (!this.scriptFilter) return this.scripts;
-      let searchText = this.scriptFilter;
+      let searchText = this.scriptFilter.toLowerCase();
       return this.scripts.filter(s =>
-        s.name.includes(searchText)
+        s.name.toLowerCase().includes(searchText)
       );
     }
   }
