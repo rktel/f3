@@ -4,7 +4,7 @@ import { Scripts } from "../../../api/collections.js";
 export default {
   name: "Script",
   mounted(){
-    this.script = this.$store.getters.storeScripts
+    this.scripts = this.$store.getters.storeScripts
   },
   methods: {
     fileChange(event) {
