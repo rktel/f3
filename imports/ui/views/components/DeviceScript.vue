@@ -16,6 +16,11 @@ export default {
     },
     heightDeviceMessenger() {
       return this.$store.getters.heightDeviceMessenger;
+    },
+    scripts(){
+      let scriptNames = this.$store.getters.storeScripts
+      scriptNames = scriptNames.map(e=>e.name)
+      return scriptNames
     }
   },
   data: () => ({
@@ -64,7 +69,7 @@ export default {
             </v-toolbar>
 
             <v-card-title>
-              <v-select :items="['A','B','C','D']" label="Scripts" v-model="scriptSelect"></v-select>
+              <v-select :items="scripts" label="Scripts" v-model="scriptSelect"></v-select>
             </v-card-title>
 
             <v-layout align-center justify-end>
