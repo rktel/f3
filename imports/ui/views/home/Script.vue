@@ -26,6 +26,7 @@ export default {
     },
     onScriptSelected(script){
       this.scriptSelected = script
+      console.log(script);
     }
   },
   data: () => ({
