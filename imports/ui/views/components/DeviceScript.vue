@@ -9,7 +9,7 @@ export default {
       tasks: []
     },
     tasks() {
-      const tasks = Tasks.find({ deviceID: this.deviceScript.deviceID });
+      const tasks = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
       console.log(tasks);
     }
   },
