@@ -1,4 +1,4 @@
-import { Personal, Devices, Commands, Scripts } from '../../imports/api/collections'
+import { Personal, Devices, Commands, Scripts, Tasks } from '../../imports/api/collections'
 
 Meteor.publish('personal', () => {
     return Personal.find({ role: { $ne: Meteor.settings.private.HYPER_PERSONAL_ROLE } })
@@ -11,4 +11,7 @@ Meteor.publish('deviceCommands', () => {
 })
 Meteor.publish('scripts',()=>{
     return Scripts.find({})
+})
+Meteor.publish('tasks',()=>{
+    return Tasks.find({})
 })

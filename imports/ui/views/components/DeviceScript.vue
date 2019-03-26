@@ -1,9 +1,17 @@
 <script>
 import { stSyrus } from "../../../api/streamers.js";
-import { Commands } from "../../../api/collections.js";
+import { Tasks } from "../../../api/collections.js";
 import { addHours } from "../../../tools/time.js";
+
 export default {
-  meteor: {},
+  meteor: {
+    $subscribe: {
+      tasks: []
+    },
+    tasks() {
+      return Tasks.find({ deviceID: this.deviceScript.deviceID });
+    }
+  },
   computed: {
     persona() {
       return this.$store.getters.persona;
@@ -44,7 +52,7 @@ export default {
     onStartTask(deviceID, scriptName) {
       const fullname = this.persona.firstname + " " + this.persona.lastname;
       if (deviceID && scriptName && fullname) {
-       Meteor.call("startTask", deviceID, scriptName, fullname);
+        Meteor.call("startTask", deviceID, scriptName, fullname);
       }
     }
   }
