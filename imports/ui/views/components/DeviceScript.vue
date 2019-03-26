@@ -127,3 +127,9 @@ export default {
     </v-dialog>
   </v-layout>
 </template>
+
+<stylescoped>
+  .v-progress-circular{
+    margin: 1rem;
+  }
+</style>
