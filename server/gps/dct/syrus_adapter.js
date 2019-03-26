@@ -82,9 +82,6 @@ Meteor.methods({
     if (socket && socket[0]) {
       message = message.includes('>') && message.includes('<') ? message : '>' + message + '<'
       socket[0].write(message)
-      return true
-    } else {
-      return false
     }
   }
 });

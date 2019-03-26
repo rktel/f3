@@ -72,7 +72,15 @@ Meteor.methods({
             scriptToTask.author = fullname
             //console.log(scriptToTask);
             Tasks.upsert({ deviceID }, { $set: scriptToTask })
-        }
+            const task = Tasks.findOne({ deviceID })
+            const firtsCommand = task.commands[0].command
+            Meteor.call('syrusTaskCommand', deviceID, firtsCommand, ns => {
+                /*
+                Tasks.update({ _id: task._id, "commands.index": 1 }, { $set: { "commands.$.status": 1, "commands.$.lastSendTime": now() } })
+                Tasks.update({ _id: task._id }, { $set: { status: 1 } })
+                */
+            })
+    }
 
 
     }
