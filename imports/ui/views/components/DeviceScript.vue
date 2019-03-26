@@ -99,6 +99,15 @@ export default {
             <v-layout align-center justify-end>
               <v-btn @click="onStartTask(deviceScript.deviceID, scriptSelect)">Iniciar</v-btn>
             </v-layout>
+            <v-layout align-center justify-start>
+                  <v-progress-circular
+                    :rotate="-90"
+                    :size="100"
+                    :width="15"
+                    :value="value"
+                    color="primary"
+                  >{{ value }}</v-progress-circular>
+            </v-layout>
 
             <v-card-actions>
               <v-list-tile class="grow">
