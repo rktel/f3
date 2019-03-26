@@ -167,9 +167,11 @@ function saveData(data) {
 
 function getDeviceID(data) {
   if (data.length == 15) {
+    Meteor.call('syncWorker', data)
     return data
   }
   if (data.includes('>R')) {
+    Meteor.call('taskWorker', data.substring(data.indexOf('ID=') + 3, data.indexOf('<')))
     return data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
   }
   return null

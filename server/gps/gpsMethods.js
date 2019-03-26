@@ -65,7 +65,7 @@ Meteor.methods({
     startTask: function (deviceID, scriptName, fullname) {
         //console.log(deviceID, scriptName, fullname);
         const scriptToTask = Scripts.findOne({ name: scriptName }, { fields: { _id: 0, createdAt: 0, original: 0 } })
-        if(scriptToTask){
+        if (scriptToTask) {
             scriptToTask.commands.map(el => el.status = 0)
             scriptToTask.status = 0
             scriptToTask.createdAt = (new Date()).toISOString()
@@ -75,15 +75,53 @@ Meteor.methods({
             const task = Tasks.findOne({ deviceID })
             const firtsCommand = task.commands[0].command
             Meteor.call('syrusTaskCommand', deviceID, firtsCommand, ns => {
-                
+
                 Tasks.update({ _id: task._id, "commands.index": 1 }, { $set: { "commands.$.status": 1, "commands.$.lastSendTime": (new Date()).toISOString() } })
                 Tasks.update({ _id: task._id }, { $set: { status: 1 } })
-                
+
             })
-    }
+        }
+    },
+    taskWorker(deviceID) {
+        const task = Meteor.call('getTask', deviceID)
+        const commands = task ? task.commands : false
+        if (commands) {
+            commands.map((el, i, array) => {
 
-
-    }
+                if (el.status == 1) {
+                    Meteor.call('status2CommandTask', deviceID, el.index, ns => {
+                        if (el.index == commands.length) {
+                            Meteor.call('status2Task', deviceID)
+                        }
+                        if (array[i + 1] && array[i + 1].command) {
+                            Meteor.call('syrusTaskCommand', deviceID, array[i + 1].command, ns => {
+                                Meteor.call('status1CommandTask', deviceID, array[i + 1].index)
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    },
+    syncWorker(deviceID){
+    	const task = Meteor.call('getTask', deviceID)
+    	if(task){
+    		const cmd1 = task.commands.filter(el=> el.status == 1)[0]
+    		cmd1 ? Meteor.call('syrusTaskCommand', deviceID, cmd1.command): false
+    	}
+    },
+    getTask: (deviceID) => {
+        return Tasks.findOne({ deviceID })
+    },
+    status2CommandTask: (deviceID, index) => {
+        Tasks.update({ deviceID, "commands.index": index }, { $set: { "commands.$.status": 2, "commands.$.lastReceivedTime": (new Date()).toISOString() } })
+    },
+    status1CommandTask: (deviceID, index) => {
+        Tasks.update({ deviceID, "commands.index": index }, { $set: { "commands.$.status": 1, "commands.$.lastSendTime": (new Date()).toISOString() } })
+    },
+    status2Task: (deviceID) => {
+        Tasks.update({ deviceID }, { $set: { status: 2, endTime: (new Date()).toISOString() } })
+    },
 });
 
 
