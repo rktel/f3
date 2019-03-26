@@ -106,30 +106,11 @@ export default {
                     :width="15"
                     :value="value"
                     color="primary"
-                  >{{ value }}</v-progress-circular>
+                  >{{ value }} %</v-progress-circular>
             </v-layout>
-
-            <v-card-actions>
-              <v-list-tile class="grow">
-                <v-list-tile-avatar color="grey darken-3">
-                  <v-progress-circular
-                    :rotate="-90"
-                    :size="100"
-                    :width="15"
-                    :value="value"
-                    color="primary"
-                  >{{ value }}</v-progress-circular>
-                </v-list-tile-avatar>
-
-                <v-list-tile-content>
-                  <v-list-tile-title>{{45}} de {{200}}</v-list-tile-title>
-                </v-list-tile-content>
-
-                <v-layout align-center justify-end>
-                  <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
-                </v-layout>
-              </v-list-tile>
-            </v-card-actions>
+            <v-layout align-center justify-end>
+              <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
+            </v-layout>
           </v-card>
         </section>
       </v-card>
@@ -139,6 +120,6 @@ export default {
 
 <stylescoped>
   .v-progress-circular{
-    margin: 2rem;
+   
   }
 </style>
