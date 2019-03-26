@@ -117,7 +117,7 @@ export default {
                   <v-chip> {{taskStatus}} de {{taskTotal}}</v-chip>
             </v-layout>
             <v-layout align-center justify-end class="ma-4">
-              <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
+              <v-chip>{{persona.firstname}} {{persona.lastname}}</v-chip>
             </v-layout>
           </v-card>
         </section>
