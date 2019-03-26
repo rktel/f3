@@ -17,6 +17,8 @@ export default {
         const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0
         this.value = totalCommands && status2Command ? parseInt(status2Command*100/totalCommands): 0
         this.taskName = task.name
+        this.taskTotal = totalCommands
+        this.taskStatus = status2Command
       }
     }
   },
@@ -42,7 +44,9 @@ export default {
   data: () => ({
     value: 0,
     scriptSelect: null,
-    taskName:null
+    taskName:null,
+    taskTotal: null,
+    taskStatus: null
   }),
   methods: {
     scrollToBottomDM() {
@@ -100,6 +104,9 @@ export default {
               <v-btn @click="onStartTask(deviceScript.deviceID, scriptSelect)">Iniciar</v-btn>
             </v-layout>
             <v-layout align-center justify-start>
+                  <v-chip> {{taskName}}</v-chip>
+            </v-layout>
+            <v-layout align-center justify-start>
                   <v-progress-circular
                     :rotate="-90"
                     :size="100"
@@ -107,8 +114,9 @@ export default {
                     :value="value"
                     color="primary"
                   >{{ value }} %</v-progress-circular>
+                  <v-chip> {{taskStatus}} de {{taskTotal}}</v-chip>
             </v-layout>
-            <v-layout align-center justify-end class="ma-2">
+            <v-layout align-center justify-end class="ma-4">
               <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
             </v-layout>
           </v-card>
@@ -118,8 +126,3 @@ export default {
   </v-layout>
 </template>
 
-<stylescoped>
-  .v-progress-circular{
-   
-  }
-</style>
