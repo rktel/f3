@@ -44,7 +44,7 @@ export default {
     onStartTask(deviceID, scriptName) {
       const fullname = this.persona.firstname + " " + this.persona.lastname;
       if (deviceID && scriptName && fullname) {
-        Meteor.call("startTask", deviceID, scriptName, fullname);
+       // Meteor.call("startTask", deviceID, scriptName, fullname);
       }
     }
   }
