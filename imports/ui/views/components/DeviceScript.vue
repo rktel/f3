@@ -108,7 +108,7 @@ export default {
                     color="primary"
                   >{{ value }} %</v-progress-circular>
             </v-layout>
-            <v-layout align-center justify-end>
+            <v-layout align-center justify-end class="ma-2">
               <span class="subheading">{{persona.firstname}} {{persona.lastname}}</span>
             </v-layout>
           </v-card>
