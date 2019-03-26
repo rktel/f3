@@ -103,13 +103,13 @@ export default {
             <v-card-actions>
               <v-list-tile class="grow">
                 <v-list-tile-avatar color="grey darken-3">
-                  <v-progress-circular
+                  <v-progress-circular style=""
                     :rotate="-90"
                     :size="100"
-                    :width="20"
+                    :width="15"
                     :value="value"
                     color="primary"
-                  >{{ value + '%' }}</v-progress-circular>
+                  >{{ value }}</v-progress-circular>%
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
