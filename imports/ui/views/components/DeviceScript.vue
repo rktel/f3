@@ -9,8 +9,9 @@ export default {
       tasks: []
     },
     tasks() {
-      const task = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
-      if(task && task.length>0){
+      let  tasks = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
+      if(tasks && tasks.length>0){
+        const task = tasks[0]
         const totalCommands = task ? task.commands.length : 0
         const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0
         this.value = totalCommands && status2Command ? parseInt(status2Command*100/totalCommands): 0
