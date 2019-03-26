@@ -63,10 +63,10 @@ Meteor.methods({
         Scripts.remove({ name })
     },
     startTask: function (deviceID, scriptName, fullname) {
-        console.log(deviceID, scriptName,fullname);
-        const scriptToTask = Scripts.findOne({ name: scriptName }, { fields: { _id: 0, createdAt: 0 } })
+        console.log(deviceID, scriptName, fullname);
+        const scriptToTask = Scripts.findOne({ name: scriptName }, { fields: { _id: 0, createdAt: 0, original: 0 } })
         console.log(scriptToTask);
-        
+
 
     }
 });
