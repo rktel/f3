@@ -10,7 +10,7 @@ export default {
     },
     tasks() {
       const task = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
-      if(task.length>0){
+      if(task && task.length>0){
         const totalCommands = task ? task.commands.length : 0
         const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0
         this.value = totalCommands && status2Command ? parseInt(status2Command*100/totalCommands): 0
