@@ -103,7 +103,7 @@ export default {
             <v-card-actions>
               <v-list-tile class="grow">
                 <v-list-tile-avatar color="grey darken-3">
-                  <v-progress-circular :style="{ margin: 10 + 'rem'}"
+                  <v-progress-circular
                     :rotate="-90"
                     :size="100"
                     :width="15"
