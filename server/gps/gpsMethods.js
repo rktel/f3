@@ -63,22 +63,10 @@ Meteor.methods({
         Scripts.remove({ name })
     },
     startTask: function (deviceID, scriptName, fullname) {
-        console.log(deviceID, scriptName);
+        console.log(deviceID, scriptName,fullname);
         const scriptToTask = Scripts.findOne({ name: scriptName }, { fields: { _id: 0, createdAt: 0 } })
-        scriptToTask.commands.map(el => el.status = 0)
-        scriptToTask.status = 0
-        scriptToTask.createdAt = (new Date()).toISOString()
-        Tasks.upsert({ deviceID }, { $set: scriptToTask, author: fullname })
-        const task = Tasks.findOne({ deviceID })
-        const firtsCommand = task.commands[0].command
-        /* ##############     If device protocol is Syrus => #################*/
-        Meteor.call('syrusTaskCommand', deviceID, firtsCommand, (a, b) => {
-            console.log('a:', a, '\n', 'b:', b);
-            /*
-            Tasks.update({ _id: task._id, "commands.index": 1 }, { $set: { "commands.$.status": 1, "commands.$.lastSendTime": now() } })
-            Tasks.update({ _id: task._id }, { $set: { status: 1 } })
-            */
-        })
+        console.log(scriptToTask);
+        
 
     }
 });
