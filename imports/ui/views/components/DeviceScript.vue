@@ -104,7 +104,7 @@ export default {
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{45}} de {{200}}</v-list-tile-title>
+                  <v-list-tile-title>{{tasks[0].name}} de {{200}}</v-list-tile-title>
                 </v-list-tile-content>
 
                 <v-layout align-center justify-end>
