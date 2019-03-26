@@ -10,7 +10,9 @@ export default {
     },
     tasks() {
       const tasks = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
-      console.log(tasks);
+      if(tasks.length>0){
+        console.log((new Date()).toISOString());
+      }
     }
   },
   computed: {
