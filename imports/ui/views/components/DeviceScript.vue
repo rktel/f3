@@ -130,6 +130,6 @@ export default {
 
 <stylescoped>
   .v-progress-circular{
-    margin: 1rem;
+    margin: 2rem;
   }
 </style>
