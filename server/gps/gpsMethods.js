@@ -1,4 +1,4 @@
-import { Events, Infos, Last, Devices, Commands, Scripts } from '../../imports/api/collections'
+import { Events, Infos, Last, Devices, Commands, Scripts, Tasks } from '../../imports/api/collections'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -60,6 +60,9 @@ Meteor.methods({
     removeScript: function (script) {
         const { name } = script
         Scripts.remove({ name })
+    },
+    startTask: function(deviceID, scriptName){
+        console.log(deviceID, scriptName);
     }
 });
 

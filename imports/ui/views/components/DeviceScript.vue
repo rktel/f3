@@ -17,10 +17,10 @@ export default {
     heightDeviceMessenger() {
       return this.$store.getters.heightDeviceMessenger;
     },
-    scripts(){
-      let scriptNames = this.$store.getters.storeScripts
-      scriptNames = scriptNames.map(e=>e.name)
-      return scriptNames
+    scripts() {
+      let scriptNames = this.$store.getters.storeScripts;
+      scriptNames = scriptNames.map(e => e.name);
+      return scriptNames;
     }
   },
   data: () => ({
@@ -40,6 +40,11 @@ export default {
     toggleFlagDSD(device) {
       this.$store.commit("toggleFlagDSD");
       this.$store.commit("setDeviceScript", {});
+    },
+    onStartTask(deviceID, scriptName) {
+      if (deviceID && scriptName) {
+        Meteor.call('startTask', deviceID, scriptName)
+      }
     }
   }
 };
@@ -51,7 +56,7 @@ export default {
       <v-card>
         <v-toolbar dark>
           <v-toolbar-title></v-toolbar-title>
-          
+
           <v-toolbar-items>
             <v-btn icon dark @click="toggleFlagDSD">
               <v-icon>arrow_back</v-icon>
@@ -59,6 +64,7 @@ export default {
           </v-toolbar-items>
           <v-spacer></v-spacer>
         </v-toolbar>
+
         <section>
           <v-card class="mx-auto" dark max-width="400">
             <v-toolbar color="transparent">
@@ -73,7 +79,7 @@ export default {
             </v-card-title>
 
             <v-layout align-center justify-end>
-              <v-btn>Iniciar</v-btn>
+              <v-btn @click="onStartTask(deviceScript.deviceID, scriptSelect)">Iniciar</v-btn>
             </v-layout>
 
             <v-card-actions>
