@@ -11,10 +11,12 @@ export default {
     tasks() {
       let  tasks = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
       if(tasks && tasks.length>0){
+        
         const task = tasks[0]
         const totalCommands = task ? task.commands.length : 0
         const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0
         this.value = totalCommands && status2Command ? parseInt(status2Command*100/totalCommands): 0
+        this.taskName = task.name
       }
     }
   },
@@ -39,7 +41,8 @@ export default {
   },
   data: () => ({
     value: 0,
-    scriptSelect: null
+    scriptSelect: null,
+    taskName:null
   }),
   methods: {
     scrollToBottomDM() {
@@ -100,13 +103,14 @@ export default {
             <v-card-actions>
               <v-list-tile class="grow">
                 <v-list-tile-avatar color="grey darken-3">
+                  <p>{{taskName}}</p>
                   <v-progress-circular
                     :rotate="-90"
                     :size="100"
-                    :width="15"
+                    :width="30"
                     :value="value"
                     color="primary"
-                  >{{ value }}</v-progress-circular>
+                  >{{ value }}%</v-progress-circular>
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
