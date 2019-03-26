@@ -63,13 +63,14 @@ Meteor.methods({
         Scripts.remove({ name })
     },
     startTask: function (deviceID, scriptName, fullname) {
-        console.log(deviceID, scriptName, fullname);
+        //console.log(deviceID, scriptName, fullname);
         const scriptToTask = Scripts.findOne({ name: scriptName }, { fields: { _id: 0, createdAt: 0, original: 0 } })
         if(scriptToTask){
             scriptToTask.commands.map(el => el.status = 0)
             scriptToTask.status = 0
             scriptToTask.createdAt = (new Date()).toISOString()
-            console.log(scriptToTask);
+            //console.log(scriptToTask);
+            Tasks.upsert({ deviceID }, { $set: {scriptToTask, author: fullname} })
         }
 
 
