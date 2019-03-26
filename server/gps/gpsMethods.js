@@ -69,8 +69,9 @@ Meteor.methods({
             scriptToTask.commands.map(el => el.status = 0)
             scriptToTask.status = 0
             scriptToTask.createdAt = (new Date()).toISOString()
+            scriptToTask.author = fullname
             //console.log(scriptToTask);
-            Tasks.upsert({ deviceID }, { $set: {scriptToTask, author: fullname} })
+            Tasks.upsert({ deviceID }, { $set: scriptToTask })
         }
 
 
