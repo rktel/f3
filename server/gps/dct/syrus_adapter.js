@@ -76,7 +76,21 @@ export { Syrus }
 
 
 /**FUNCIONES DE APOYO */
-function findResponseCommand(deviceID, data){
+Meteor.methods({
+  syrusTaskCommand: function (deviceID, message) {
+    const socket = SOCKETS.filter(d => d.deviceID == deviceID)
+    if (socket && socket[0]) {
+      message = message.includes('>') && message.includes('<') ? message : '>' + message + '<'
+      socket[0].write(message)
+      return true
+    } else {
+      return false
+    }
+  }
+});
+
+
+function findResponseCommand(deviceID, data) {
   // {...,deviceID:"0007", response:">RXART<",status:2,	receivedTime: "2019-03-16T23:34:52.000Z"}
   const commandObject = {
     deviceID, response: data, receivedTime: (new Date()).toISOString()
@@ -99,6 +113,7 @@ function sendCommand(deviceID, message, persona) {
   }
 
 }
+
 function deviceOn(device) {
   Meteor.call('deviceOn', device)
 }
@@ -120,29 +135,29 @@ function inSOCKETS_DEVICE(socket, deviceID) {
     SOCKETS.push(socket)
     DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
     deviceOn(DEVICE)
-  }else{
+  } else {
     if (SOCKETS.filter(el => el.port == port).length == 0) {
-        
-        SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
-        DEVICE = { deviceID, connectionStatus: 'off', lastDisconnectionTime : (new Date()).toISOString()}
-        deviceOff(DEVICE)
-        socket['deviceID'] = deviceID
-        socket['ip'] = ip
-        socket['port'] = port
-        SOCKETS.push(socket)
-        DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
-        deviceOn(DEVICE)
-        
+
+      SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
+      DEVICE = { deviceID, connectionStatus: 'off', lastDisconnectionTime: (new Date()).toISOString() }
+      deviceOff(DEVICE)
+      socket['deviceID'] = deviceID
+      socket['ip'] = ip
+      socket['port'] = port
+      SOCKETS.push(socket)
+      DEVICE = { appVersion, protocol, deviceID, connectionStatus, connectionTime, ip, port }
+      deviceOn(DEVICE)
+
     }
   }
 }
 function outSOCKETS_DEVICE(socket) {
   const { deviceID } = socket
- 
+
   const connectionStatus = "off"
   const lastDisconnectionTime = (new Date()).toISOString()
   if (deviceID) {
-    
+
     SOCKETS = SOCKETS.filter(el => el.deviceID !== deviceID)
     DEVICE = { deviceID, connectionStatus, lastDisconnectionTime }
     deviceOff(DEVICE)

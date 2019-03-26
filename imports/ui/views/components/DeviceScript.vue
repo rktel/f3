@@ -42,8 +42,9 @@ export default {
       this.$store.commit("setDeviceScript", {});
     },
     onStartTask(deviceID, scriptName) {
-      if (deviceID && scriptName) {
-        Meteor.call('startTask', deviceID, scriptName)
+      const fullname = this.persona.firstname + " " + this.persona.lastname;
+      if (deviceID && scriptName && fullname) {
+        Meteor.call("startTask", deviceID, scriptName, fullname);
       }
     }
   }
