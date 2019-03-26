@@ -106,7 +106,7 @@ export default {
                   <v-progress-circular
                     :rotate="-90"
                     :size="100"
-                    :width="15"
+                    :width="20"
                     :value="value"
                     color="primary"
                   >{{ value + '%' }}</v-progress-circular>
