@@ -47,7 +47,8 @@ export default {
     scriptSelect: null,
     taskName:null,
     taskTotal: null,
-    taskStatus: null
+    taskStatus: null,
+    taskAuthor: null
   }),
   methods: {
     scrollToBottomDM() {
