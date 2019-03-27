@@ -19,6 +19,7 @@ export default {
         this.taskName = task.name
         this.taskTotal = totalCommands
         this.taskStatus = status2Command
+        this.taskAuthor = task.author
       }
     }
   },
@@ -117,7 +118,7 @@ export default {
                   <v-chip> {{taskStatus}} de {{taskTotal}}</v-chip>
             </v-layout>
             <v-layout align-center justify-end class="ma-4">
-              <v-chip>{{persona.firstname}} {{persona.lastname}}</v-chip>
+              <v-chip>{{taskAuthor}}</v-chip>
             </v-layout>
           </v-card>
         </section>
