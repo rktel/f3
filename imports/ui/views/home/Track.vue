@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     selectDevice(device) {
-      this.$store.commit("setDAS", device);
+      // this.$store.commit("setDAS", device);  MASSIVE
     },
     deleteSelectedDevice(device) {
       this.$store.commit("deleteDAS", device);
@@ -136,7 +136,7 @@ export default {
 
     <section class="itemTwo">
       <v-divider></v-divider>
-      <v-toolbar flat class="pt-0 transparent" dark>
+      <!--v-toolbar flat class="pt-0 transparent" dark>
         <v-chip>Masivo</v-chip>
         <v-spacer></v-spacer>
         <v-btn color="green" flat class="white--text" @click="toggleFlagDMMD">
@@ -145,7 +145,7 @@ export default {
         <v-btn color="green" flat class="white--text" @click="toggleFlagDMSD">
           <v-icon dark>insert_drive_file</v-icon>
         </v-btn>
-      </v-toolbar>
+      </v-toolbar!-->
       <v-divider></v-divider>
 
       <div>
