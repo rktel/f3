@@ -9,7 +9,7 @@ export default {
       tasks: []
     },
     tasks() {
-      let  tasks = Tasks.find({ deviceID: this.deviceScript.deviceID }).fetch()
+      let  tasks = Tasks.find({ deviceID: this.$store.getters.deviceScript.deviceID }).fetch()
       if(tasks && tasks.length>0){
         
         const task = tasks[0]
@@ -60,7 +60,7 @@ export default {
     restFiveHours(time) {
       if (time) return addHours(time, -5);
     },
-    toggleFlagDSD(device) {
+    toggleFlagDSD() {
       this.$store.commit("toggleFlagDSD");
       this.$store.commit("setDeviceScript", {});
     },
