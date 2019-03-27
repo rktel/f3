@@ -15,13 +15,8 @@ export default {
       if (tasks && tasks.length > 0) {
         const task = tasks[0];
         const totalCommands = task ? task.commands.length : 0;
-        const status2Command = task
-          ? task.commands.filter(el => el.status == 2).length
-          : 0;
-        this.value =
-          totalCommands && status2Command
-            ? parseInt((status2Command * 100) / totalCommands)
-            : 0;
+        const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0;
+        this.value = totalCommands && status2Command ? parseInt((status2Command * 100) / totalCommands) : 0;
         this.taskName = task.name;
         this.taskTotal = totalCommands;
         this.taskStatus = status2Command;
@@ -74,6 +69,7 @@ export default {
       this.taskTotal = null;
       this.taskStatus = null;
       this.taskAuthor = null;
+      this.value = 0;
     },
     onStartTask(deviceID, scriptName) {
       const fullname = this.persona.firstname + " " + this.persona.lastname;
