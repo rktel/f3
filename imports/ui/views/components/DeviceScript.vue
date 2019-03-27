@@ -112,7 +112,9 @@ export default {
             <v-layout align-center justify-end>
               <v-btn @click="onStartTask(deviceScript.deviceID, scriptSelect)">Iniciar</v-btn>
             </v-layout>
-            <v-layout align-center justify-start>
+
+          <template v-if="taskName">
+              <v-layout align-center justify-start>
               <v-chip>{{taskName}}</v-chip>
             </v-layout>
             <v-layout align-center justify-start>
@@ -128,6 +130,8 @@ export default {
             <v-layout align-center justify-end class="ma-4">
               <v-chip>{{taskAuthor}}</v-chip>
             </v-layout>
+          </template>
+
           </v-card>
         </section>
       </v-card>
