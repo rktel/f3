@@ -145,8 +145,8 @@ export default {
         <v-btn color="green" flat class="white--text" @click="toggleFlagDMSD">
           <v-icon dark>insert_drive_file</v-icon>
         </v-btn>
-      </v-toolbar!-->
-      <v-divider></v-divider>
+      </v-toolbar>
+      <v-divider></v-divider!-->
 
       <div>
         <ol>
