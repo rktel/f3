@@ -9,17 +9,23 @@ export default {
       tasks: []
     },
     tasks() {
-      let  tasks = Tasks.find({ deviceID: this.$store.getters.deviceScript.deviceID }).fetch()
-      if(tasks && tasks.length>0){
-        
-        const task = tasks[0]
-        const totalCommands = task ? task.commands.length : 0
-        const status2Command = task ? task.commands.filter(el => el.status == 2).length : 0
-        this.value = totalCommands && status2Command ? parseInt(status2Command*100/totalCommands): 0
-        this.taskName = task.name
-        this.taskTotal = totalCommands
-        this.taskStatus = status2Command
-        this.taskAuthor = task.author
+      let tasks = Tasks.find({
+        deviceID: this.$store.getters.deviceScript.deviceID
+      }).fetch();
+      if (tasks && tasks.length > 0) {
+        const task = tasks[0];
+        const totalCommands = task ? task.commands.length : 0;
+        const status2Command = task
+          ? task.commands.filter(el => el.status == 2).length
+          : 0;
+        this.value =
+          totalCommands && status2Command
+            ? parseInt((status2Command * 100) / totalCommands)
+            : 0;
+        this.taskName = task.name;
+        this.taskTotal = totalCommands;
+        this.taskStatus = status2Command;
+        this.taskAuthor = task.author;
       }
     }
   },
@@ -45,7 +51,7 @@ export default {
   data: () => ({
     value: 0,
     scriptSelect: null,
-    taskName:null,
+    taskName: null,
     taskTotal: null,
     taskStatus: null,
     taskAuthor: null
@@ -63,6 +69,11 @@ export default {
     toggleFlagDSD() {
       this.$store.commit("toggleFlagDSD");
       this.$store.commit("setDeviceScript", {});
+      this.scriptSelect = null;
+      this.taskName = null;
+      this.taskTotal = null;
+      this.taskStatus = null;
+      this.taskAuthor = null;
     },
     onStartTask(deviceID, scriptName) {
       const fullname = this.persona.firstname + " " + this.persona.lastname;
@@ -106,17 +117,17 @@ export default {
               <v-btn @click="onStartTask(deviceScript.deviceID, scriptSelect)">Iniciar</v-btn>
             </v-layout>
             <v-layout align-center justify-start>
-                  <v-chip> {{taskName}}</v-chip>
+              <v-chip>{{taskName}}</v-chip>
             </v-layout>
             <v-layout align-center justify-start>
-                  <v-progress-circular
-                    :rotate="-90"
-                    :size="100"
-                    :width="15"
-                    :value="value"
-                    color="primary"
-                  >{{ value }} %</v-progress-circular>
-                  <v-chip> {{taskStatus}} de {{taskTotal}}</v-chip>
+              <v-progress-circular
+                :rotate="-90"
+                :size="100"
+                :width="15"
+                :value="value"
+                color="primary"
+              >{{ value }} %</v-progress-circular>
+              <v-chip>{{taskStatus}} de {{taskTotal}}</v-chip>
             </v-layout>
             <v-layout align-center justify-end class="ma-4">
               <v-chip>{{taskAuthor}}</v-chip>
