@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     selectDevice(device) {
-      // this.$store.commit("setDAS", device);  MASSIVE
+      this.$store.commit("setDAS", device);  MASSIVE
     },
     deleteSelectedDevice(device) {
       this.$store.commit("deleteDAS", device);
