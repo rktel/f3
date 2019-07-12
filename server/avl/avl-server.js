@@ -15,7 +15,7 @@ export function Server(port, host){
         sockets.push(sock);
         console.log("SOCKS_5:", SOCKS_5)
         sock.on('data', function (data) {
-            console.log('DATA ' + sock.remoteAddress + ': ' + data);
+            console.log(data.toString().trim());
             // Write the data back to all the connected, the client will receive it as data from the server
             sockets.forEach(function (sock, index, array) {
                 //sock.write(sock.remoteAddress + ':' + sock.remotePort + " said " + data + '\n');
