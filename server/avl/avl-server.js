@@ -23,6 +23,8 @@ export function Server(port, host) {
                 const sockIndex = pdu.sockIndex;
                 const SOCK = getSOCK(sockIndex);
                 console.log(SOCK);
+                SOCK.push(22);
+                console.log(SOCKS_1);
                 sock.write(mobileID);
             }
 
