@@ -43,25 +43,25 @@ export function Server(port, host) {
 */
 
 function getSOCK(index) {
-    if (index === 0) {
+    if (index == 0) {
         return SOCKS_0
-    } else if (index === 1) {
+    } else if (index == 1) {
         return SOCKS_1
-    } else if (index === 2) {
+    } else if (index == 2) {
         return SOCKS_2
-    } else if (index === 3) {
+    } else if (index == 3) {
         return SOCKS_3
-    } else if (index === 4) {
+    } else if (index == 4) {
         return SOCKS_4
-    } else if (index === 5) {
+    } else if (index == 5) {
         return SOCKS_5
-    } else if (index === 6) {
+    } else if (index == 6) {
         return SOCKS_6
-    } else if (index === 7) {
+    } else if (index == 7) {
         return SOCKS_7
-    } else if (index === 8) {
+    } else if (index == 8) {
         return SOCKS_8
-    } else if (index === 9) {
+    } else if (index == 9) {
         return SOCKS_9
     } else {
         return false
