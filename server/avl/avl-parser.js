@@ -6,21 +6,25 @@ export function Parser(pdu) {
 }
 
 function TAIP(pdu) {
-    let mobileID = null
-
-    //pdu.length == 15 ? pdu : pdu.substring(pdu.indexOf(TAIP_INIT_MOBILEID) + 3, pdu.indexOf(TAIP_INIT_MOBILEID) + 3 + 15)
+    let mobileID = null;
+    let sockIndex = null;
 
     if (pdu.length == 15) {
         // heartbeat
-        mobileID = pdu
+        mobileID = pdu;
+        sockIndex = mobileID[mobileID.length -1];
     } else {
         // pdu
-        mobileID = pdu.substring(pdu.indexOf(TAIP_INIT_MOBILEID) + 3, pdu.indexOf(TAIP_INIT_MOBILEID) + 3 + 15)
+        mobileID = pdu.substring(pdu.indexOf(TAIP_INIT_MOBILEID) + 3, pdu.indexOf(TAIP_INIT_MOBILEID) + 3 + 15);
+        sockIndex = mobileID[mobileID.length -1];
     }
 
     if (mobileID) {
         return {
-            mobileID
+            mobileID,
+            sockIndex
         }
+    }else{
+        return false
     }
 }

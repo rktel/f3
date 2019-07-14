@@ -3,39 +3,41 @@ const net = require('net');
 // Parser
 import { Parser } from './avl-parser'
 
-let sockets = [];
-
-export function Server(port, host){
+export function Server(port, host) {
     const svr = net.createServer();
+    //Start tcp server
     svr.listen(port, host, () => {
         console.log('TCP Server is running on port ' + port + '.');
     });
+    // on Connection
     svr.on('connection', function (sock) {
-        const { remoteAddress, remotePort} = sock
-        sockets.push(sock);
-        console.log("SOCKS_5:", SOCKS_5)
+
         sock.on('data', function (data) {
+            // show data  packet
             console.log(data.toString().trim());
-            // Write the data back to all the connected, the client will receive it as data from the server
-            sockets.forEach(function (sock, index, array) {
-                //sock.write(sock.remoteAddress + ':' + sock.remotePort + " said " + data + '\n');
-                //data = data.toString()
-                //const mobileID = data.substring(data.indexOf(SYRUS_INIT_MOBILEID) + 3, data.indexOf(SYRUS_END_MOBILEID))
-                // console.log("mobileID:", mobileID);
-                const pdu = new Parser(data.toString());
-                console.log("pdu.mobileID:",pdu.mobileID);
-                
-                sock.write(pdu.mobileID)
-            });
+            // Check if pdu exist
+            const pdu = new Parser(data.toString());
+
+            if (pdu) {
+                const mobileID = pdu.mobileID;
+                const sockIndex = pdu.sockIndex;
+                const SOCK = getSOCK(sockIndex);
+                console.log(SOCK);
+                sock.write(mobileID);
+            }
+
         });
-    
-        // Add a 'close' event handler to this instance of socket
-        sock.on('close', function (data) {
-            let index = sockets.findIndex(function (o) {
-                return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
-            })
-            if (index !== -1) sockets.splice(index, 1);
-            console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
-        });
-    }); 
+
+    });
 }
+
+/*
+// Add a 'close' event handler to this instance of socket
+                sock.on('close', function (data) {
+                    let index = sockets.findIndex(function (o) {
+                        return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
+                    })
+                    if (index !== -1) sockets.splice(index, 1);
+                    console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
+                });
+*/
