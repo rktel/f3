@@ -22,7 +22,7 @@ export function Server(port, host){
                 //data = data.toString()
                 //const mobileID = data.substring(data.indexOf(SYRUS_INIT_MOBILEID) + 3, data.indexOf(SYRUS_END_MOBILEID))
                 // console.log("mobileID:", mobileID);
-                const pdu = new Parser(data.toString().trim())
+                const pdu = new Parser(data.toString());
                 console.log("pdu.mobileID:",pdu.mobileID);
                 
                 sock.write(pdu.mobileID)
