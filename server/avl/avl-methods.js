@@ -8,11 +8,13 @@ Meteor.methods({
         const sockIndex = mobileID[mobileID.length - 1];
         const SOCK_MASTER = getSOCK(sockIndex);
         const sock = SOCK_MASTER.find(element => { if (element) { return element.mobileID === mobileID } });
-        sock.write(cmd);
+        if(sock){
+            sock.write(cmd);
+        }
     },
     writeBroadcast: function (arrayMobileID, cmd) {
         arrayMobileID.forEach(mobileID => {
-            Meteor.call('writeSingle',arrayMobileID, cmd)
+            Meteor.call('writeSingle',mobileID, cmd)
         });
     }
 });
