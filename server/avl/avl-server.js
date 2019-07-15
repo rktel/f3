@@ -48,6 +48,8 @@ export function Server(port, host) {
             const sockIndex = mobileID[mobileID.length -1];
             const SOCK_MASTER = getSOCK(sockIndex);
             const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
+            console.log('elementIndex', elementIndex);
+            
             delete SOCK_MASTER[elementIndex];
             console.log('delete SOCK', SOCK_MASTER.length);
             
