@@ -77,7 +77,7 @@ export function Server(port, host) {
     });
     // on close server
     svr.on('close', () => {
-        console.log('onCLose server TCP');
+        console.log('onClose server TCP');
         cleanSOCKS();
     })
 }
