@@ -22,9 +22,9 @@ export function Server(port, host) {
         }, 60*1000);
     });
     // on Connection client - server
-    svr.on('connection', (sock) => {
+    svr.on('connection',Meteor.bindEnvironment( (sock) => {
         //on sock  data
-        sock.on('data', (data) => {
+        sock.on('data',Meteor.bindEnvironment((data) => {
             // show data  packet
             console.log(data.toString().trim());
             // Check if pdu exist
@@ -52,7 +52,7 @@ export function Server(port, host) {
                 sock.write(mobileID);
             }
 
-        });
+        }));
         // on sock close
         sock.on('close', function () {
             console.log('Closed sock', sock.mobileID);
@@ -67,7 +67,7 @@ export function Server(port, host) {
             console.log('Error sock', sock.mobileID);
         });
 
-    });
+    }));
     // on error server
     svr.on('error', (e) => {
         setTimeout(() => {
