@@ -20,7 +20,7 @@ Meteor.methods({
         });
     },
     getAllMobiles: function(){ 
-        return getAllMobileID();
+        return getAllMobiles();
     }
 });
 
