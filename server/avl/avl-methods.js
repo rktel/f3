@@ -21,7 +21,9 @@ Meteor.methods({
     },
     updateMobiles: function(){ 
         const mobiles = getAllMobileID();
-        Mobiles.replaceOne({ mobiles }, { upsert: true });
+       // Mobiles.replaceOne({ mobiles }, { upsert: true });
+       console.log(mobiles);
+       
     }
 });
 
