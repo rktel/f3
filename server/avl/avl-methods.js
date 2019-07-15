@@ -20,7 +20,8 @@ Meteor.methods({
         });
     },
     updateMobiles: function(){ 
-        Mobiles.replaceOne({ mobiles: getAllMobileID() }, { upsert: true });
+        const mobiles = getAllMobileID();
+        Mobiles.replaceOne({ mobiles }, { upsert: true });
     }
 });
 
