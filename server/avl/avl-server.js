@@ -31,7 +31,7 @@ export function Server(port, host) {
                     console.log('exit SOCK_MASTER:', SOCK_MASTER.length);
                 }
                 // mobileID No exist on SOCK_MASTER! 
-                if (SOCK_MASTER && !SOCK_MASTER.find(element => element.mobileID === mobileID)) {
+                if (SOCK_MASTER && !SOCK_MASTER.find(element => {if(element){ element.mobileID === mobileID}else{return false}})) {
                     sock.mobileID = mobileID;
                     SOCK_MASTER.push(sock);
                     console.log('NO exist SOCK_MASTER:', SOCK_MASTER.length);
