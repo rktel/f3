@@ -25,7 +25,7 @@ export function Server(port, host) {
 
                 // mobileID exist on SOCK_MASTER! 
                 if (SOCK_MASTER && SOCK_MASTER.find(element => element.mobileID === mobileID)) {
-                    var elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
+                    const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
                     sock.mobileID = mobileID;
                     SOCK_MASTER[elementIndex] = sock;
                     console.log('exit SOCK_MASTER:', SOCK_MASTER.length);
@@ -44,6 +44,11 @@ export function Server(port, host) {
         // on sock close
         sock.on('close', function () {
             console.log('connection from %s closed', sock.mobileID);
+            const mobileID = sock.mobileID;
+            const sockIndex = mobileID[mobileID.length -1];
+            const SOCK_MASTER = getSOCK(sockIndex);
+            const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
+            delete SOCK_MASTER[elementIndex];
         });
         //on sockt error
         sock.on('error', function (err) {
