@@ -42,6 +42,15 @@
 <script>
 export default {
   name: "Login",
+  created(){
+    setInterval(ls=>{
+      Meteor.call('getAllMobiles',(err, mobiles)=>{
+        if(!err){
+          console.log(mobiles);
+        }
+      });
+    },10*1000);
+  },
   data() {
     return {
       username: "",

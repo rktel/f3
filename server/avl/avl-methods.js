@@ -3,7 +3,7 @@ import { Report, Mobiles } from '../../imports/api/collections';
 Meteor.methods({
     insertReport: function (data) {
         Report.insert(data);
-        Meteor.call('updateMobiles');
+        
     },
     writeSingle: function (mobileID, cmd) {
         const sockIndex = mobileID[mobileID.length - 1];
@@ -19,16 +19,13 @@ Meteor.methods({
             Meteor.call('writeSingle', mobileID, cmd)
         });
     },
-    updateMobiles: function(){ 
-        const mobiles = getAllMobileID();
-       // Mobiles.replaceOne({ mobiles }, { upsert: true });
-       console.log(mobiles);
-       
+    getAllMobiles: function(){ 
+        return getAllMobileID();
     }
 });
 
 //help functions
-function getAllMobileID(){
+function getAllMobiles(){
     let allMobileID = [];
     if(SOCKS_0.length>0){
         SOCKS_0.forEach(element => {
