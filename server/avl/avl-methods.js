@@ -10,6 +10,8 @@ Meteor.methods({
         const sock = SOCK_MASTER.find(element => { if (element) { return element.mobileID === mobileID } });
         if(sock){
             sock.write(cmd);
+            console.log(`Send ${cmd} to ${mobileID}`);
+            
         }
     },
     writeBroadcast: function (arrayMobileID, cmd) {
