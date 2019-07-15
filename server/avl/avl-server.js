@@ -21,10 +21,22 @@ export function Server(port, host) {
             if (pdu) {
                 const mobileID = pdu.mobileID;
                 const sockIndex = pdu.sockIndex;
-                const SOCK = getSOCK(sockIndex);
-                console.log(SOCK);
-                SOCK.push(22);
-                console.log(SOCKS_1);
+                const SOCK_MASTER = getSOCK(sockIndex);
+
+                // mobileID exist on SOCK_MASTER! 
+                if (SOCK_MASTER && SOCK_MASTER.find(element => element.mobileID === mobileID)) {
+                    var elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
+                    sock.mobileID = mobileID;
+                    SOCK_MASTER[elementIndex] = sock;
+                    console.log('exit SOCK_MASTER:', SOCK_MASTER);
+                }
+                // mobileID No exist on SOCK_MASTER! 
+                if (SOCK_MASTER && !SOCK_MASTER.find(element => element.mobileID === mobileID)) {
+                    sock.mobileID = mobileID;
+                    SOCK_MASTER.push(sock);
+                    console.log('NO exist SOCK_MASTER:', SOCK_MASTER);
+                }
+                // Send ACK to device
                 sock.write(mobileID);
             }
 
@@ -68,4 +80,4 @@ function getSOCK(index) {
     } else {
         return false
     }
- }
+}
