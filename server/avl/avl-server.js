@@ -24,14 +24,14 @@ export function Server(port, host) {
                 const SOCK_MASTER = getSOCK(sockIndex);
 
                 // mobileID exist on SOCK_MASTER! 
-                if (SOCK_MASTER && SOCK_MASTER.find(element => {if(element){ return element.mobileID === mobileID}})) {
-                    const elementIndex = SOCK_MASTER.findIndex(element => {if(element){ return element.mobileID === mobileID}});
+                if (SOCK_MASTER && SOCK_MASTER.find(element => { if (element) { return element.mobileID === mobileID } })) {
+                    const elementIndex = SOCK_MASTER.findIndex(element => { if (element) { return element.mobileID === mobileID } });
                     sock.mobileID = mobileID;
                     SOCK_MASTER[elementIndex] = sock;
                     console.log('Exist SOCK_MASTER:', SOCK_MASTER.length);
                 }
                 // mobileID No exist on SOCK_MASTER! 
-                if (SOCK_MASTER && !SOCK_MASTER.find(element => {if(element){ return element.mobileID === mobileID}})) {
+                if (SOCK_MASTER && !SOCK_MASTER.find(element => { if (element) { return element.mobileID === mobileID } })) {
                     sock.mobileID = mobileID;
                     SOCK_MASTER.push(sock);
                     console.log('NO exist SOCK_MASTER:', SOCK_MASTER.length);
@@ -45,14 +45,13 @@ export function Server(port, host) {
         sock.on('close', function () {
             console.log('Closed sock', sock.mobileID);
             const mobileID = sock.mobileID;
-            const sockIndex = mobileID[mobileID.length -1];
+            const sockIndex = mobileID[mobileID.length - 1];
             const SOCK_MASTER = getSOCK(sockIndex);
             const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
             console.log('elementIndex', elementIndex);
-            
-            delete SOCK_MASTER[elementIndex];
+            SOCK_MASTER.splice(elementIndex, 1);
             console.log('delete SOCK', SOCK_MASTER.length);
-            
+
         });
         //on sockt error
         sock.on('error', function (err) {
