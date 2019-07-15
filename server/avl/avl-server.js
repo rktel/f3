@@ -25,7 +25,7 @@ export function Server(port, host) {
 
                 // mobileID exist on SOCK_MASTER! 
                 if (SOCK_MASTER && SOCK_MASTER.find(element => {if(element){ return element.mobileID === mobileID}})) {
-                    const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
+                    const elementIndex = SOCK_MASTER.findIndex(element => {if(element){ return element.mobileID === mobileID}});
                     sock.mobileID = mobileID;
                     SOCK_MASTER[elementIndex] = sock;
                     console.log('exit SOCK_MASTER:', SOCK_MASTER.length);
