@@ -9,16 +9,16 @@ export function Server(port, host) {
     svr.listen(port, host, () => {
         console.log('TCP Server is running on port ' + port + '.');
         setInterval(ls=>{
-            console.log(`Conexiones en SOCKS_0 ${SOCKS_0.length}`);
-            console.log(`Conexiones en SOCKS_1 ${SOCKS_1.length}`);
-            console.log(`Conexiones en SOCKS_2 ${SOCKS_2.length}`);
-            console.log(`Conexiones en SOCKS_3 ${SOCKS_3.length}`);
-            console.log(`Conexiones en SOCKS_4 ${SOCKS_4.length}`);
-            console.log(`Conexiones en SOCKS_5 ${SOCKS_5.length}`);
-            console.log(`Conexiones en SOCKS_6 ${SOCKS_6.length}`);
-            console.log(`Conexiones en SOCKS_7 ${SOCKS_7.length}`);
-            console.log(`Conexiones en SOCKS_8 ${SOCKS_8.length}`);
-            console.log(`Conexiones en SOCKS_9 ${SOCKS_9.length}`);
+            console.log(`Conexiones en SOCKS_0: ${SOCKS_0.length}`);
+            console.log(`Conexiones en SOCKS_1: ${SOCKS_1.length}`);
+            console.log(`Conexiones en SOCKS_2: ${SOCKS_2.length}`);
+            console.log(`Conexiones en SOCKS_3: ${SOCKS_3.length}`);
+            console.log(`Conexiones en SOCKS_4: ${SOCKS_4.length}`);
+            console.log(`Conexiones en SOCKS_5: ${SOCKS_5.length}`);
+            console.log(`Conexiones en SOCKS_6: ${SOCKS_6.length}`);
+            console.log(`Conexiones en SOCKS_7: ${SOCKS_7.length}`);
+            console.log(`Conexiones en SOCKS_8: ${SOCKS_8.length}`);
+            console.log(`Conexiones en SOCKS_9: ${SOCKS_9.length}`);
         }, 60*1000);
     });
     // on Connection client - server
@@ -81,17 +81,6 @@ export function Server(port, host) {
         cleanSOCKS();
     })
 }
-
-/*
-// Add a 'close' event handler to this instance of socket
-                sock.on('close', function (data) {
-                    let index = sockets.findIndex(function (o) {
-                        return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
-                    })
-                    if (index !== -1) sockets.splice(index, 1);
-                    console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
-                });
-*/
 
 function getSOCK(index) {
     if (index == 0) {

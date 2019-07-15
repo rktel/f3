@@ -2,9 +2,11 @@ import { Syrus } from '../server/gps/dct/syrus_adapter'
 import { Server } from './avl/avl-server'
 //----------------------CONSTANTES
 //#WORDS
+APP_VERSION = "4.0";
 TAIP_INIT_MOBILEID = "ID=";
 TAIP_PORT = 3001;
 TAIP_HOST = '0.0.0.0';
+TAIP_PROTOCOL = 'TAIP';
 //----------------------VARIABLES
 //#SOCKETS
 SOCKS_0 = [];
