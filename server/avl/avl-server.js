@@ -10,9 +10,9 @@ export function Server(port, host) {
         console.log('TCP Server is running on port ' + port + '.');
     });
     // on Connection client - server
-    svr.on('connection',  (sock)=> {
-
-        sock.on('data',  (data)=> {
+    svr.on('connection', (sock) => {
+        //on sock  data
+        sock.on('data', (data) => {
             // show data  packet
             console.log(data.toString().trim());
             // Check if pdu exist
@@ -41,6 +41,14 @@ export function Server(port, host) {
             }
 
         });
+        // on sock close
+        sock.on('close', function () {
+            console.log('connection from %s closed', sock.mobileID);
+        });
+        //on sockt error
+        sock.on('error', function (err) {
+            console.log('Connection %s error', sock.mobileID);
+        });
 
     });
     // on error server
@@ -51,9 +59,8 @@ export function Server(port, host) {
         }, 1000);
     });
     // on close server
-    svr.on('close',()=>{
+    svr.on('close', () => {
         console.log('onCLose server TCP');
-        
         cleanSOCKS();
     })
 }
@@ -104,5 +111,5 @@ function cleanSOCKS() {
     SOCKS_6 = [];
     SOCKS_7 = [];
     SOCKS_8 = [];
-    SOCKS_9 = [];   
+    SOCKS_9 = [];
 };
