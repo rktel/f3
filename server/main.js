@@ -8,7 +8,7 @@ TAIP_HOST = '0.0.0.0';
 //----------------------VARIABLES
 //#SOCKETS
 SOCKS_0 = []
-SOCKS_1 = [11]
+SOCKS_1 = []
 SOCKS_2 = []
 SOCKS_3 = []
 SOCKS_4 = []
