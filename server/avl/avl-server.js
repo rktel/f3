@@ -28,13 +28,13 @@ export function Server(port, host) {
                     var elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
                     sock.mobileID = mobileID;
                     SOCK_MASTER[elementIndex] = sock;
-                    console.log('exit SOCK_MASTER:', SOCK_MASTER);
+                    console.log('exit SOCK_MASTER:', SOCK_MASTER.length);
                 }
                 // mobileID No exist on SOCK_MASTER! 
                 if (SOCK_MASTER && !SOCK_MASTER.find(element => element.mobileID === mobileID)) {
                     sock.mobileID = mobileID;
                     SOCK_MASTER.push(sock);
-                    console.log('NO exist SOCK_MASTER:', SOCK_MASTER);
+                    console.log('NO exist SOCK_MASTER:', SOCK_MASTER.length);
                 }
                 // Send ACK to device
                 sock.write(mobileID);
