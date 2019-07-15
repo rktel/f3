@@ -15,4 +15,5 @@ export const Tasks = new Mongo.Collection('tasks');
 
 // F4.0  14/07/2019
 export const Report = new Mongo.Collection('report');
+export const Mobiles = new Mongo.Collection('mobiles');
 

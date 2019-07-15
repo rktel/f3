@@ -13,6 +13,11 @@ function TAIP(pdu) {
         // heartbeat
         mobileID = pdu;
         sockIndex = mobileID[mobileID.length - 1];
+        const serverTime = new Date().toISOString();
+        const data = {
+            mobileID, appVersion: APP_VERSION, mobileProtocol: TAIP_PROTOCOL_HB,serverTime
+        };
+        Meteor.call('insertReport', data);
     } else {
         // pdu
         mobileID = pdu.substring(pdu.indexOf(TAIP_INIT_MOBILEID) + 3, pdu.indexOf(TAIP_INIT_MOBILEID) + 3 + 15);
