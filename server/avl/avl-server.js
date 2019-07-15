@@ -9,10 +9,10 @@ export function Server(port, host) {
     svr.listen(port, host, () => {
         console.log('TCP Server is running on port ' + port + '.');
     });
-    // on Connection
-    svr.on('connection', function (sock) {
+    // on Connection client - server
+    svr.on('connection',  (sock)=> {
 
-        sock.on('data', function (data) {
+        sock.on('data',  (data)=> {
             // show data  packet
             console.log(data.toString().trim());
             // Check if pdu exist
@@ -43,6 +43,19 @@ export function Server(port, host) {
         });
 
     });
+    // on error server
+    svr.on('error', (e) => {
+        setTimeout(() => {
+            svr.close();
+            svr.listen(port, host);
+        }, 1000);
+    });
+    // on close server
+    svr.on('close',()=>{
+        console.log('onCLose server TCP');
+        
+        cleanSOCKS();
+    })
 }
 
 /*
@@ -81,3 +94,15 @@ function getSOCK(index) {
         return false
     }
 }
+function cleanSOCKS() {
+    SOCKS_0 = [];
+    SOCKS_1 = [];
+    SOCKS_2 = [];
+    SOCKS_3 = [];
+    SOCKS_4 = [];
+    SOCKS_5 = [];
+    SOCKS_6 = [];
+    SOCKS_7 = [];
+    SOCKS_8 = [];
+    SOCKS_9 = [];   
+};
