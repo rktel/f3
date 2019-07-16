@@ -1,5 +1,5 @@
-import { stSyrus} from '../../imports/api/streamers'
+//import { stSyrus} from '../../imports/api/streamers'
 
 // Syrus
-stSyrus.allowRead('all');
-stSyrus.allowWrite('all');
+//stSyrus.allowRead('all');
+//stSyrus.allowWrite('all');
