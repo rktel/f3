@@ -13,8 +13,10 @@ import F4 from '../ui/views/f4/F4.vue'
 const routes = [
     { path: '/login', component: Login, name: 'Login' },
     { path:'/f4', component: F4, name:'F4'},
+     /*
     {
         path: '/', component: Index, name: 'Home', redirect: '/f4',
+       
         children: [
             {
                 path: 'track',
@@ -35,7 +37,8 @@ const routes = [
                 icon:'person'
             }
         ]
-    },
+        
+    },*/
 ]
 
 export default new VueRouter({

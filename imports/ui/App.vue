@@ -6,7 +6,7 @@
 export default {
   created() {
     Meteor.userId()
-      ? this.$router.push({ name: "Home" })
+      ? this.$router.push({ name: "F4" })
       : this.$router.push({ name: "Login" });
   }
 };
