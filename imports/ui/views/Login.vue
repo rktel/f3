@@ -65,8 +65,8 @@ export default {
       if (username.length > 0 && password.length > 0) {
         Meteor.loginWithPassword(username, password, error => {
           if (!error) {
-             this.$router.push({ name: "F4" });
-            //this.$router.push({ name: "Track" });
+           //  this.$router.push({ name: "F4" });
+            this.$router.push({ name: "Track" });
           }
         });
       }

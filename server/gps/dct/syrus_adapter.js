@@ -1,7 +1,7 @@
 
 var net = require('net');
 import SyrusParser from './syrus_parser'
-//import { stSyrus } from '../../../imports/api/streamers'
+import { stSyrus } from '../../../imports/api/streamers'
 
 // FIRMWARE [1]
 // device TEst: 357042063175104
@@ -13,11 +13,11 @@ let DEVICE = null
 const APP_VERSION = Meteor.settings.public.appVersion
 const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 // stSyrus.emit('sendCommand', device.deviceID, message)
-/*
+
 stSyrus.on("SEND_COMMAND_SYRUS", Meteor.bindEnvironment((deviceID, message, persona) => {
   sendCommand(deviceID, message, persona)
 }))
-*/
+
 function Syrus(port = DEFAULT_PORT) {
 
   const server = net.createServer(Meteor.bindEnvironment(function (socket) {
