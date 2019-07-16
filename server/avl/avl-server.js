@@ -60,7 +60,7 @@ export function Server(port, host) {
 
         }));
         // on sock close
-        sock.on('close', function () {
+        sock.on('close',  Meteor.bindEnvironment(() =>{
             console.log('Closed sock', sock.mobileID);
             const mobileID = sock.mobileID;
             const sockIndex = mobileID[mobileID.length - 1];
@@ -70,7 +70,7 @@ export function Server(port, host) {
             // Prepare to CLient
             const AUX = SOCK_MASTER.map(el => el.mobileID);
             Meteor.call('setMobiles', sockIndex, AUX);
-        });
+        }));
         //on sockt error
         sock.on('error', function (err) {
             console.log('Error sock', sock.mobileID);
