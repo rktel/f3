@@ -8,9 +8,11 @@ import Index from '../ui/views/home/Index.vue'
 import Track from '../ui/views/home/Track.vue'
 import Script from '../ui/views/home/Script.vue'
 import Users from '../ui/views/home/Users.vue'
+import F4 from '../ui/views/f4/F4.vue'
 
 const routes = [
     { path: '/login', component: Login, name: 'Login' },
+    { path:'/f4', component: F4, name:'F4'},
     {
         path: '/', component: Index, name: 'Home', redirect: '/track',
         children: [
