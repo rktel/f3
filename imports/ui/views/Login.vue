@@ -43,6 +43,7 @@
 export default {
   name: "Login",
   created(){
+/*
     setInterval(ls=>{
       Meteor.call('getAllMobiles',(err, mobiles)=>{
         if(!err){
@@ -50,6 +51,7 @@ export default {
         }
       });
     },10*1000);
+*/
   },
   data() {
     return {
