@@ -8,7 +8,7 @@ export function Server(port, host) {
     //Start tcp server
     svr.listen(port, host, () => {
         console.log('TCP Server is running on port ' + port + '.');
-        setInterval(ls=>{
+        setInterval(ls => {
             console.log(`Conexiones en SOCKS_0: ${SOCKS_0.length}`);
             console.log(`Conexiones en SOCKS_1: ${SOCKS_1.length}`);
             console.log(`Conexiones en SOCKS_2: ${SOCKS_2.length}`);
@@ -19,12 +19,12 @@ export function Server(port, host) {
             console.log(`Conexiones en SOCKS_7: ${SOCKS_7.length}`);
             console.log(`Conexiones en SOCKS_8: ${SOCKS_8.length}`);
             console.log(`Conexiones en SOCKS_9: ${SOCKS_9.length}`);
-        }, 60*1000);
+        }, 60 * 1000);
     });
     // on Connection client - server
-    svr.on('connection',Meteor.bindEnvironment( (sock) => {
+    svr.on('connection', Meteor.bindEnvironment((sock) => {
         //on sock  data
-        sock.on('data',Meteor.bindEnvironment((data) => {
+        sock.on('data', Meteor.bindEnvironment((data) => {
             // show data  packet
             console.log(data.toString().trim());
             // Check if pdu exist
@@ -41,12 +41,18 @@ export function Server(port, host) {
                     if (elementIndex >= 0) {
                         sock.mobileID = mobileID;
                         SOCK_MASTER[elementIndex] = sock;
+                        // Prepare to CLient
+                        const AUX = SOCK_MASTER.map(el => el.mobileID);
+                        Meteor.call('setMobiles', sockIndex, AUX);
                     }
                 }
                 // mobileID No exist on SOCK_MASTER! 
                 if (SOCK_MASTER && !SOCK_MASTER.find(element => { if (element) { return element.mobileID === mobileID } })) {
                     sock.mobileID = mobileID;
                     SOCK_MASTER.push(sock);
+                    // Prepare to CLient
+                    const AUX = SOCK_MASTER.map(el => el.mobileID);
+                    Meteor.call('setMobiles', sockIndex, AUX);
                 }
                 // Send ACK to device
                 sock.write(mobileID);
@@ -61,6 +67,9 @@ export function Server(port, host) {
             const SOCK_MASTER = getSOCK(sockIndex);
             const elementIndex = SOCK_MASTER.findIndex(element => element.mobileID == mobileID);
             SOCK_MASTER.splice(elementIndex, 1);
+            // Prepare to CLient
+            const AUX = SOCK_MASTER.map(el => el.mobileID);
+            Meteor.call('setMobiles', sockIndex, AUX);
         });
         //on sockt error
         sock.on('error', function (err) {

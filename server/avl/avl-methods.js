@@ -3,7 +3,6 @@ import { Report, Mobiles } from '../../imports/api/collections';
 Meteor.methods({
     insertReport: function (data) {
         Report.insert(data);
-        
     },
     writeSingle: function (mobileID, cmd) {
         const sockIndex = mobileID[mobileID.length - 1];
@@ -19,60 +18,63 @@ Meteor.methods({
             Meteor.call('writeSingle', mobileID, cmd)
         });
     },
-    getAllMobiles: function(){ 
+    getAllMobiles: function () {
         return getAllMobiles();
+    },
+    setMobiles: function (indexSock, arrayMobileID) {
+        Mobiles.update({sockID:indexSock},{$set:{ mobiles:arrayMobileID }},{upsert:true});
     }
 });
 
 //help functions
-function getAllMobiles(){
+function getAllMobiles() {
     let allMobileID = [];
-    if(SOCKS_0.length>0){
+    if (SOCKS_0.length > 0) {
         SOCKS_0.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_1.length>0){
+    if (SOCKS_1.length > 0) {
         SOCKS_1.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_2.length>0){
+    if (SOCKS_2.length > 0) {
         SOCKS_2.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_3.length>0){
+    if (SOCKS_3.length > 0) {
         SOCKS_3.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_4.length>0){
+    if (SOCKS_4.length > 0) {
         SOCKS_4.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_5.length>0){
+    if (SOCKS_5.length > 0) {
         SOCKS_5.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_6.length>0){
+    if (SOCKS_6.length > 0) {
         SOCKS_6.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_7.length>0){
+    if (SOCKS_7.length > 0) {
         SOCKS_7.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_8.length>0){
+    if (SOCKS_8.length > 0) {
         SOCKS_8.forEach(element => {
             allMobileID.push(element.mobileID);
         });
     }
-    if(SOCKS_9.length>0){
+    if (SOCKS_9.length > 0) {
         SOCKS_9.forEach(element => {
             allMobileID.push(element.mobileID);
         });
