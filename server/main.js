@@ -27,5 +27,5 @@ Meteor.startup(() => {
    // Meteor.call('createHyperPersonal')
    // Meteor.call('setEmailOptions')
    new Syrus();
-   new Server(TAIP_PORT, TAIP_HOST);
+   // new Server(TAIP_PORT, TAIP_HOST);
 })
