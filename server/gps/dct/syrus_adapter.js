@@ -52,7 +52,7 @@ function Syrus(port = DEFAULT_PORT) {
           //Enviamos ACK al Equipo
           socket.write(deviceID)
           // DISCONNECTED ALL
-          // socket.write(DISCONNECT_DEVICE_CMD)
+          socket.write(DISCONNECT_DEVICE_CMD)
         }
       }
 
