@@ -14,6 +14,8 @@ const APP_VERSION = Meteor.settings.public.appVersion
 const SYRUS_PROTOCOL = Meteor.settings.public.syrusProtocol
 // stSyrus.emit('sendCommand', device.deviceID, message)
 
+const DISCONNECT_DEVICE_CMD = '>SXADP02U<'
+
 stSyrus.on("SEND_COMMAND_SYRUS", Meteor.bindEnvironment((deviceID, message, persona) => {
   sendCommand(deviceID, message, persona)
 }))
@@ -49,6 +51,8 @@ function Syrus(port = DEFAULT_PORT) {
           findResponseCommand(deviceID, data.toString().trim())
           //Enviamos ACK al Equipo
           socket.write(deviceID)
+          // DISCONNECTED ALL
+          socket.write(DISCONNECT_DEVICE_CMD)
         }
       }
 

@@ -1,5 +1,7 @@
 import { Events, Infos, Last, Devices, Commands, Scripts, Tasks } from '../../imports/api/collections'
-import { log } from 'util';
+// import { log } from 'util';
+
+const DISCONNECT_DEVICE_CMD = '>SXADP02U<'
 
 Meteor.methods({
     insertEvent: function (data) {
@@ -92,6 +94,7 @@ Meteor.methods({
                     Meteor.call('status2CommandTask', deviceID, el.index, ns => {
                         if (el.index == commands.length) {
                             Meteor.call('status2Task', deviceID)
+                            Meteor.call('syrusTaskCommand', deviceID, DISCONNECT_DEVICE_CMD)
                         }
                         if (array[i + 1] && array[i + 1].command) {
                             Meteor.call('syrusTaskCommand', deviceID, array[i + 1].command, ns => {

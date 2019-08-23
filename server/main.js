@@ -1,5 +1,5 @@
 import { Syrus } from '../server/gps/dct/syrus_adapter'
-import { Server } from './avl/avl-server'
+// import { Server } from './avl/avl-server'
 //----------------------CONSTANTES
 //#WORDS
 APP_VERSION = "4.0";
