@@ -7,7 +7,7 @@ export default class SyrusParser {
     constructor(message) {
 
         if (message.includes('REV')) {
-            this._deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
+            this._deviceID = message.substring(message.lastIndexOf('ID=') + 3, message.lastIndexOf('<'))
             this._eventCode = parseInt(message.substr(4, 2))
             this._created = Time(message.substr(6, 10))
             this._received = (new Date()).toISOString()
@@ -20,7 +20,7 @@ export default class SyrusParser {
         }
         if (message.includes('RXART')) {
             this._received = (new Date()).toISOString()
-            this._deviceID = message.substring(message.indexOf('ID=') + 3, message.indexOf('<'))
+            this._deviceID = message.substring(message.lastIndexOf('ID=') + 3, message.lastIndexOf('<'))
             const splitMessage = message.split(';')
             this._firmware = splitMessage[1]
             this._hardware = splitMessage[2]

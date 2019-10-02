@@ -42,7 +42,7 @@ function Syrus(port = DEFAULT_PORT) {
       //console.log(data.toString().trim());
 
       if (data && data.length > 0) {
-        const deviceID = getDeviceID(data.toString().trim())
+        const deviceID = getDeviceID(data.toString())
 
         if (deviceID) {
           // console.log('deviceID:', deviceID);
@@ -176,8 +176,10 @@ function getDeviceID(data) {
     return data
   }
   if (data.includes('>R')) {
-    const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
-    Meteor.call('syncWorker', deviceID)
+    // const deviceID = data.substring(data.indexOf('ID=') + 3, data.indexOf('<'))
+    data = data.split('\r\n');
+    const deviceID = (data.length > 0) ? data[0].slice(data[0].lastIndexOf('ID=') + 3, data[0].lastIndexOf('<')) : false;
+    // Meteor.call('syncWorker', deviceID)
     Meteor.call('taskWorker', deviceID)
     return deviceID
   }
