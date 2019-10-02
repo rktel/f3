@@ -126,8 +126,8 @@ function inSOCKETS_DEVICE(socket, deviceID) {
   const connectionStatus = "on"
   const appVersion = APP_VERSION
   const protocol = SYRUS_PROTOCOL
-  const ip = socket.remoteAddress.split(':')[3]
-  const port = socket.remotePort
+  const ip = socket.remoteAddress ? (socket.remoteAddress.split(':')[3]): 0
+  const port = socket.remotePort ? socket.remotePort : 0
   const connectionTime = (new Date()).toISOString()
 
   if (SOCKETS.filter(el => el.deviceID == deviceID).length == 0) {
